@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Jakarta:ital,wght@0,200..800;1,200..800&display=swap');
+@import './assets/styles/colors.scss';
+
+body {
+  background-color: $main-bg;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Jakarta', sans-serif;
+}
+
+.default {
+  background-color: $btn-default-bg;
+  color: $btn-default-font;
+}
+
+.accent {
+  background-color: $btn-accent-bg;
+  color: $btn-accent-font;
+}
