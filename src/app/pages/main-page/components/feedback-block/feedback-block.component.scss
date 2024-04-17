@@ -23,6 +23,8 @@
       transition: 0.3s;
 
       img {
+        pointer-events: none;
+        user-select: none;
         width: 15px;
         height: 25px;
       }
@@ -33,14 +35,15 @@
       }
     }
 
-    .left-arrow {
-      border: 1px solid $semi-text-color;
-      background-color: $btn-default-bg;
-    }
-
-    .right-arrow {
+    .active {
       border: 1px solid $btn-accent-bg;
       background-color: $btn-accent-bg;
+    }
+
+    .disabled {
+      pointer-events: none;
+      border: 1px solid $semi-text-color;
+      background-color: $btn-default-bg;
     }
   }
 
@@ -56,14 +59,15 @@
 
   .cards-container {
     display: flex;
+    max-width: 1240px;
     gap: 20px;
-    max-width: 1260px;
     overflow-x: hidden;
     margin: 0 auto;
   }
 
   .card {
-    width: 360px;
+    box-sizing: border-box;
+    min-width: 400px;
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -71,7 +75,7 @@
     gap: 35px;
     background-color: $default-bg;
     border-radius: 30px;
-    filter: drop-shadow(0px 0px 10px $shadow-default-color);
+    transition: transform 0.3s ease;
 
     .name {
       color: $semi-text-color;

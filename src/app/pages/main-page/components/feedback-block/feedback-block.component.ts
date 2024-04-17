@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 
 @Component({
@@ -6,6 +7,25 @@ import {RouterOutlet} from '@angular/router';
   standalone: true,
   templateUrl: './feedback-block.component.html',
   styleUrl: './feedback-block.component.scss',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
 })
-export class FeedbackBlockComponent {}
+export class FeedbackBlockComponent {
+  @ViewChild('sliderContainer') sliderContainer?: ElementRef;
+  currentPosition = 0;
+
+  shiftCards(direction: number) {
+    this.currentPosition = this.currentPosition + direction;
+
+    if (this.sliderContainer) {
+      const cardElements = this.sliderContainer.nativeElement.children;
+
+      for (let i = 0; i < cardElements.length; i++) {
+        const card = cardElements[i] as HTMLElement;
+        const currentTransform = card.style.transform || 'translateX(0px)';
+        const currentPosition = parseInt(currentTransform.match(/(-?\d+)px/)![1], 10);
+        const newPosition = currentPosition + direction * 420; // Регулируйте сдвиг здесь
+        card.style.transform = `translateX(${newPosition}px)`;
+      }
+    }
+  }
+}

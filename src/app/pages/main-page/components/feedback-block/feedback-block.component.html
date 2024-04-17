@@ -4,16 +4,26 @@
   <div class="title-block">
     <h2>Нам доверяют</h2>
     <div class="button-container">
-      <button class="left-arrow">
-        <img src="assets/img/right-arrow-btn.svg" alt="" />
+      <button
+        [class.active]="currentPosition"
+        [class.disabled]="!currentPosition"
+        (click)="shiftCards(1)"
+      >
+        <img *ngIf="currentPosition" src="assets/img/active-arrow-left.svg" alt="" />
+        <img *ngIf="!currentPosition" src="assets/img/disabled-arrow-left.svg" alt="" />
       </button>
-      <button class="right-arrow">
-        <img src="assets/img/left-arrow-btn.svg" alt="" />
+      <button
+        [class.active]="currentPosition > -2"
+        [class.disabled]="currentPosition === -2"
+        (click)="shiftCards(-1)"
+      >
+        <img *ngIf="currentPosition > -2" src="assets/img/active-arrow-right.svg" alt="" />
+        <img *ngIf="currentPosition === -2" src="assets/img/disabled-arrow-right.svg" alt="" />
       </button>
     </div>
   </div>
 
-  <div class="cards-container">
+  <div #sliderContainer class="cards-container">
     <div class="card">
       <div class="user-container">
         <img class="icon" src="assets/img/andrew.svg" alt="" />
@@ -29,7 +39,7 @@
         </div>
       </div>
 
-      <p style="width: 307px" class="title">Надежная и удобная платформа!</p>
+      <p class="title">Надежная и удобная платформа!</p>
       <p class="description">
         Отличная возможность найти надежных водителей и безопасно путешествовать. Удобная систему
         бронирования и оплаты, что сделало процесс организации поездки максимально простым.
@@ -51,7 +61,7 @@
         </div>
       </div>
 
-      <p style="width: 335px" class="title">Я в восторге от такого путешествия</p>
+      <p class="title">Я в восторге от такого путешествия</p>
       <p class="description">
         Спасибо ПОПУТКЕ за возможность встретить интересных людей, разделить опыт и создать новые
         связи, делая каждую поездку незабываемой и обогащающей.
@@ -73,7 +83,7 @@
         </div>
       </div>
 
-      <p style="width: 337px" class="title">Экологически чистые поездки</p>
+      <p class="title">Экологически чистые поездки</p>
       <p class="description">
         Это способствует уменьшению количества автомобилей на дорогах. Пользуясь ПОПУТКОЙ, я вношу
         свой вклад в сохранение окружающей среды и чувствую себя частью экологического движения.
@@ -82,45 +92,45 @@
 
     <div class="card">
       <div class="user-container">
-        <img class="icon" src="assets/img/mary.svg" alt="" />
+        <img class="icon" src="assets/img/misha.svg" alt="" />
         <div class="user-info">
-          <div class="name">Мария</div>
+          <div class="name">Михаил</div>
           <div class="rating">
             <img src="assets/img/star.svg" alt="" />
             <img src="assets/img/star.svg" alt="" />
             <img src="assets/img/star.svg" alt="" />
             <img src="assets/img/star.svg" alt="" />
-            <img src="assets/img/empty-star.svg" alt="" />
+            <img src="assets/img/star.svg" alt="" />
           </div>
         </div>
       </div>
 
-      <p style="width: 337px" class="title">Экологически чистые поездки</p>
+      <p class="title">Удобство под рукой в пару кликов</p>
       <p class="description">
-        Это способствует уменьшению количества автомобилей на дорогах. Пользуясь ПОПУТКОЙ, я вношу
-        свой вклад в сохранение окружающей среды и чувствую себя частью экологического движения.
+        Удобное решение для запланированной поездки которое находится у тебя в кармане. Моё любимое
+        приложение! Спасибо ПОПУТКЕ!
       </p>
     </div>
 
     <div class="card">
       <div class="user-container">
-        <img class="icon" src="assets/img/mary.svg" alt="" />
+        <img class="icon" src="assets/img/oleg.svg" alt="" />
         <div class="user-info">
-          <div class="name">Мария</div>
+          <div class="name">Олег</div>
           <div class="rating">
             <img src="assets/img/star.svg" alt="" />
             <img src="assets/img/star.svg" alt="" />
             <img src="assets/img/star.svg" alt="" />
-            <img src="assets/img/star.svg" alt="" />
+            <img src="assets/img/empty-star.svg" alt="" />
             <img src="assets/img/empty-star.svg" alt="" />
           </div>
         </div>
       </div>
 
-      <p style="width: 337px" class="title">Экологически чистые поездки</p>
+      <p class="title">Лучший вариант для путешествий</p>
       <p class="description">
-        Это способствует уменьшению количества автомобилей на дорогах. Пользуясь ПОПУТКОЙ, я вношу
-        свой вклад в сохранение окружающей среды и чувствую себя частью экологического движения.
+        В компании друзей путешествовать всегда весело. А вместе с ПОПУТКОЙ этот процесс становится
+        еще удобнее.
       </p>
     </div>
   </div>
