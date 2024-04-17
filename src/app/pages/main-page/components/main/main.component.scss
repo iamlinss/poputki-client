@@ -1,0 +1,76 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  margin-bottom: 150px;
+
+  width: 100%;
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .logo-container {
+    position: relative;
+
+    h1 {
+      width: 653px;
+      font-size: 52px;
+      display: inline-block;
+      position: absolute;
+
+      left: 290px;
+    }
+  }
+
+  .main-logo {
+    width: 1200px;
+    height: 475px;
+
+    pointer-events: none;
+  }
+
+  .round-button {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    transition: 0.3s;
+
+    &.location {
+      position: relative;
+      left: 65px;
+      top: 350px;
+      background-color: $green-btn-color;
+      filter: drop-shadow(0px 0px 5px #3c8d846b);
+
+      img {
+        height: 18px;
+      }
+
+      &:hover {
+        transform: scale(1.25);
+        filter: drop-shadow(2px 2px 5px #3c8d84);
+      }
+    }
+
+    &.car {
+      position: relative;
+      left: 975px;
+      bottom: 280px;
+      background-color: $orange-btn-color;
+      filter: drop-shadow(0px 0px 5px #d6b03e77);
+      &:hover {
+        transform: scale(1.25);
+        filter: drop-shadow(2px 2px 5px #d6b03e9a);
+      }
+    }
+  }
+}

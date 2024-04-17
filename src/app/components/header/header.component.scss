@@ -6,7 +6,6 @@
     justify-content: space-between;
     align-items: center;
     height: 90px;
-    padding: 0px 100px;
 
     &::before {
       content: '';
@@ -15,10 +14,25 @@
       position: absolute;
       left: -540px;
       top: 35px;
-      box-shadow: 65px 0px 300px 0px #4475f2;
+      box-shadow: 65px 0px 300px 0px $blue-shadow;
       border-radius: 100%;
       background-color: transparent;
+      z-index: -1;
     }
+
+    // &::after {
+    //   content: '';
+    //   width: 500px;
+    //   height: 500px;
+    //   position: absolute;
+    //   right: -450px;
+    //   top: 700px;
+    //   box-shadow: 100px 0px 500px 155px $purple-shadow;
+    //   filter: blur(115px);
+    //   border-radius: 100%;
+    //   background-color: transparent;
+    //   z-index: -1;
+    // }
   }
 
   .btn-container {
@@ -38,7 +52,8 @@
   }
 
   .logo {
-    font-size: 24px;
     font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -2px;
   }
 }

@@ -1,0 +1,114 @@
+@import '../../../../../assets/styles/colors.scss';
+:host {
+  margin-bottom: 120px;
+  width: 100%;
+
+  .title-block {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 20px;
+
+    button {
+      width: 63px;
+      height: 63px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+
+      img {
+        width: 15px;
+        height: 25px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0px 0px 10px $box-shadow-color);
+      }
+    }
+
+    .left-arrow {
+      border: 1px solid $semi-text-color;
+      background-color: $btn-default-bg;
+    }
+
+    .right-arrow {
+      border: 1px solid $btn-accent-bg;
+      background-color: $btn-accent-bg;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 60px;
+  }
+
+  .cards-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1260px;
+    overflow-x: hidden;
+    margin: 0 auto;
+  }
+
+  .card {
+    width: 360px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 35px;
+    background-color: $default-bg;
+    border-radius: 30px;
+    filter: drop-shadow(0px 0px 10px $shadow-default-color);
+
+    .name {
+      color: $semi-text-color;
+      font-size: 18px;
+    }
+
+    .rating {
+      display: flex;
+      gap: 6px;
+    }
+
+    .user-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 85px;
+      height: 85px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .description {
+      color: $semi-text-color;
+      width: 303px;
+      font-size: 18px;
+    }
+  }
+}

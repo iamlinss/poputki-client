@@ -1,0 +1,26 @@
+@import '../../../../../assets/styles/colors.scss';
+:host {
+  margin-bottom: 150px;
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    text-wrap: nowrap;
+  }
+
+  .description {
+    color: $semi-text-color;
+    width: 330px;
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+}

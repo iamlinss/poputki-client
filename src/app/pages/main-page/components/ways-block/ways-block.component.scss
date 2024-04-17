@@ -1,0 +1,60 @@
+@import '../../../../../assets/styles/colors.scss';
+:host {
+  margin-bottom: 150px;
+
+  width: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  .ways-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .city-way {
+    width: 400px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: $default-bg;
+    border: 1px solid $default-border-color;
+    border-radius: 30px;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0px 0px 10px $box-shadow-color);
+    }
+
+    .city {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .arrow {
+      width: 27px;
+      height: 15px;
+    }
+
+    .link-arrow {
+      width: 14px;
+      height: 25px;
+    }
+  }
+}

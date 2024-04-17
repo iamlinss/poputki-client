@@ -1,11 +1,11 @@
 import {Routes} from '@angular/router';
-import {MainComponent} from './pages/main/main.component';
+import {MainPageComponent} from './pages/main-page/main-page.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: MainComponent,
+    component: MainPageComponent,
   },
   // { path: "main", pathMatch: "full", component: HomeComponent },
 ];

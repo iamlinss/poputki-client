@@ -1,0 +1,36 @@
+@import '../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  footer {
+    box-sizing: border-box;
+    padding: 60px 220px 60px 100px;
+    background-color: $footer-bg-color;
+    border-radius: 30px;
+    height: 370px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      li {
+        font-size: 18px;
+        color: $semi-text-color;
+      }
+    }
+
+    h4 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+  }
+}
