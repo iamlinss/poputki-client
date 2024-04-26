@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://poputka.onrender.com",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": "false"
+  }
+}

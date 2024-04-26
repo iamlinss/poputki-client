@@ -1,0 +1,47 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+  }
+
+  .container-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .input-container {
+    &:first-of-type {
+      margin-bottom: 32px;
+    }
+  }
+
+  .btn-container {
+    margin-top: 60px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-error {
+    left: 0px;
+    top: 100px;
+  }
+
+  .btn {
+    margin-left: auto;
+  }
+}

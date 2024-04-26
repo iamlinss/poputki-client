@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './components/header/header.component';
 
@@ -9,10 +9,6 @@ import {HeaderComponent} from './components/header/header.component';
   styleUrl: './app.component.scss',
   imports: [RouterOutlet, HeaderComponent],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'bratanov-car';
-
-  ngOnInit(): void {
-    console.log('tes');
-  }
 }

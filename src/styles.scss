@@ -11,6 +11,23 @@ body {
   font-family: 'Jakarta', sans-serif;
 }
 
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  font-size: 14px;
+  width: 120px;
+  height: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 12.5px 16px;
+  border: none;
+  border-radius: 30px;
+}
+
 .default {
   background-color: $btn-default-bg;
   color: $btn-default-font;
@@ -62,6 +79,92 @@ body {
   font-size: 24px;
   color: $page-label-color;
   margin-bottom: 14px;
+}
+
+.link {
+  text-decoration: none;
+  color: $ref-text-color;
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: $ref-text-hover;
+  }
+}
+
+.input-container {
+  position: relative;
+
+  .input {
+    font-size: 1.4rem;
+    line-height: 140%;
+    outline: 0;
+    padding: 24px 30px;
+    border: 1px solid $input-border-default;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 544px;
+    height: 74px;
+
+    &.ng-touched.ng-invalid {
+      border: 1px solid $invalid-color;
+
+      & ~ .placeholder {
+        color: $invalid-color;
+      }
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 26px;
+    left: 12px;
+    color: $placeholder-color;
+    font-size: 20px;
+    pointer-events: none;
+    transform-origin: 0 50%;
+    transition:
+      transform 200ms,
+      color 200ms;
+    padding: 0 6px;
+  }
+
+  .input:-webkit-autofill,
+  .input:-webkit-autofill:focus {
+    font-size: 1.4rem;
+    transition:
+      background-color 0s 600000s,
+      $btn-default-bg 0s 600000s !important;
+  }
+
+  .input:focus ~ .placeholder,
+  .input:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-30px);
+    background-color: $btn-default-bg;
+    font-size: 14px;
+    width: fit-content;
+    padding: 0 6px;
+    height: 20px;
+
+    z-index: 1;
+    font-weight: 600;
+  }
+
+  .input-error {
+    position: absolute;
+    left: 5px;
+    top: 80px;
+    font-size: 14px;
+    color: $invalid-color;
+  }
+
+  .input-description {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: $placeholder-color;
+  }
 }
 
 //* Scroll bar style *//

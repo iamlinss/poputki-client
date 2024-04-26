@@ -1,0 +1,44 @@
+<div class="container">
+  <h4 class="container-title">Вход</h4>
+
+  <form [formGroup]="form">
+    <div class="input-container">
+      <input
+        formControlName="login"
+        placeholder=" "
+        class="input"
+        id="mail"
+        type="text"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="mail">Почта</label>
+
+      <span *ngIf="formService.getFormError(form, 'login', 'email')" class="input-error">
+        Введите корректный email.
+      </span>
+      <span *ngIf="formService.getFormError(form, 'login', 'required')" class="input-error">
+        Поле email является обязательным.
+      </span>
+    </div>
+
+    <div class="input-container">
+      <input
+        formControlName="password"
+        placeholder=" "
+        class="input"
+        id="password"
+        type="password"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="password">Пароль</label>
+      <span *ngIf="formService.getFormError(form, 'password', 'required')" class="input-error">
+        Поле пароль является обязательным.
+      </span>
+    </div>
+
+    <div class="btn-container">
+      <a class="link" (click)="router.navigate(['/register'])"> Зарегестрироваться </a>
+      <button (click)="login()" class="btn accent">Войти</button>
+    </div>
+  </form>
+</div>

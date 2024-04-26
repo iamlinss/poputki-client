@@ -1,7 +1,20 @@
 <header>
-  <p class="logo">ПОПУТКА</p>
+  <button (click)="router.navigate([''])" class="btn logo">
+    <p class="logo">ПОПУТКА</p>
+  </button>
+
+  <div *ngIf="registerProgressService.progressState !== null" class="progress">
+    <div [class.active]="registerProgressService.progressState === 'email'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="registerProgressService.progressState === 'info'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="registerProgressService.progressState === 'gender'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="registerProgressService.progressState === 'password'" class="round"></div>
+  </div>
+
   <div class="btn-container">
-    <button class="btn default">Регистрация</button>
-    <button class="btn accent">Войти</button>
+    <button (click)="router.navigate(['/register'])" class="btn default">Регистрация</button>
+    <button (click)="router.navigate(['/login'])" class="btn accent">Войти</button>
   </div>
 </header>

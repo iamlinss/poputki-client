@@ -1,0 +1,85 @@
+<div class="container">
+  <h4 class="container-title" [ngSwitch]="registerProgressService.progressState">
+    <ng-container *ngSwitchCase="'email'"> Введите эл. почту </ng-container>
+    <ng-container *ngSwitchCase="'info'"> Регестрация </ng-container>
+    <ng-container *ngSwitchCase="'gender'"> Укажите свой пол </ng-container>
+    <ng-container *ngSwitchCase="'password'"> Придумайте пароль </ng-container>
+  </h4>
+
+  <form [formGroup]="form" [ngSwitch]="registerProgressService.progressState">
+    <ng-container *ngSwitchCase="'email'">
+      <div class="input-container">
+        <input
+          formControlName="email"
+          placeholder=" "
+          class="input"
+          id="email"
+          type="text"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="email">Почта</label>
+        <span class="input-description"> Email должен быть уникальным. </span>
+        <span *ngIf="formService.getFormError(form, 'email', 'email')" class="input-error">
+          Введите корректный email.
+        </span>
+        <span *ngIf="formService.getFormError(form, 'email', 'required')" class="input-error">
+          Поле email является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'info'">
+      <div class="input-container">
+        <input
+          formControlName="firstName"
+          placeholder=" "
+          class="input"
+          id="firstName"
+          type="text"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="firstName">Имя</label>
+        <span *ngIf="formService.getFormError(form, 'firstName', 'required')" class="input-error">
+          Поле Имя является обязательным.
+        </span>
+      </div>
+
+      <div class="input-container">
+        <input
+          formControlName="lastName"
+          placeholder=" "
+          class="input"
+          id="lastName"
+          type="text"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="lastName">Фамилия</label>
+        <span *ngIf="formService.getFormError(form, 'lastName', 'required')" class="input-error">
+          Поле Фамилия является обязательным.
+        </span>
+      </div>
+
+      <div class="input-container">
+        <input
+          formControlName="birthDate"
+          placeholder=" "
+          class="input"
+          id="birthDate"
+          type="date"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="birthDate">Дата</label>
+        <span *ngIf="formService.getFormError(form, 'birthDate', 'required')" class="input-error">
+          Поле Дата является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <div class="btn-container">
+      <a *ngIf="registerProgressService.progressState !== 'email'" class="link" (click)="back()">
+        Назад
+      </a>
+      <button (click)="next()" class="btn accent">Продолжить</button>
+    </div>
+  </form>
+</div>
