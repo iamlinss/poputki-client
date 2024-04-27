@@ -1,5 +1,9 @@
-<div class="container">
-  <h4 class="container-title" [ngSwitch]="registerProgressService.progressState">
+<div [class.success]="registerProgressService.progressState === 'success'" class="container">
+  <h4
+    *ngIf="registerProgressService.progressState !== 'success'"
+    [ngSwitch]="registerProgressService.progressState"
+    class="container-title"
+  >
     <ng-container *ngSwitchCase="'email'"> Введите эл. почту </ng-container>
     <ng-container *ngSwitchCase="'info'"> Регестрация </ng-container>
     <ng-container *ngSwitchCase="'gender'"> Укажите свой пол </ng-container>
@@ -39,12 +43,15 @@
           autocomplete="new-password"
         />
         <label class="placeholder" for="firstName">Имя</label>
-        <span *ngIf="formService.getFormError(form, 'firstName', 'required')" class="input-error">
+        <span
+          *ngIf="formService.getFormError(form, 'firstName', 'required')"
+          class="input-error top-80"
+        >
           Поле Имя является обязательным.
         </span>
       </div>
 
-      <div class="input-container">
+      <div class="input-container mb-32">
         <input
           formControlName="lastName"
           placeholder=" "
@@ -54,7 +61,10 @@
           autocomplete="new-password"
         />
         <label class="placeholder" for="lastName">Фамилия</label>
-        <span *ngIf="formService.getFormError(form, 'lastName', 'required')" class="input-error">
+        <span
+          *ngIf="formService.getFormError(form, 'lastName', 'required')"
+          class="input-error top-80"
+        >
           Поле Фамилия является обязательным.
         </span>
       </div>
@@ -69,13 +79,73 @@
           autocomplete="new-password"
         />
         <label class="placeholder" for="birthDate">Дата</label>
-        <span *ngIf="formService.getFormError(form, 'birthDate', 'required')" class="input-error">
+        <span
+          *ngIf="formService.getFormError(form, 'birthDate', 'required')"
+          class="input-error top-80"
+        >
           Поле Дата является обязательным.
         </span>
       </div>
     </ng-container>
 
-    <div class="btn-container">
+    <ng-container *ngSwitchCase="'gender'">
+      <div class="gender-container">
+        <button
+          (click)="selectGender('f')"
+          [class.active]="form.get('gender')?.value === 'f'"
+          class="btn-select"
+        >
+          Женский
+        </button>
+        <button
+          (click)="selectGender('m')"
+          [class.active]="form.get('gender')?.value === 'm'"
+          class="btn-select"
+        >
+          Мужской
+        </button>
+        <button
+          (click)="selectGender('n')"
+          [class.active]="form.get('gender')?.value === 'n'"
+          class="btn-select"
+        >
+          Предпочитаю не указывать пол
+        </button>
+      </div>
+
+      <span *ngIf="formService.getFormError(form, 'gender', 'required')" class="error">
+        Пожалуйста, укажите свой пол
+      </span>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'password'">
+      <div class="input-container">
+        <input
+          formControlName="password"
+          placeholder=" "
+          class="input"
+          id="password"
+          type="password"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="password">Пароль</label>
+        <span class="input-description">
+          Пароль должен содержать не менее восьми знаков, включать заглавные и строчные буквы.
+        </span>
+        <span
+          *ngIf="formService.getFormError(form, 'password', 'required')"
+          class="input-error top-120"
+        >
+          Поле Пароль является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'success'">
+      <img src="assets/img/sucsess-registration.svg" alt="" />
+    </ng-container>
+
+    <div *ngIf="registerProgressService.progressState !== 'success'" class="btn-container">
       <a *ngIf="registerProgressService.progressState !== 'email'" class="link" (click)="back()">
         Назад
       </a>

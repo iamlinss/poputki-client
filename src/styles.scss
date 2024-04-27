@@ -28,6 +28,29 @@ input {
   border-radius: 30px;
 }
 
+.btn-select {
+  font-size: 20px;
+  width: 544px;
+  padding: 30px 25px;
+  border: 1px solid $input-border-default;
+  border-radius: 6px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &.active {
+    background-color: $btn-selected-bg;
+    border: 1px solid $btn-accent-bg;
+  }
+
+  &::after {
+    content: url('../src/assets/img/gray-select-arrow.svg');
+    display: block;
+  }
+}
+
 .default {
   background-color: $btn-default-bg;
   color: $btn-default-font;

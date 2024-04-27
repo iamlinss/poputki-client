@@ -4,5 +4,5 @@ import {Injectable} from '@angular/core';
   providedIn: 'root',
 })
 export class RegisterProgressService {
-  progressState: 'email' | 'info' | 'gender' | 'password' | null = null;
+  progressState: 'email' | 'info' | 'gender' | 'password' | 'success' | null = null;
 }

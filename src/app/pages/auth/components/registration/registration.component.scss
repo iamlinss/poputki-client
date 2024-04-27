@@ -11,6 +11,20 @@
     padding: 70px;
     box-sizing: border-box;
     max-width: 684px;
+
+    &.success {
+      background-color: transparent;
+      border-radius: 0px;
+      max-width: unset;
+    }
+  }
+
+  .error {
+    display: block;
+    margin-top: 12px;
+    position: absolute;
+    font-size: 14px;
+    color: $invalid-color;
   }
 
   .container-title {
@@ -20,8 +34,15 @@
     margin-bottom: 40px;
   }
 
+  .gender-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
   .input-container {
-    &:first-of-type {
+    &:first-of-type,
+    &.mb-32 {
       margin-bottom: 32px;
     }
   }
@@ -39,6 +60,14 @@
   .input-error {
     left: 0px;
     top: 100px;
+
+    &.top-80 {
+      top: 80px;
+    }
+
+    &.top-120 {
+      top: 120px;
+    }
   }
 
   .btn {

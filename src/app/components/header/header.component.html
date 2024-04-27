@@ -3,7 +3,13 @@
     <p class="logo">ПОПУТКА</p>
   </button>
 
-  <div *ngIf="registerProgressService.progressState !== null" class="progress">
+  <div
+    *ngIf="
+      registerProgressService.progressState !== null &&
+      registerProgressService.progressState !== 'success'
+    "
+    class="progress"
+  >
     <div [class.active]="registerProgressService.progressState === 'email'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
     <div [class.active]="registerProgressService.progressState === 'info'" class="round"></div>
