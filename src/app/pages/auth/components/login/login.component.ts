@@ -3,9 +3,9 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {Router, RouterOutlet} from '@angular/router';
 import {AuthDataService} from '../../auth.service';
 import {CommonModule} from '@angular/common';
-import {FormService} from '../../../../common/form-validation.service';
+import {FormService} from '../../../../common/services/form-validation.service';
 import {AuthData} from '../../auth.model';
-import {UnsubscribeService} from '../../../../common/unsubscribe.service';
+import {UnsubscribeService} from '../../../../common/services/unsubscribe.service';
 import {takeUntil} from 'rxjs';
 
 @Component({
@@ -43,7 +43,14 @@ export class LoginComponent implements OnInit {
         email: this.form.get('login')?.value,
         password: this.form.get('password')?.value,
       };
-      this.authDataService.login(data).pipe(takeUntil(this.unsubscribe$)).subscribe();
+      this.authDataService
+        .login(data)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe({
+          next: (res) => {
+            sessionStorage.setItem('token', res);
+          },
+        });
     } else {
       this.form.markAllAsTouched();
     }

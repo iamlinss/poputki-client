@@ -73,4 +73,16 @@
   .btn {
     margin-left: auto;
   }
+
+  .success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .wide {
+    width: 200px;
+    margin-left: unset;
+  }
 }

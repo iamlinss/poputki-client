@@ -130,7 +130,8 @@ input {
     width: 544px;
     height: 74px;
 
-    &.ng-touched.ng-invalid {
+    &.ng-touched.ng-invalid,
+    &.dirty {
       border: 1px solid $invalid-color;
 
       & ~ .placeholder {

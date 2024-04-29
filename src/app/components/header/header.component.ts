@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {RegisterProgressService} from '../../common/register-progress.service';
+import {RegisterProgressService} from '../../common/services/register-progress.service';
 import {CommonModule} from '@angular/common';
 
 @Component({

@@ -10,10 +10,15 @@
     <ng-container *ngSwitchCase="'password'"> Придумайте пароль </ng-container>
   </h4>
 
-  <form [formGroup]="form" [ngSwitch]="registerProgressService.progressState">
+  <form
+    [formGroup]="form"
+    [ngSwitch]="registerProgressService.progressState"
+    [class.success]="registerProgressService.progressState === 'success'"
+  >
     <ng-container *ngSwitchCase="'email'">
       <div class="input-container">
         <input
+          [class.dirty]="!isEmailUniqe"
           formControlName="email"
           placeholder=" "
           class="input"
@@ -28,6 +33,9 @@
         </span>
         <span *ngIf="formService.getFormError(form, 'email', 'required')" class="input-error">
           Поле email является обязательным.
+        </span>
+        <span *ngIf="!isEmailUniqe" class="input-error top-120">
+          Этот email уже используется в другой учетной записи ПОПУТКИ
         </span>
       </div>
     </ng-container>
@@ -143,6 +151,7 @@
 
     <ng-container *ngSwitchCase="'success'">
       <img src="assets/img/sucsess-registration.svg" alt="" />
+      <button (click)="router.navigate(['/login'])" class="btn accent wide">Войти</button>
     </ng-container>
 
     <div *ngIf="registerProgressService.progressState !== 'success'" class="btn-container">

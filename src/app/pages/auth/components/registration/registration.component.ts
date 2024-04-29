@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterOutlet} from '@angular/router';
-import {FormService} from '../../../../common/form-validation.service';
-import {UnsubscribeService} from '../../../../common/unsubscribe.service';
+import {FormService} from '../../../../common/services/form-validation.service';
 import {AuthDataService} from '../../auth.service';
 import {CommonModule} from '@angular/common';
-import {RegisterProgressService} from '../../../../common/register-progress.service';
+import {RegisterProgressService} from '../../../../common/services/register-progress.service';
 import {RegisterData} from '../../auth.model';
-import {takeUntil} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -15,14 +14,15 @@ import {takeUntil} from 'rxjs';
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
   imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
-  providers: [UnsubscribeService],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   form!: FormGroup;
+  subs: Subscription[] = [];
+
+  isEmailUniqe: boolean = true;
 
   constructor(
     private authDataService: AuthDataService,
-    private unsubscribe$: UnsubscribeService,
     public registerProgressService: RegisterProgressService,
     public router: Router,
     public formService: FormService,
@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       birthDate: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]), // m f n
+      gender: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
@@ -62,7 +62,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     switch (this.registerProgressService.progressState) {
       case 'email':
         if (this.form.get('email')?.valid) {
-          this.registerProgressService.progressState = 'info';
+          this.subs.push(
+            this.authDataService.checkEmail(this.form.get('email')?.value).subscribe({
+              error: (res) => {
+                if (res.status === 302) {
+                  this.isEmailUniqe = false;
+                } else {
+                  this.isEmailUniqe = true;
+                  this.registerProgressService.progressState = 'info';
+                }
+              },
+            }),
+          );
         } else {
           this.form.get('email')?.markAsTouched();
         }
@@ -113,17 +124,17 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       password: this.form.get('password')?.value,
     };
 
-    this.authDataService
-      .register(data)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe({
+    this.subs.push(
+      this.authDataService.register(data).subscribe({
         next: () => {
           this.registerProgressService.progressState = 'success';
         },
-      });
+      }),
+    );
   }
 
   ngOnDestroy() {
     this.registerProgressService.progressState = null;
+    this.subs.forEach((item) => item.unsubscribe());
   }
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ApiService} from '../../common/api.service';
+import {ApiService} from '../../common/services/api.service';
 import {AuthData, RegisterData} from './auth.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,9 @@ import {AuthData, RegisterData} from './auth.model';
 export class AuthDataService {
   constructor(private apiService: ApiService) {}
 
-  public login(data: AuthData) {
+  public login(data: AuthData): Observable<string> {
     const url = '/util/login';
-    return this.apiService.httpPost(url, data);
+    return this.apiService.httpPost<string>(url, data);
   }
 
   public register(data: RegisterData) {
