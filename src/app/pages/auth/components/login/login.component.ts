@@ -7,6 +7,7 @@ import {FormService} from '../../../../common/services/form-validation.service';
 import {AuthData} from '../../auth.model';
 import {UnsubscribeService} from '../../../../common/services/unsubscribe.service';
 import {takeUntil} from 'rxjs';
+import {UserService} from '../../../../common/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     private unsubscribe$: UnsubscribeService,
     public router: Router,
     public formService: FormService,
+    public userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -32,8 +34,8 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      login: new FormControl('leonov@mail.com', [Validators.required, Validators.email]),
+      password: new FormControl('leonov', [Validators.required]),
     });
   }
 
@@ -48,7 +50,9 @@ export class LoginComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            sessionStorage.setItem('token', res);
+            sessionStorage.setItem('token', JSON.stringify(res));
+            this.userService.updateAuth();
+            this.router.navigate(['/']);
           },
         });
     } else {

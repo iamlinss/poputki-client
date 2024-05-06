@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {AnalyticsBlockComponent} from './components/analytics-block/analytics-block.component';
 import {DriverBenefitsComponent} from './components/driver-benefits/driver-benefits.component';
@@ -24,8 +24,4 @@ import {MainComponent} from './components/main/main.component';
     MainComponent,
   ],
 })
-export class MainPageComponent implements OnInit {
-  ngOnInit(): void {
-    console.log('tes');
-  }
-}
+export class MainPageComponent {}

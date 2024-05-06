@@ -1,6 +1,56 @@
 @import '../../../assets/styles/colors.scss';
 
 :host {
+  .btn-icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .menu {
+    max-height: 0px;
+    border-radius: 30px;
+    background-color: $default-bg;
+    list-style-type: none;
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    z-index: 1;
+    transition: 0.3s;
+    overflow: hidden;
+
+    &.active {
+      max-height: 248px;
+    }
+
+    li {
+      cursor: pointer;
+      padding: 20px;
+      font-size: 1.2rem;
+      color: unset;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      width: 271px;
+      transition: 0.3s;
+
+      &:hover {
+        filter: brightness(0.5);
+        background-color: #00000017;
+      }
+
+      .btn-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 16px;
+      }
+
+      .btn-arrow {
+        width: 9px;
+        height: 15px;
+      }
+    }
+  }
+
   .progress {
     display: flex;
     justify-content: space-between;
@@ -28,6 +78,27 @@
     &.logo {
       border: none;
       background-color: transparent;
+    }
+
+    &.user {
+      border-radius: 50%;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        right: -25px;
+        content: url('../../../assets/img/menu-icon.svg');
+        width: 15px;
+        height: 15px;
+        display: block;
+        transition: 0.3s;
+      }
+
+      &.active {
+        &::before {
+          transform: rotate(0.5turn);
+        }
+      }
     }
   }
 

@@ -19,8 +19,46 @@
     <div [class.active]="registerProgressService.progressState === 'password'" class="round"></div>
   </div>
 
-  <div class="btn-container">
-    <button (click)="router.navigate(['/register'])" class="btn default">Регистрация</button>
-    <button (click)="router.navigate(['/login'])" class="btn accent">Войти</button>
+  <div class="btn-container" [ngSwitch]="userService.isAuthorized$ | async">
+    <ng-container *ngSwitchCase="false">
+      <button (click)="router.navigate(['/register'])" class="btn default">Регистрация</button>
+      <button (click)="router.navigate(['/login'])" class="btn accent">Войти</button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="true">
+      <button (click)="router.navigate(['/register'])" class="btn default icon">
+        <span> Опубликовать поездку </span>
+        <img class="btn-icon" src="assets/img/add-icon.svg" alt="add" />
+      </button>
+      <button
+        (click)="isMenuOpen = !isMenuOpen"
+        [class.active]="isMenuOpen"
+        class="btn accent user"
+      >
+        <img class="btn-icon" src="assets/img/user-icon.svg" alt="user" />
+      </button>
+      <ul [class.active]="isMenuOpen" class="menu">
+        <li>
+          <img class="btn-icon" src="assets/img/menu-car.svg" alt="user" />
+          <span> Ваши поездки </span>
+          <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
+        </li>
+        <li (click)="router.navigate(['/profile']); isMenuOpen = false">
+          <img class="btn-icon" src="assets/img/menu-user.svg" alt="user" />
+          <span> Профиль </span>
+          <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
+        </li>
+        <li>
+          <img class="btn-icon" src="assets/img/menu-chat.svg" alt="user" />
+          <span> Чаты </span>
+          <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
+        </li>
+        <li (click)="logout()">
+          <img class="btn-icon" src="assets/img/menu-exit.svg" alt="user" />
+          <span> Выход </span>
+          <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
+        </li>
+      </ul>
+    </ng-container>
   </div>
 </header>
