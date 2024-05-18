@@ -1,0 +1,64 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px 70px 20px 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+    width: 100%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .input-container {
+      .input {
+        border: none;
+        border-bottom: 1px solid $input-border-default;
+        border-radius: 0;
+        padding: 24px 0px;
+      }
+
+      textarea {
+        min-width: 544px;
+        max-width: 544px;
+        max-height: 150px;
+        height: 80px;
+      }
+    }
+
+    h4 {
+      font-weight: 700;
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+  }
+
+  .input:focus ~ .placeholder,
+  .input:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-30px) translateX(-18px);
+    background-color: $btn-default-bg;
+    font-size: 14px;
+    width: fit-content;
+    padding: 0 6px;
+    height: 20px;
+
+    z-index: 1;
+    font-weight: 500;
+  }
+}

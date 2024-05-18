@@ -8,32 +8,124 @@
   .container {
     background-color: $default-bg;
     border-radius: 30px;
-    padding: 70px;
+    padding: 70px 70px 20px 70px;
     box-sizing: border-box;
     max-width: 684px;
+    width: 100%;
+  }
+
+  .container-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .container-title {
     text-align: center;
     font-weight: 700;
     font-size: 30px;
-    margin-bottom: 40px;
   }
 
-  .input-container {
-    &:first-of-type {
-      margin-bottom: 32px;
+  .profile-info {
+    margin-top: 40px;
+    list-style-type: none;
+    .stat {
+      display: grid;
+      grid-template-columns: 26px auto 9px;
+      align-items: center;
+      padding-bottom: 32px;
+      border-bottom: 1px solid $finder-border-color;
+    }
+
+    .info {
+      padding: 32px 0;
+      border-top: 1px solid $finder-border-color;
+      border-bottom: 1px solid $finder-border-color;
+
+      .info-header {
+        display: flex;
+        justify-content: space-between;
+
+        .btn-icon {
+          transition: 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            filter: brightness(0.5);
+          }
+        }
+      }
+
+      .info-desc {
+        display: block;
+        margin-top: 20px;
+      }
+    }
+
+    .cars {
+      padding: 32px 0;
+      border-bottom: 1px solid $finder-border-color;
+
+      .add-car {
+        cursor: pointer;
+        margin-top: 20px;
+        color: $semi-text-color;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.3s;
+
+        &:hover {
+          filter: brightness(0.5);
+        }
+      }
+    }
+
+    .date {
+      padding: 20px 0;
+      color: $semi-text-color;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 14px;
     }
   }
 
-  .btn-container {
-    margin-top: 60px;
-  }
-
-  .btn-container {
+  .car-list {
+    list-style-type: none;
+    margin-top: 20px;
     display: flex;
+    flex-direction: column;
+    gap: 16px;
 
-    justify-content: space-between;
-    align-items: center;
+    li {
+      line-height: 120%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    div {
+      margin-left: 8px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $car-border-color;
+      border-radius: 50%;
+    }
   }
 }

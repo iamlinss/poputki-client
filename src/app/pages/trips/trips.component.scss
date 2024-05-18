@@ -1,0 +1,101 @@
+@import '../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px 70px 20px 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+    width: 100%;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .swiper {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+
+    button {
+      cursor: pointer;
+      width: 257px;
+      height: 35px;
+      color: $semi-text-color;
+      border: none;
+      background-color: transparent;
+      border-bottom: 2px solid $semi-text-color;
+      transition: 0.3s;
+
+      &.active {
+        color: black;
+        border-bottom: 2px solid black;
+      }
+
+      &:hover {
+        filter: brightness(0.5);
+      }
+    }
+  }
+
+  .trip-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    max-height: 924px;
+    padding-right: 16px;
+    margin-bottom: 50px;
+  }
+
+  .trip-container {
+    border: 1px solid $input-border-default;
+    padding: 20px;
+    border-radius: 6px;
+
+    .trip-status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      img {
+        margin-right: 15px;
+      }
+      color: $yellow-status;
+    }
+
+    .route {
+      margin: 12px 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .route-cities {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 50px;
+    }
+
+    .driver-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}

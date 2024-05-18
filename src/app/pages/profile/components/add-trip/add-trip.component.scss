@@ -1,0 +1,323 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .error {
+    margin-top: 4px;
+    font-size: 14px;
+    color: $invalid-color;
+  }
+
+  .btn-arrow {
+    &.select {
+      position: absolute;
+      left: 510px;
+      top: 28px;
+      width: 10px;
+      transition: 0.3s;
+
+      &.active {
+        transform: rotate(0.25turn);
+      }
+    }
+  }
+
+  .route {
+    margin-top: 30px;
+    display: flex;
+    height: 88px;
+
+    .time {
+      margin-right: 12px;
+    }
+
+    .route-icon {
+      margin-right: 20px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .values {
+      margin-left: auto;
+
+      .passeger-count {
+        display: flex;
+        align-items: center;
+        line-height: 100%;
+        gap: 4px;
+        font-size: 20px;
+        margin-top: 10px;
+
+        img {
+          width: 19px;
+        }
+      }
+    }
+  }
+
+  h5 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 120px;
+  }
+
+  h3 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 38px;
+    margin-top: 60px;
+  }
+
+  .currency {
+    font-size: 1.4rem;
+    line-height: 140%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .passenger {
+    margin: 0 auto;
+    width: 25%;
+    display: flex;
+    border-radius: 4px;
+    height: 26px;
+    color: $gray-secondary-color;
+    padding: 12px 14px;
+    font-size: 18px;
+    align-items: center;
+    justify-content: space-between;
+
+    .passenger-counter {
+      font-size: 30px;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        cursor: pointer;
+        width: 21px;
+        height: 21px;
+        transition: 0.3s;
+        &:hover {
+          filter: brightness(0.5);
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+
+    &.success {
+      background-color: transparent;
+      border-radius: 0px;
+      max-width: unset;
+    }
+  }
+
+  .error {
+    display: block;
+    margin-top: 12px;
+    position: absolute;
+    font-size: 14px;
+    color: $invalid-color;
+  }
+
+  .container-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .gender-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .input-container {
+    &:first-of-type,
+    &.mb-32 {
+      margin-bottom: 32px;
+    }
+
+    .input {
+      &.color {
+        background-color: transparent;
+      }
+    }
+
+    textarea {
+      padding: 8px 10px;
+      min-width: 544px;
+      max-width: 544px;
+      max-height: 95px;
+      min-height: 95px;
+    }
+  }
+
+  .btn-container {
+    margin-top: 60px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-error {
+    left: 0px;
+    top: 100px;
+
+    &.top-80 {
+      top: 80px;
+    }
+
+    &.top-120 {
+      top: 120px;
+    }
+  }
+
+  .left {
+    margin-left: auto;
+  }
+
+  .add {
+    width: 200px;
+  }
+
+  .success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .wide {
+    width: 200px;
+    margin-left: unset;
+  }
+
+  .cities-list {
+    list-style: none;
+    border-radius: 10px;
+    background-color: white;
+    list-style-type: none;
+    position: absolute;
+    z-index: 1;
+    transition: 0.3s;
+    overflow-x: auto;
+    width: 100%;
+    box-shadow: 0px 0px 10px #d7d7d7;
+    max-height: 0px;
+
+    &.active {
+      max-height: 170px;
+    }
+    li {
+      cursor: pointer;
+      padding: 17px;
+      font-size: 1.2rem;
+      color: unset;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+
+      transition: 0.3s;
+
+      &:hover {
+        background-color: rgb(243 243 243);
+      }
+    }
+  }
+
+  .car-list {
+    list-style-type: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: 166px;
+    padding-right: 12px;
+    overflow: auto;
+    gap: 8px;
+
+    li {
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 120%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      transition: 0.3s;
+      border: 1px solid $input-border-default;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+
+        .car-info {
+          display: flex;
+        }
+      }
+
+      .btn-arrow {
+        margin-left: auto;
+      }
+
+      .plate {
+        display: block;
+        font-size: 14px;
+        color: $placeholder-color;
+      }
+
+      &:hover {
+        background-color: rgb(243 243 243);
+      }
+
+      &.selected {
+        background-color: $btn-selected-bg;
+        border: 1px solid $btn-accent-bg;
+      }
+    }
+
+    .round {
+      margin-left: 8px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $car-border-color;
+      border-radius: 50%;
+    }
+  }
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

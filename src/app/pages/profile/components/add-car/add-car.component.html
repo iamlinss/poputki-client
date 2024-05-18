@@ -1,0 +1,98 @@
+<div *ngIf="isLoading" class="loader"></div>
+
+<div
+  *ngIf="!isLoading"
+  [class.success]="ProgressService.addCarProgress === 'success'"
+  class="container"
+>
+  <h4
+    *ngIf="ProgressService.addCarProgress !== 'success'"
+    [ngSwitch]="ProgressService.addCarProgress"
+    class="container-title"
+  >
+    <ng-container *ngSwitchCase="'registration'"> Регистрационный номер машины </ng-container>
+    <ng-container *ngSwitchCase="'brand'"> Введите производителя машины </ng-container>
+    <ng-container *ngSwitchCase="'model'"> Введите модель машины </ng-container>
+    <ng-container *ngSwitchCase="'color'"> Выберите цвет машины </ng-container>
+  </h4>
+
+  <form
+    [formGroup]="form"
+    [ngSwitch]="ProgressService.addCarProgress"
+    [class.success]="ProgressService.addCarProgress === 'success'"
+  >
+    <ng-container *ngSwitchCase="'registration'">
+      <div class="input-container">
+        <input
+          formControlName="regNumber"
+          placeholder=" "
+          class="input"
+          id="regNumber"
+          type="text"
+          autocomplete="new-password"
+        />
+        <span *ngIf="formService.getFormError(form, 'regNumber', 'required')" class="input-error">
+          Поле является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'brand'">
+      <div class="input-container">
+        <input
+          formControlName="brand"
+          placeholder=" "
+          class="input"
+          id="brand"
+          type="text"
+          autocomplete="new-password"
+        />
+        <span *ngIf="formService.getFormError(form, 'brand', 'required')" class="input-error">
+          Поле является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'model'">
+      <div class="input-container">
+        <input
+          formControlName="model"
+          placeholder=" "
+          class="input"
+          id="model"
+          type="text"
+          autocomplete="new-password"
+        />
+        <span *ngIf="formService.getFormError(form, 'model', 'required')" class="input-error">
+          Поле является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'color'">
+      <div class="input-container">
+        <input
+          formControlName="color"
+          placeholder=" "
+          class="input color"
+          id="color"
+          type="color"
+          autocomplete="new-password"
+        />
+        <span *ngIf="formService.getFormError(form, 'color', 'required')" class="input-error">
+          Поле является обязательным.
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'success'">
+      <img src="assets/img/added-car.svg" alt="" />
+      <button (click)="router.navigate(['/'])" class="btn accent wide">Вернутся на главную</button>
+    </ng-container>
+
+    <div *ngIf="ProgressService.addCarProgress !== 'success'" class="btn-container">
+      <a class="link" (click)="back()"> Назад </a>
+      <button (click)="next()" class="btn accent">Продолжить</button>
+    </div>
+  </form>
+</div>

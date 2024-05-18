@@ -1,0 +1,94 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+
+    &.success {
+      background-color: transparent;
+      border-radius: 0px;
+      max-width: unset;
+    }
+  }
+
+  .error {
+    display: block;
+    margin-top: 12px;
+    position: absolute;
+    font-size: 14px;
+    color: $invalid-color;
+  }
+
+  .container-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .gender-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .input-container {
+    &:first-of-type,
+    &.mb-32 {
+      margin-bottom: 32px;
+    }
+
+    .input {
+      &.color {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .btn-container {
+    margin-top: 60px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-error {
+    left: 0px;
+    top: 100px;
+
+    &.top-80 {
+      top: 80px;
+    }
+
+    &.top-120 {
+      top: 120px;
+    }
+  }
+
+  .btn {
+    margin-left: auto;
+  }
+
+  .success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .wide {
+    width: 200px;
+    margin-left: unset;
+  }
+}

@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 162px;
+    gap: 4px;
 
     .round {
       background-color: $progress-bg-default;

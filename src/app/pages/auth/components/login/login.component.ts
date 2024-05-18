@@ -8,6 +8,7 @@ import {AuthData} from '../../auth.model';
 import {UnsubscribeService} from '../../../../common/services/unsubscribe.service';
 import {takeUntil} from 'rxjs';
 import {UserService} from '../../../../common/services/user.service';
+import {LoaderService} from '../../../../common/services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public formService: FormService,
     public userService: UserService,
+    public loaderService: LoaderService,
   ) {}
 
   ngOnInit() {
@@ -45,12 +47,14 @@ export class LoginComponent implements OnInit {
         email: this.form.get('login')?.value,
         password: this.form.get('password')?.value,
       };
+      this.loaderService.setLoading(true);
       this.authDataService
         .login(data)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            sessionStorage.setItem('token', JSON.stringify(res));
+            this.loaderService.setLoading(false);
+            sessionStorage.setItem('token', res.token);
             this.userService.updateAuth();
             this.router.navigate(['/']);
           },

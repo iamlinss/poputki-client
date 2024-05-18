@@ -1,0 +1,63 @@
+<div class="container">
+  <h4>Редактирование профиля</h4>
+  <form [formGroup]="form">
+    <div class="input-container">
+      <input
+        formControlName="name"
+        placeholder=" "
+        class="input"
+        id="name"
+        type="text"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="name">Имя</label>
+    </div>
+
+    <div class="input-container">
+      <input
+        formControlName="surname"
+        placeholder=" "
+        class="input"
+        id="surname"
+        type="text"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="surname">Фамилия</label>
+    </div>
+
+    <div class="input-container">
+      <input
+        formControlName="date"
+        placeholder=" "
+        class="input"
+        id="date"
+        type="date"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="date">Дата рождения</label>
+    </div>
+
+    <div class="input-container">
+      <input
+        formControlName="phone"
+        placeholder=" "
+        class="input"
+        id="phone"
+        type="text"
+        autocomplete="new-password"
+      />
+      <label class="placeholder" for="phone">Телефон</label>
+    </div>
+
+    <div class="input-container">
+      <textarea formControlName="desc" placeholder=" " class="input" id="desc" type="text">
+      </textarea>
+      <label class="placeholder" for="desc">О себе</label>
+    </div>
+  </form>
+
+  <div class="btn-container">
+    <a (click)="router.navigate(['/profile'])" class="link">Назад</a>
+    <button class="btn accent">Сохранить</button>
+  </div>
+</div>

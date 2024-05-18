@@ -1,0 +1,246 @@
+<div [class.success]="ProgressService.addTripProgress === 'success'" class="container">
+  <ng-container *ngIf="carList.length; else empty">
+    <h4
+      *ngIf="ProgressService.addTripProgress !== 'success'"
+      [ngSwitch]="ProgressService.addTripProgress"
+      class="container-title"
+    >
+      <ng-container *ngSwitchCase="'car'"> Выберете машину на которой поедете </ng-container>
+      <ng-container *ngSwitchCase="'start'"> Откуда вы выезжаете? </ng-container>
+      <ng-container *ngSwitchCase="'finish'"> Куда вы едете? </ng-container>
+      <ng-container *ngSwitchCase="'date'"> Когда поездка? </ng-container>
+      <ng-container *ngSwitchCase="'time'"> Во сколько заберете пассажиров? </ng-container>
+      <ng-container *ngSwitchCase="'price'"> Задайте цену на место </ng-container>
+      <ng-container *ngSwitchCase="'comment'"> Добавьте свои пожелания </ng-container>
+      <ng-container *ngSwitchCase="'details'">
+        Детали вашего маршрута указаны. Все верно?
+      </ng-container>
+    </h4>
+
+    <form
+      [formGroup]="form"
+      [ngSwitch]="ProgressService.addTripProgress"
+      [class.success]="ProgressService.addTripProgress === 'success'"
+    >
+      <ng-container *ngSwitchCase="'car'">
+        <ul class="car-list">
+          <li
+            *ngFor="let car of carList"
+            (click)="form.get('car')?.setValue(car)"
+            [class.selected]="form.get('car')?.value === car"
+          >
+            <div class="column">
+              <div class="car-info">
+                <div>{{ car.brand }} {{ car.model }}</div>
+                <div class="round" [style]="'background-color :' + car.color"></div>
+              </div>
+
+              <span class="plate">{{ car.plateNumber }}</span>
+            </div>
+
+            <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+          </li>
+        </ul>
+
+        <span *ngIf="formService.getFormError(form, 'car', 'required')" class="error">
+          Пожалуйста, выберите машину.
+        </span>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'start'">
+        <div class="input-container">
+          <input
+            (click)="isCitiesListOpen = !isCitiesListOpen"
+            formControlName="start"
+            placeholder=" "
+            class="input select"
+            id="start"
+            type="text"
+            readonly
+            autocomplete="new-password"
+          />
+
+          <img
+            [class.active]="isCitiesListOpen"
+            src="assets/img/menu-arrow.svg"
+            alt="user"
+            class="btn-arrow select"
+          />
+
+          <ul [class.active]="isCitiesListOpen" class="cities-list">
+            <li *ngFor="let city of citiesList" (click)="selectCity(city, 'start')">
+              <span>{{ city.city }}, </span>
+              <span>{{ city.country }}</span>
+
+              <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+            </li>
+          </ul>
+
+          <span *ngIf="formService.getFormError(form, 'start', 'required')" class="input-error">
+            Поле является обязательным.
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'finish'">
+        <div class="input-container">
+          <input
+            (click)="isCitiesListOpen = !isCitiesListOpen"
+            formControlName="finish"
+            placeholder=" "
+            class="input select"
+            id="finish"
+            type="text"
+            readonly
+            autocomplete="new-password"
+          />
+
+          <img
+            [class.active]="isCitiesListOpen"
+            src="assets/img/menu-arrow.svg"
+            alt="user"
+            class="btn-arrow select"
+          />
+
+          <ul [class.active]="isCitiesListOpen" class="cities-list">
+            <li *ngFor="let city of citiesList" (click)="selectCity(city, 'finish')">
+              <span>{{ city.city }}, </span>
+              <span>{{ city.country }}</span>
+
+              <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+            </li>
+          </ul>
+
+          <span *ngIf="formService.getFormError(form, 'finish', 'required')" class="input-error">
+            Поле является обязательным.
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'date'">
+        <div class="input-container">
+          <input
+            formControlName="date"
+            placeholder=" "
+            class="input"
+            id="date"
+            type="date"
+            autocomplete="new-password"
+          />
+          <span *ngIf="formService.getFormError(form, 'date', 'required')" class="input-error">
+            Поле является обязательным.
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'time'">
+        <div class="input-container">
+          <input
+            formControlName="time"
+            placeholder=" "
+            class="input"
+            id="color"
+            type="time"
+            autocomplete="new-password"
+          />
+          <span *ngIf="formService.getFormError(form, 'time', 'required')" class="input-error">
+            Поле является обязательным.
+          </span>
+        </div>
+
+        <h3>Сколько попутчиков возьмете в дорогу?</h3>
+
+        <div class="passenger">
+          <button
+            (click)="passengerCount = passengerCount === 1 ? 1 : passengerCount - 1"
+            type="button"
+          >
+            <img src="assets/img/minus-icon.svg" alt="" />
+          </button>
+
+          <span class="passenger-counter">
+            {{ passengerCount }}
+          </span>
+
+          <button type="button" (click)="passengerCount = passengerCount + 1">
+            <img src="assets/img/plus-icon.svg" alt="" />
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'price'">
+        <div class="input-container">
+          <input
+            formControlName="price"
+            placeholder=" "
+            class="input"
+            id="price"
+            type="number"
+            placeholder="15 BYN"
+            autocomplete="new-password"
+          />
+          <div *ngIf="form.get('price')?.value" class="currency">BYN</div>
+          <span class="input-description"> Рекомендованная цена за эту поездку - 10-20 BYN </span>
+          <span *ngIf="formService.getFormError(form, 'price', 'required')" class="input-error">
+            Поле является обязательным.
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'comment'">
+        <div class="input-container">
+          <textarea formControlName="comment" placeholder=" " class="input" id="desc" type="text">
+          </textarea>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'details'">
+        <div class="details">
+          <div>
+            {{ this.form.get('date')?.value | date }}
+          </div>
+          <div class="route">
+            <div class="time">
+              {{ this.form.get('time')?.value }}
+            </div>
+            <div class="route-icon">
+              <img src="assets/img/route.svg" alt="" />
+            </div>
+            <div class="column">
+              <div>{{ this.form.get('start')?.value }}</div>
+              <div>{{ this.form.get('finish')?.value }}</div>
+            </div>
+            <div class="values">
+              <div>{{ this.form.get('price')?.value }} BYN</div>
+              <div class="passeger-count">
+                <div>{{ passengerCount }}</div>
+                <img src="assets/img/passeger-icon.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'success'">
+        <img src="assets/img/added-trip.svg" alt="" />
+        <button (click)="router.navigate(['/'])" class="btn accent wide">
+          Вернутся на главную
+        </button>
+      </ng-container>
+
+      <div *ngIf="ProgressService.addTripProgress !== 'success'" class="btn-container">
+        <a class="link" (click)="back()"> Назад </a>
+        <button (click)="next()" class="btn accent left">Продолжить</button>
+      </div>
+    </form>
+  </ng-container>
+</div>
+
+<ng-template #empty>
+  <div *ngIf="carList.length" class="empty">
+    <h5>Для создания поездки требуется наличие машины</h5>
+    <button (click)="router.navigate(['/profile/add/car'])" class="btn accent add">
+      Добавить машину
+    </button>
+  </div>
+</ng-template>

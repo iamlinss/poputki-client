@@ -5,18 +5,54 @@
 
   <div
     *ngIf="
-      registerProgressService.progressState !== null &&
-      registerProgressService.progressState !== 'success'
+      ProgressService.registrationProgress !== null &&
+      ProgressService.registrationProgress !== 'success'
     "
     class="progress"
   >
-    <div [class.active]="registerProgressService.progressState === 'email'" class="round"></div>
+    <div [class.active]="ProgressService.registrationProgress === 'email'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
-    <div [class.active]="registerProgressService.progressState === 'info'" class="round"></div>
+    <div [class.active]="ProgressService.registrationProgress === 'info'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
-    <div [class.active]="registerProgressService.progressState === 'gender'" class="round"></div>
+    <div [class.active]="ProgressService.registrationProgress === 'gender'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
-    <div [class.active]="registerProgressService.progressState === 'password'" class="round"></div>
+    <div [class.active]="ProgressService.registrationProgress === 'password'" class="round"></div>
+  </div>
+
+  <div
+    *ngIf="ProgressService.addCarProgress !== null && ProgressService.addCarProgress !== 'success'"
+    class="progress"
+  >
+    <div [class.active]="ProgressService.addCarProgress === 'registration'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addCarProgress === 'brand'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addCarProgress === 'model'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addCarProgress === 'color'" class="round"></div>
+  </div>
+
+  <div
+    *ngIf="
+      ProgressService.addTripProgress !== null && ProgressService.addTripProgress !== 'success'
+    "
+    class="progress"
+  >
+    <div [class.active]="ProgressService.addTripProgress === 'car'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'start'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'finish'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'date'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'time'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'price'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'comment'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addTripProgress === 'details'" class="round"></div>
   </div>
 
   <div class="btn-container" [ngSwitch]="userService.isAuthorized$ | async">
@@ -26,7 +62,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="true">
-      <button (click)="router.navigate(['/register'])" class="btn default icon">
+      <button (click)="router.navigate(['/profile/add/trip'])" class="btn default icon">
         <span> Опубликовать поездку </span>
         <img class="btn-icon" src="assets/img/add-icon.svg" alt="add" />
       </button>
@@ -38,7 +74,7 @@
         <img class="btn-icon" src="assets/img/user-icon.svg" alt="user" />
       </button>
       <ul [class.active]="isMenuOpen" class="menu">
-        <li>
+        <li (click)="router.navigate(['/trips'])">
           <img class="btn-icon" src="assets/img/menu-car.svg" alt="user" />
           <span> Ваши поездки </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
@@ -48,7 +84,7 @@
           <span> Профиль </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
         </li>
-        <li>
+        <li (click)="router.navigate(['/chat']); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/menu-chat.svg" alt="user" />
           <span> Чаты </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />

@@ -136,6 +136,17 @@ input {
     width: 544px;
     height: 74px;
 
+    &.select {
+      cursor: pointer;
+      &::after {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+      }
+    }
+
     &.ng-touched.ng-invalid,
     &.dirty {
       border: 1px solid $invalid-color;
@@ -229,4 +240,53 @@ input {
     scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
     scrollbar-width: thin;
   }
+}
+
+// LOADER
+.loader {
+  width: 100px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 10%;
+  left: calc(100% - 50%);
+  display: grid;
+  margin: 200px auto;
+  overflow: hidden;
+}
+.loader::before,
+.loader::after {
+  content: '';
+  grid-area: 1/1;
+  --c: no-repeat radial-gradient(farthest-side, #7b74f3 92%, #91919109);
+  background:
+    var(--c) 50% 0,
+    var(--c) 50% 100%,
+    var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 18px 18px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 12px 12px;
+  animation-timing-function: linear;
+}
+
+@keyframes l12 {
+  100% {
+    transform: rotate(0.5turn);
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

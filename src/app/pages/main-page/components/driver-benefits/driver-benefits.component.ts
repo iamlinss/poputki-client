@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-driver-benefits',
@@ -8,4 +8,6 @@ import {RouterOutlet} from '@angular/router';
   styleUrl: './driver-benefits.component.scss',
   imports: [RouterOutlet],
 })
-export class DriverBenefitsComponent {}
+export class DriverBenefitsComponent {
+  constructor(public router: Router) {}
+}

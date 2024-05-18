@@ -1,4 +1,28 @@
 .wrapper {
   padding: 0 100px;
   overflow-x: hidden;
+
+  .loader-container,
+  .content {
+    opacity: 0;
+    transition:
+      visibility 1s linear,
+      opacity 1s linear;
+    pointer-events: none;
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+
+    &.active {
+      transition:
+        visibility 1s linear,
+        opacity 1s linear;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
+    }
+  }
 }

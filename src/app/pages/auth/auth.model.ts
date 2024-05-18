@@ -10,4 +10,5 @@ export interface RegisterData {
   birthDate: string;
   gender: string;
   password: string;
+  phone: string;
 }

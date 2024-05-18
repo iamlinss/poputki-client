@@ -1,4 +1,9 @@
 <div class="wrapper">
   <app-header></app-header>
-  <router-outlet />
+  <div class="content" [class.active]="(loaderService.isLoading$ | async) === false">
+    <router-outlet />
+  </div>
+  <div [class.active]="loaderService.isLoading$ | async" class="loader-container">
+    <div class="loader"></div>
+  </div>
 </div>

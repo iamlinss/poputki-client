@@ -1,7 +1,7 @@
-<div [class.success]="registerProgressService.progressState === 'success'" class="container">
+<div [class.success]="ProgressService.registrationProgress === 'success'" class="container">
   <h4
-    *ngIf="registerProgressService.progressState !== 'success'"
-    [ngSwitch]="registerProgressService.progressState"
+    *ngIf="ProgressService.registrationProgress !== 'success'"
+    [ngSwitch]="ProgressService.registrationProgress"
     class="container-title"
   >
     <ng-container *ngSwitchCase="'email'"> Введите эл. почту </ng-container>
@@ -12,8 +12,8 @@
 
   <form
     [formGroup]="form"
-    [ngSwitch]="registerProgressService.progressState"
-    [class.success]="registerProgressService.progressState === 'success'"
+    [ngSwitch]="ProgressService.registrationProgress"
+    [class.success]="ProgressService.registrationProgress === 'success'"
   >
     <ng-container *ngSwitchCase="'email'">
       <div class="input-container">
@@ -74,6 +74,24 @@
           class="input-error top-80"
         >
           Поле Фамилия является обязательным.
+        </span>
+      </div>
+
+      <div class="input-container mb-32">
+        <input
+          formControlName="phone"
+          placeholder=" "
+          class="input"
+          id="phone"
+          type="text"
+          autocomplete="new-password"
+        />
+        <label class="placeholder" for="phone">Номер телефона</label>
+        <span
+          *ngIf="formService.getFormError(form, 'phone', 'required')"
+          class="input-error top-80"
+        >
+          Поле Номер телефона является обязательным.
         </span>
       </div>
 
@@ -154,8 +172,8 @@
       <button (click)="router.navigate(['/login'])" class="btn accent wide">Войти</button>
     </ng-container>
 
-    <div *ngIf="registerProgressService.progressState !== 'success'" class="btn-container">
-      <a *ngIf="registerProgressService.progressState !== 'email'" class="link" (click)="back()">
+    <div *ngIf="ProgressService.registrationProgress !== 'success'" class="btn-container">
+      <a *ngIf="ProgressService.registrationProgress !== 'email'" class="link" (click)="back()">
         Назад
       </a>
       <button (click)="next()" class="btn accent">Продолжить</button>

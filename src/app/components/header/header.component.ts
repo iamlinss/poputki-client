@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {RegisterProgressService} from '../../common/services/register-progress.service';
+import {ProgressService} from '../../common/services/register-progress.service';
 import {CommonModule} from '@angular/common';
 import {UserService} from '../../common/services/user.service';
 
@@ -16,7 +16,7 @@ export class HeaderComponent {
 
   constructor(
     public router: Router,
-    public registerProgressService: RegisterProgressService,
+    public ProgressService: ProgressService,
     public userService: UserService,
     private el: ElementRef,
   ) {}
@@ -29,8 +29,7 @@ export class HeaderComponent {
 
   @HostListener('document:click', ['$event'])
   onClick(event: Event) {
-    console.log(event);
-    if (this.el.nativeElement.contains(event.target)) {
+    if (!this.el.nativeElement.contains(event.target)) {
       this.isMenuOpen = false;
     }
   }

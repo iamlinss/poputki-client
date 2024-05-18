@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 import {FinderBlockComponent} from '../finder-block/finder-block.component';
+import {LoaderService} from '../../../../common/services/loader.service';
 
 @Component({
   selector: 'app-main',
@@ -9,4 +10,17 @@ import {FinderBlockComponent} from '../finder-block/finder-block.component';
   styleUrl: './main.component.scss',
   imports: [RouterOutlet, FinderBlockComponent],
 })
-export class MainComponent {}
+export class MainComponent implements OnInit {
+  constructor(
+    public router: Router,
+    public loaderService: LoaderService,
+  ) {}
+
+  ngOnInit() {
+    this.loaderService.setLoading(true);
+
+    setTimeout(() => {
+      this.loaderService.setLoading(false);
+    }, 1000);
+  }
+}

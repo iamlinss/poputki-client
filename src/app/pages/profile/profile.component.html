@@ -1,3 +1,52 @@
 <div class="container">
-  <h4 class="container-title">Ваш профиль</h4>
+  <div class="container-header">
+    <div class="column">
+      <h4 class="container-title">Ваш профиль</h4>
+      <h3 class="container-name">
+        <span> {{ profileData?.firstName }} {{ profileData?.lastName }} </span>
+        <div>
+          <img src="assets/img/star.svg" alt="star" />
+          {{ profileData?.rate }}
+        </div>
+      </h3>
+      <span>{{ profileData?.phone }}</span>
+    </div>
+    <img class="profile-user" src="assets/img/profile-user.svg" alt="profile-user" />
+  </div>
+
+  <ul class="profile-info">
+    <li class="info">
+      <div class="info-header">
+        <h3>О себе</h3>
+        <img
+          (click)="router.navigate(['/profile/edit'])"
+          src="assets/img/edit-profile.svg"
+          class="btn-icon"
+          alt="edit-profile"
+        />
+      </div>
+      <span class="info-desc"> {{ profileData?.description }} </span>
+    </li>
+
+    <li class="cars">
+      <h3>Машины</h3>
+
+      <ul *ngIf="profileData?.cars" class="car-list">
+        <li *ngFor="let car of profileData?.cars">
+          <span>{{ car.brand }} {{ car.model }}</span>
+          <div [style]="'background-color :' + car.color"></div>
+        </li>
+      </ul>
+
+      <button (click)="router.navigate(['/profile/add/car'])" class="add-car">
+        Добавить машину
+        <img src="assets/img/plus-icon.svg" alt="" />
+      </button>
+    </li>
+
+    <li class="date">
+      <span>Опубликованных поездок: {{ profileData?.tripAmount }} </span>
+      <span>Дата регистрации: {{ profileData?.registrationDate }}</span>
+    </li>
+  </ul>
 </div>
