@@ -2,176 +2,113 @@
   <h4>Ваши поездки</h4>
 
   <div class="swiper">
-    <button (click)="tripStatus = false" [class.active]="!tripStatus">Созданные</button>
-    <button (click)="tripStatus = true" [class.active]="tripStatus">Забронированные</button>
+    <button (click)="tripStatus = false; toggleStatus()" [class.active]="!tripStatus">
+      Созданные
+    </button>
+    <button (click)="tripStatus = true; toggleStatus()" [class.active]="tripStatus">
+      Забронированные
+    </button>
   </div>
 
-  <div class="trip-list">
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
+  <div [ngSwitch]="tripStatus" class="trip-list">
+    <ng-container *ngSwitchCase="false">
+      <div *ngFor="let trip of tripList" class="trip-container">
+        <div class="trip-status" [ngSwitch]="trip.status?.id">
+          <ng-container *ngSwitchCase="1">
+            <img src="assets/img/yellow-clock.svg" alt="" />
+            <span class="yellow">{{ trip.status?.status }}</span>
+          </ng-container>
 
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
+          <ng-container *ngSwitchCase="2">
+            <img src="assets/img/red-cross.svg" alt="" />
+            <span class="red">{{ trip.status?.status }}</span>
+          </ng-container>
 
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
+          <ng-container *ngSwitchCase="3">
+            <img src="assets/img/green-car.svg" alt="" />
+            <span class="green">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="4">
+            <img src="assets/img/gray-approve.svg" alt="" />
+            <span class="gray">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="5">
+            <img src="assets/img/red-cross.svg" alt="" />
+            <span class="red">{{ trip.status?.status }}</span>
+          </ng-container>
+        </div>
+
+        <div class="trip-info">
+          <span class="date">{{ trip.departureDateTime | date }} </span>
+
+          <div class="route">
+            <img src="assets/img/trip-divider.svg" alt="" />
+            <div class="route-cities">
+              <span>{{ trip.departureLocation.country + ', ' + trip.departureLocation.city }}</span>
+              <span>{{
+                trip.destinationLocation.country + ', ' + trip.destinationLocation.city
+              }}</span>
+            </div>
+          </div>
+
+          <div class="driver-info">
+            <img src="assets/img/profile-user.svg" alt="" />
+            <span>{{ driverName }}</span>
           </div>
         </div>
+      </div>
+    </ng-container>
 
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
+    <ng-container *ngSwitchCase="true">
+      <div *ngFor="let trip of tripList" class="trip-container">
+        <div class="trip-status" [ngSwitch]="trip.status?.id">
+          <ng-container *ngSwitchCase="1">
+            <img src="assets/img/yellow-clock.svg" alt="" />
+            <span class="yellow">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="2">
+            <img src="assets/img/red-cross.svg" alt="" />
+            <span class="red">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="3">
+            <img src="assets/img/green-car.svg" alt="" />
+            <span class="green">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="4">
+            <img src="assets/img/gray-approve.svg" alt="" />
+            <span class="gray">{{ trip.status?.status }}</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="5">
+            <img src="assets/img/red-cross.svg" alt="" />
+            <span class="red">{{ trip.status?.status }}</span>
+          </ng-container>
         </div>
-      </div>
-    </div>
 
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
+        <div class="trip-info">
+          <span class="date">{{ trip.departureDateTime | date }} </span>
 
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
+          <div class="route">
+            <img src="assets/img/trip-divider.svg" alt="" />
+            <div class="route-cities">
+              <span>{{ trip.departureLocation.country + ', ' + trip.departureLocation.city }}</span>
+              <span>{{
+                trip.destinationLocation.country + ', ' + trip.destinationLocation.city
+              }}</span>
+            </div>
+          </div>
 
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
+          <div class="driver-info">
+            <img src="assets/img/profile-user.svg" alt="" />
+            <span>{{ driverName }}</span>
           </div>
         </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
       </div>
-    </div>
-
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
-
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
-
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
-          </div>
-        </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
-
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
-
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
-          </div>
-        </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
-
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
-
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
-          </div>
-        </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
-
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
-
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
-          </div>
-        </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
-      </div>
-    </div>
-    <div class="trip-container">
-      <div class="trip-status">
-        <img src="assets/img/yellow-clock.svg" alt="" />
-        <span>Ждет подтверждения</span>
-      </div>
-
-      <div class="trip-info">
-        <span class="date">Ср, 17 апреля в 09:00 </span>
-
-        <div class="route">
-          <img src="assets/img/trip-divider.svg" alt="" />
-          <div class="route-cities">
-            <span>Минск</span>
-            <span>Брест</span>
-          </div>
-        </div>
-
-        <div class="driver-info">
-          <img src="assets/img/profile-user.svg" alt="" />
-          <span>Константин</span>
-        </div>
-      </div>
-    </div>
+    </ng-container>
   </div>
 </div>

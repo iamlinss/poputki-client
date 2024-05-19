@@ -69,10 +69,27 @@
       display: flex;
       align-items: center;
       margin-bottom: 20px;
+
       img {
-        margin-right: 15px;
+        margin-right: 12px;
       }
-      color: $yellow-status;
+      span {
+        &.yellow {
+          color: $yellow-status;
+        }
+
+        &.red {
+          color: $red-status;
+        }
+
+        &.green {
+          color: $green-status;
+        }
+
+        &.gray {
+          color: $gray-status;
+        }
+      }
     }
 
     .route {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../common/services/api.service';
-import {CarData, EditProfileData, ProfileData, TripData} from './profile.model';
+import {CarData, DriverTripData, EditProfileData, ProfileData, TripData} from './profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +30,11 @@ export class ProfileDataService {
 
   getUserDriverTrips(userId: string) {
     const url = `/trips/${userId}`;
-    return this.apiService.httpGet<ProfileData>(url);
+    return this.apiService.httpGet<DriverTripData[]>(url);
   }
 
   getUserPassegerTrips(userId: string) {
     const url = `/trips/brone/${userId}`;
-    return this.apiService.httpGet<ProfileData>(url);
+    return this.apiService.httpGet<any>(url);
   }
 }

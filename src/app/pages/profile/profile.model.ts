@@ -28,11 +28,11 @@ export interface ProfileData {
 }
 
 export interface EditProfileData {
-  name: string;
-  surname: string;
-  date: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
   phone: string;
-  desc: string;
+  description: string;
 }
 
 export interface TripData {
@@ -48,4 +48,19 @@ export interface TripData {
   };
   userId: string;
   carId: number;
+}
+
+export interface DriverTripData {
+  car: CarData;
+  departureDateTime: string;
+  departureLocation: CityData;
+  description: string;
+  destinationLocation: CityData;
+  id: number;
+  seats: number;
+  status?: {
+    id: number;
+    status: string;
+  };
+  userId: number;
 }

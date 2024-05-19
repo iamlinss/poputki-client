@@ -61,11 +61,11 @@ export class EditProfileComponent implements OnInit {
   editProfile() {
     if (this.form.valid) {
       const data: EditProfileData = {
-        name: this.form.get('name')?.value,
-        surname: this.form.get('surname')?.value,
-        date: this.form.get('date')?.value,
+        firstName: this.form.get('name')?.value,
+        lastName: this.form.get('surname')?.value,
+        birthDate: this.form.get('date')?.value,
         phone: this.form.get('phone')?.value,
-        desc: this.form.get('desc')?.value,
+        description: this.form.get('desc')?.value,
       };
 
       this.loaderService.setLoading(true);

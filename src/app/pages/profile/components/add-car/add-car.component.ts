@@ -8,6 +8,7 @@ import {ProgressService} from '../../../../common/services/register-progress.ser
 import {CarData} from '../../profile.model';
 import {ProfileDataService} from '../../profile.service';
 import {UserService} from '../../../../common/services/user.service';
+import {LoaderService} from '../../../../common/services/loader.service';
 
 @Component({
   selector: 'app-add-car',
@@ -26,6 +27,7 @@ export class AddCarComponent implements OnInit, OnDestroy {
   constructor(
     public ProgressService: ProgressService,
     public profileDataService: ProfileDataService,
+    public loaderService: LoaderService,
     public router: Router,
     public formService: FormService,
     public userService: UserService,
@@ -109,11 +111,12 @@ export class AddCarComponent implements OnInit, OnDestroy {
       plateNumber: this.form.get('regNumber')?.value,
     };
 
-    this.isLoading = true;
+    this.loaderService.setLoading(true);
+
     this.subs.push(
       this.profileDataService.addCar(this.userService.userId!, data).subscribe({
         next: () => {
-          this.isLoading = false;
+          this.loaderService.setLoading(false);
           this.ProgressService.addCarProgress = 'success';
         },
       }),
