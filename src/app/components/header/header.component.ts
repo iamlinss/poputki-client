@@ -23,7 +23,7 @@ export class HeaderComponent {
 
   logout() {
     this.isMenuOpen = false;
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.userService.updateAuth();
   }
 

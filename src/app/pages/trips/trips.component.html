@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="tripList.length" class="container">
   <h4>Ваши поездки</h4>
 
   <div class="swiper">
@@ -10,9 +10,9 @@
     </button>
   </div>
 
-  <div [ngSwitch]="tripStatus" class="trip-list">
+  <div *ngIf="!isLoading; else loader" [ngSwitch]="tripStatus" class="trip-list">
     <ng-container *ngSwitchCase="false">
-      <div *ngFor="let trip of tripList" class="trip-container">
+      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container">
         <div class="trip-status" [ngSwitch]="trip.status?.id">
           <ng-container *ngSwitchCase="1">
             <img src="assets/img/yellow-clock.svg" alt="" />
@@ -55,14 +55,14 @@
 
           <div class="driver-info">
             <img src="assets/img/profile-user.svg" alt="" />
-            <span>{{ driverName }}</span>
+            <span>{{ trip.driverName }}</span>
           </div>
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="true">
-      <div *ngFor="let trip of tripList" class="trip-container">
+      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container">
         <div class="trip-status" [ngSwitch]="trip.status?.id">
           <ng-container *ngSwitchCase="1">
             <img src="assets/img/yellow-clock.svg" alt="" />
@@ -105,10 +105,29 @@
 
           <div class="driver-info">
             <img src="assets/img/profile-user.svg" alt="" />
-            <span>{{ driverName }}</span>
+            <span>{{ trip.driverName }}</span>
           </div>
         </div>
       </div>
     </ng-container>
   </div>
 </div>
+
+<ng-container *ngIf="!tripList.length">
+  <img class="no-trips" src="assets/img/no-trips.svg" alt="" />
+  <button (click)="router.navigate(['/'])" class="btn accent wide">Вернутся на главную</button>
+</ng-container>
+
+<app-trip-item
+  [class.active]="selectedTrip"
+  [selectedTrip]="selectedTrip"
+  [tripStatus]="tripStatus"
+  (closedEvent)="selectedTrip = null"
+>
+</app-trip-item>
+
+<ng-template #loader>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>

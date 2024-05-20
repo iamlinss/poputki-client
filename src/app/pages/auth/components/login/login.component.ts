@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (res) => {
             this.loaderService.setLoading(false);
-            sessionStorage.setItem('token', res.token);
+            localStorage.setItem('token', res.token);
             this.userService.updateAuth();
             this.router.navigate(['/']);
           },

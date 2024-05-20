@@ -61,9 +61,15 @@
   }
 
   .trip-container {
+    cursor: pointer;
     border: 1px solid $input-border-default;
     padding: 20px;
     border-radius: 6px;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $main-bg;
+    }
 
     .trip-status {
       display: flex;
@@ -114,5 +120,21 @@
         height: 40px;
       }
     }
+  }
+
+  .loader-container {
+    height: 230px;
+    display: flex;
+    position: relative;
+
+    .loader {
+      top: -60%;
+      left: 42%;
+    }
+  }
+
+  .wide {
+    margin-top: 40px;
+    width: 200px;
   }
 }

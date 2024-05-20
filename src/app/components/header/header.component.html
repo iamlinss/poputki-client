@@ -74,7 +74,7 @@
         <img class="btn-icon" src="assets/img/user-icon.svg" alt="user" />
       </button>
       <ul [class.active]="isMenuOpen" class="menu">
-        <li (click)="router.navigate(['/trips'])">
+        <li (click)="router.navigate(['/trips']); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/menu-car.svg" alt="user" />
           <span> Ваши поездки </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />

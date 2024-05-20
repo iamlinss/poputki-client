@@ -63,4 +63,5 @@ export interface DriverTripData {
     status: string;
   };
   userId: number;
+  driverName: string;
 }

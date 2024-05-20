@@ -6,13 +6,13 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  isAuthorized$?: Observable<boolean> = of(!!sessionStorage.getItem('token'));
+  isAuthorized$?: Observable<boolean> = of(!!localStorage.getItem('token'));
   userId: string | null = null;
 
   constructor() {}
 
   updateAuth() {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     if (token) {
       this.userId = jwtDecode(token!).iss!;

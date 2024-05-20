@@ -9,20 +9,21 @@ import {UserService} from '../../common/services/user.service';
 import {ProfileDataService} from '../profile/profile.service';
 import {takeUntil} from 'rxjs';
 import {DriverTripData} from '../profile/profile.model';
+import {TripItemComponent} from './components/trip-item/trip-item.component';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
   templateUrl: './trips.component.html',
   styleUrl: './trips.component.scss',
-  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
   providers: [UnsubscribeService],
+  imports: [RouterOutlet, ReactiveFormsModule, CommonModule, TripItemComponent],
 })
 export class TripsComponent implements OnInit {
   tripStatus: boolean = false;
-
+  isLoading = false;
   tripList: DriverTripData[] = [];
-  driverName: string = '';
+  selectedTrip: DriverTripData | null = null;
 
   constructor(
     public router: Router,
@@ -34,29 +35,21 @@ export class TripsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.toggleStatus();
+    this.toggleStatus(true);
   }
 
-  toggleStatus() {
+  toggleStatus(isFirstCall = false) {
+    isFirstCall ? this.loaderService.setLoading(true) : (this.isLoading = true);
+
     if (!this.tripStatus) {
       this.profileService
         .getUserDriverTrips(this.userService.userId!)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            console.log('getUserDriverTrips');
             this.tripList = res;
-            console.log(res);
+            isFirstCall ? this.loaderService.setLoading(false) : (this.isLoading = false);
             this.cdr.detectChanges();
-          },
-        });
-
-      this.profileService
-        .getUser(this.userService.userId!)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-          next: (res) => {
-            this.driverName = res.firstName + ' ' + res.lastName;
           },
         });
     } else {
@@ -65,19 +58,9 @@ export class TripsComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            console.log('getUserPassegerTrips');
             this.tripList = res;
-            console.log(res);
+            isFirstCall ? this.loaderService.setLoading(false) : (this.isLoading = false);
             this.cdr.detectChanges();
-          },
-        });
-
-      this.profileService
-        .getUser(this.tripList[0].userId + '')
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-          next: (res) => {
-            this.driverName = res.firstName + ' ' + res.lastName;
           },
         });
     }

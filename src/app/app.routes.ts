@@ -8,6 +8,7 @@ import {AddCarComponent} from './pages/profile/components/add-car/add-car.compon
 import {ChatComponent} from './pages/chat/chat.component';
 import {AddTripComponent} from './pages/profile/components/add-trip/add-trip.component';
 import {TripsComponent} from './pages/trips/trips.component';
+import {authGuard} from './common/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -29,30 +30,41 @@ export const routes: Routes = [
     path: 'profile',
     pathMatch: 'full',
     component: ProfileComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'profile/edit',
     pathMatch: 'full',
     component: EditProfileComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'profile/add/car',
     pathMatch: 'full',
     component: AddCarComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'profile/add/trip',
     pathMatch: 'full',
     component: AddTripComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'chat',
     pathMatch: 'full',
     component: ChatComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'trips',
     pathMatch: 'full',
     component: TripsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];

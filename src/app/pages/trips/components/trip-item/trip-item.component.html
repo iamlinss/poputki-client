@@ -1,0 +1,159 @@
+<div [ngSwitch]="status" [class.active]="selectedTrip" class="bg" (click)="close()">
+  <div *ngSwitchCase="'data'" (click)="$event.stopPropagation()" class="container">
+    <h4>План поездки</h4>
+
+    <div *ngIf="selectedTrip" class="trip-container">
+      <div class="trip-status" [ngSwitch]="selectedTrip.status?.id">
+        <ng-container *ngSwitchCase="1">
+          <img src="assets/img/yellow-clock.svg" alt="" />
+          <span class="yellow">{{ selectedTrip.status?.status }}</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <img src="assets/img/red-cross.svg" alt="" />
+          <span class="red">{{ selectedTrip.status?.status }}</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="3">
+          <img src="assets/img/green-car.svg" alt="" />
+          <span class="green">{{ selectedTrip.status?.status }}</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="4">
+          <img src="assets/img/gray-approve.svg" alt="" />
+          <span class="gray">{{ selectedTrip.status?.status }}</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="5">
+          <img src="assets/img/red-cross.svg" alt="" />
+          <span class="red">{{ selectedTrip.status?.status }}</span>
+        </ng-container>
+      </div>
+
+      <div class="trip-info">
+        <span class="date">{{ selectedTrip.departureDateTime | date }} </span>
+
+        <div class="route">
+          <img src="assets/img/route.svg" alt="" />
+          <div class="route-cities">
+            <span>{{
+              selectedTrip.departureLocation.country + ', ' + selectedTrip.departureLocation.city
+            }}</span>
+            <span>{{
+              selectedTrip.destinationLocation.country +
+                ', ' +
+                selectedTrip.destinationLocation.city
+            }}</span>
+          </div>
+        </div>
+        <ul class="trip-info">
+          <li class="trip-price">
+            <div class="column">
+              <span> Наличными </span>
+              <span> Забронированных мест : {{ selectedTrip.seats }} </span>
+            </div>
+            <div class="currency">15 BYN</div>
+          </li>
+        </ul>
+        <ul class="trip-driver">
+          <div class="driver-info">
+            <img class="icon" src="assets/img/profile-user.svg" alt="" />
+            <span>{{ selectedTrip.driverName }}</span>
+            <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+          </div>
+          <div class="car-block">
+            <div class="car-data">
+              <div>
+                {{ selectedTrip.car.brand + ' ' + selectedTrip.car.model }}
+              </div>
+              <div class="round" [style]="'background-color :' + selectedTrip.car.color"></div>
+            </div>
+
+            <div class="plate">
+              {{ selectedTrip.car.plateNumber }}
+            </div>
+          </div>
+        </ul>
+
+        <ul class="trip-passager">
+          Других пассажиров пока нет
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a (click)="close()" class="link"> Закрыть </a>
+      <button (click)="toggleStatus('decline'); $event.stopPropagation()" class="btn danger left">
+        Отменить бронь
+      </button>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'decline'" (click)="$event.stopPropagation()" class="container">
+    <h4>В чем причина отмены?</h4>
+
+    <ul *ngIf="tripStatus" class="decline-list">
+      <li (click)="selectedReason = 1" [class.selected]="selectedReason === 1">
+        <span> Нашелся другой попутчик</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 2" [class.selected]="selectedReason === 2">
+        <span>Планы изменились, и я никуда не еду</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 3" [class.selected]="selectedReason === 3">
+        <span>Не удалось связаться с водителем</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 4" [class.selected]="selectedReason === 4">
+        <span>Бронирование произошло по ошибке</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 5" [class.selected]="selectedReason === 5">
+        <span>Другая причина</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+
+      <div *ngIf="error" class="error">Пожалуйста, выберите одну из причин</div>
+    </ul>
+
+    <ul *ngIf="!tripStatus" class="decline-list">
+      <li (click)="selectedReason = 1" [class.selected]="selectedReason === 1">
+        <span> Планы изменились, и я никуда не еду</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 2" [class.selected]="selectedReason === 2">
+        <span>Еду в другой день</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 3" [class.selected]="selectedReason === 3">
+        <span>Не удалось связаться с попутчиками</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 4" [class.selected]="selectedReason === 4">
+        <span>Создание поездки произошло по ошибке</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+      <li (click)="selectedReason = 5" [class.selected]="selectedReason === 5">
+        <span>Другая причина</span>
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+
+      <div *ngIf="error" class="error">Пожалуйста, выберите одну из причин</div>
+    </ul>
+
+    <div class="btn-container">
+      <a (click)="toggleStatus('data'); $event.stopPropagation()" class="link"> Назад </a>
+      <button
+        (click)="toggleStatus('decline-success'); $event.stopPropagation()"
+        class="btn danger left"
+      >
+        Отменить
+      </button>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'decline-success'">
+    <img src="assets/img/decline-trip.svg" alt="" />
+  </div>
+</div>

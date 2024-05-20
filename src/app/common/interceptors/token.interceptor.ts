@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 
 export const TokenInterceptor: HttpInterceptorFn = (req, next) => {
   const userService = inject(UserService);
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
   const router = inject(Router);
 
   return userService.isAuthorized$!.pipe(
@@ -23,7 +23,7 @@ export const TokenInterceptor: HttpInterceptorFn = (req, next) => {
       return next(req).pipe(
         catchError((err) => {
           if (err instanceof HttpErrorResponse && err.status === 403) {
-            sessionStorage.removeItem('token');
+            localStorage.removeItem('token');
             router.navigateByUrl('/login');
           }
           return throwError(() => err);
