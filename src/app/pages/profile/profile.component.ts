@@ -36,7 +36,6 @@ export class ProfileComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.loaderService.setLoading(false);
 
           this.profileData = res;
