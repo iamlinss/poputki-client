@@ -64,4 +64,5 @@ export interface DriverTripData {
   };
   userId: number;
   driverName: string;
+  price?: number;
 }

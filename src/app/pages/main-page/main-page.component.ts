@@ -3,7 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {AnalyticsBlockComponent} from './components/analytics-block/analytics-block.component';
 import {DriverBenefitsComponent} from './components/driver-benefits/driver-benefits.component';
 import {FeedbackBlockComponent} from './components/feedback-block/feedback-block.component';
-import {FinderBlockComponent} from './components/finder-block/finder-block.component';
+import {FinderBlockComponent} from '../../components/finder-block/finder-block.component';
 import {MainBenefitsComponent} from './components/main-benefits/main-benefits.component';
 import {WaysBlockComponent} from './components/ways-block/ways-block.component';
 import {MainComponent} from './components/main/main.component';

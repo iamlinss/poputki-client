@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {FinderBlockComponent} from '../finder-block/finder-block.component';
+import {FinderBlockComponent} from '../../../../components/finder-block/finder-block.component';
 import {LoaderService} from '../../../../common/services/loader.service';
 
 @Component({

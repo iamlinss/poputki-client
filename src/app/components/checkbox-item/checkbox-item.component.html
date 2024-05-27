@@ -1,0 +1,14 @@
+<label *ngIf="item" class="checkbox-item" [class.disabled]="isDisabled === true">
+  <input
+    [id]="item.id"
+    (change)="checkChange(item)"
+    [disabled]="isDisabled === true"
+    [(ngModel)]="item.state"
+    type="checkbox"
+    class="checkbox-item__input"
+  />
+  <span class="checkbox-item__icon" [class.disabled]="isDisabled === true"></span>
+  <span *ngIf="item.name" class="checkbox-item__name">
+    {{ item.name }}
+  </span>
+</label>

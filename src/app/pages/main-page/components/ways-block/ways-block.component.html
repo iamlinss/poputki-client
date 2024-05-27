@@ -3,31 +3,31 @@
 
   <div class="title-container">
     <h2>Куда вы хотите поехать?</h2>
-    <button class="accent link-btn">
+    <button (click)="router.navigate(['/trips-passenger'])" class="accent link-btn">
       <span> Популярные маршруты </span>
     </button>
   </div>
 
   <div class="ways-container">
-    <div class="city-way">
+    <button class="city-way" (click)="router.navigate(['/trips-passenger'])">
       <span class="city"> Гродно </span>
       <img class="arrow" src="../../../assets/img/arrow-right.svg" alt="" />
       <span class="city"> Москва </span>
       <img class="link-arrow" src="../../../assets/img/left-arrow-link.svg" alt="" />
-    </div>
+    </button>
 
-    <div class="city-way">
-      <span class="city"> Минск </span>
+    <button class="city-way">
+      <span class="city" (click)="router.navigate(['/trips-passenger'])"> Минск </span>
       <img class="arrow" src="../../../assets/img/arrow-right.svg" alt="" />
       <span class="city"> Борисов </span>
       <img class="link-arrow" src="../../../assets/img/left-arrow-link.svg" alt="" />
-    </div>
+    </button>
 
-    <div class="city-way">
+    <button class="city-way" (click)="router.navigate(['/trips-passenger'])">
       <span class="city"> Витебск </span>
       <img class="arrow" src="../../../assets/img/arrow-right.svg" alt="" />
       <span class="city"> Полоцк </span>
       <img class="link-arrow" src="../../../assets/img/left-arrow-link.svg" alt="" />
-    </div>
+    </button>
   </div>
 </div>

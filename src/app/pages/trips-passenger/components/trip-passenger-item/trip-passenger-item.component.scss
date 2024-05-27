@@ -1,0 +1,191 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+  .bg {
+    height: 100vh;
+    width: 100vw;
+    background-color: #0000007e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.3s;
+
+    &.active {
+      opacity: 1;
+      z-index: 10;
+      pointer-events: all;
+    }
+  }
+
+  .wide {
+    width: 200px;
+  }
+  .container {
+    transition: 0.3s;
+    padding: 5rem;
+    width: 25%;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 20;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .trip-container {
+    border-radius: 6px;
+    transition: 0.3s;
+
+    .trip-status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      img {
+        margin-right: 12px;
+      }
+      span {
+        &.yellow {
+          color: $yellow-status;
+        }
+
+        &.red {
+          color: $red-status;
+        }
+
+        &.green {
+          color: $green-status;
+        }
+
+        &.gray {
+          color: $gray-status;
+        }
+      }
+    }
+
+    .route {
+      margin: 12px 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .route-cities {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 88px;
+    }
+  }
+
+  .trip-info {
+    margin-top: 30px;
+    list-style: none;
+
+    .trip-price {
+      display: flex;
+      justify-content: space-between;
+      padding: 30px 0;
+      border-top: 1px solid $input-border-default;
+      border-bottom: 1px solid $input-border-default;
+    }
+
+    .column {
+      color: $semi-text-color;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .trip-passager {
+      color: $semi-text-color;
+      padding: 20px 0;
+    }
+
+    .trip-driver {
+      padding: 20px 0;
+      border-bottom: 1px solid $input-border-default;
+
+      .car-data {
+        display: flex;
+      }
+
+      .car-block {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .plate {
+        color: $semi-text-color;
+      }
+    }
+
+    .driver-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      .icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .btn-arrow {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .round {
+    margin-left: 8px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $car-border-color;
+    border-radius: 50%;
+  }
+
+  .btn-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .decline-list {
+    list-style: none;
+
+    li {
+      cursor: pointer;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $input-border-default;
+
+      transition: 0.3s;
+
+      &.selected {
+        background-color: $main-bg;
+      }
+
+      &:hover {
+        background-color: $main-bg;
+      }
+    }
+  }
+
+  .error {
+    margin-top: 20px;
+    font-size: 14px;
+    color: $invalid-color;
+  }
+}

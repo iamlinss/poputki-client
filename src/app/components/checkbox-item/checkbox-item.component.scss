@@ -1,0 +1,39 @@
+@import '../../../assets/styles/colors';
+
+:host {
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+
+    &__input {
+      position: absolute;
+      appearance: none;
+
+      &:checked {
+        & + .checkbox-item__icon {
+          background-image: url('../../../assets/img/checkbox-check.svg');
+        }
+      }
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: block;
+      background-image: url('../../../assets/img/checkbox-uncheck.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    &__name {
+      margin-left: 8px;
+      margin-top: 2px;
+      font-size: 1.4rem;
+      line-height: 140%;
+    }
+  }
+}

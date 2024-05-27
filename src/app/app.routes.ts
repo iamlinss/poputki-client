@@ -9,6 +9,7 @@ import {ChatComponent} from './pages/chat/chat.component';
 import {AddTripComponent} from './pages/profile/components/add-trip/add-trip.component';
 import {TripsComponent} from './pages/trips/trips.component';
 import {authGuard} from './common/guards/auth.guard';
+import {TripsPassengerComponent} from './pages/trips-passenger/trips-passenger.component';
 
 export const routes: Routes = [
   {
@@ -61,6 +62,17 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: TripsComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'trips',
+    pathMatch: 'full',
+    component: TripsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'trips-passenger',
+    pathMatch: 'full',
+    component: TripsPassengerComponent,
   },
   {
     path: '**',

@@ -3,13 +3,14 @@ import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterOutlet} from '@angular/router';
 import {DriverTripData} from '../../../profile/profile.model';
+import {TimeFormatPipe} from '../../../../common/pipes/time.pipe';
 
 @Component({
   selector: 'app-trip-item',
   standalone: true,
   templateUrl: './trip-item.component.html',
   styleUrl: './trip-item.component.scss',
-  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
+  imports: [RouterOutlet, ReactiveFormsModule, CommonModule, TimeFormatPipe],
 })
 export class TripItemComponent {
   status: 'data' | 'decline' | 'decline-success' = 'data';

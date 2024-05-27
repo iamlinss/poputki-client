@@ -1,0 +1,102 @@
+<div class="container">
+  <app-finder-block (submitForm)="setFilter($event)"></app-finder-block>
+
+  <div class="main-wrap">
+    <div class="time-filter">
+      <b class="time-title">Время выезда</b>
+      <ul>
+        <li (click)="onTimeClick(1)">
+          <label for="1">До 06:00</label>
+          <app-checkbox-item [isDisabled]="true" [item]="timeOptions[0]"></app-checkbox-item>
+        </li>
+        <li (click)="onTimeClick(2)">
+          <label for="2">06:00-12:00</label>
+          <app-checkbox-item [isDisabled]="true" [item]="timeOptions[1]"></app-checkbox-item>
+        </li>
+        <li (click)="onTimeClick(3)">
+          <label for="3">12:00-18:00</label>
+          <app-checkbox-item [isDisabled]="true" [item]="timeOptions[2]"></app-checkbox-item>
+        </li>
+        <li (click)="onTimeClick(4)">
+          <label for="4">После 18:00</label>
+          <app-checkbox-item [isDisabled]="true" [item]="timeOptions[3]"></app-checkbox-item>
+        </li>
+      </ul>
+    </div>
+
+    <div class="trips-container">
+      <div *ngIf="!isLoading; else loader">
+        <div class="trips-header">
+          <span *ngIf="date" class="date1">{{ date | customDate }}</span>
+
+          <div *ngIf="start && finish" class="route1">
+            <span>{{ start || '' }}</span>
+            <span>→</span>
+            <span>{{ finish || '' }}</span>
+          </div>
+
+          <span *ngIf="count" class="counter1">Кол-во пассажиров: {{ count }} </span>
+        </div>
+
+        <div *ngIf="tripsList.length; else empty" class="trips-list">
+          <div *ngFor="let trip of tripsList" (dblclick)="selectedTrip = trip" class="details">
+            <div class="date">{{ trip.departureDateTime | date }}</div>
+            <div class="route">
+              <div class="time">{{ trip.departureDateTime | timeFormat }}</div>
+              <div class="route-icon">
+                <img src="assets/img/route.svg" alt="" />
+              </div>
+              <div class="column">
+                <div>{{ trip.departureLocation.country }}, {{ trip.departureLocation.city }}</div>
+                <div>
+                  {{ trip.destinationLocation.country }}, {{ trip.destinationLocation.city }}
+                </div>
+              </div>
+              <div class="values">
+                <div>{{ trip.price }} BYN</div>
+                <div class="passeger-count">
+                  <div>{{ trip.seats }}</div>
+                  <img src="assets/img/passeger-icon.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="driver-info">
+              <img src="assets/img/profile-user.svg" alt="" />
+              <span>{{ trip.driverName }}</span>
+              <div class="star-container">
+                <img class="star" src="assets/img/star.svg" alt="" /> 5
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <img class="image" src="assets/img/passager-img.svg" alt="" />
+</div>
+
+<app-trip-passenger-item
+  [class.active]="selectedTrip"
+  [selectedTrip]="selectedTrip"
+  [count]="count"
+  (closedEvent)="selectedTrip = null"
+>
+</app-trip-passenger-item>
+
+<ng-template #empty>
+  <div class="empty">
+    <span class="empty-head">Поездок нет</span>
+    <img src="assets/img/no-info.svg" alt="" />
+    <span class="empty-desc">
+      К сожалению, на основе заданных критериев фильтрации данных не найдено. Попробуйте изменить
+      выбранную дату или другие параметры фильтрации.
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #loader>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>

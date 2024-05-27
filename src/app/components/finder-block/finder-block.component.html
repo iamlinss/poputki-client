@@ -1,0 +1,86 @@
+<form [formGroup]="form" class="finder-block">
+  <div class="input-container">
+    <label for="city_to">Куда</label>
+    <input
+      (click)="isCitiesListOpen1 = !isCitiesListOpen1; isCitiesListOpen2 = false"
+      readonly
+      formControlName="start"
+      class="input select"
+      id="city_to"
+      placeholder="Гродно"
+      type="text"
+    />
+    <img
+      [class.active]="isCitiesListOpen1"
+      src="assets/img/menu-arrow.svg"
+      alt="user"
+      class="btn-arrow select"
+    />
+    <ul [class.active]="isCitiesListOpen1" class="cities-list">
+      <li *ngFor="let city of citiesList" (click)="selectCity(city, 'start')">
+        <span>{{ city.city }}, </span>
+        <span>{{ city.country }}</span>
+
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+    </ul>
+  </div>
+
+  <button class="refresh-icon">
+    <img src="assets/img/refresh-arrows.svg" alt="" />
+  </button>
+
+  <div class="input-container">
+    <label for="city_from">Откуда</label>
+    <input
+      (click)="isCitiesListOpen2 = !isCitiesListOpen2; isCitiesListOpen1 = false"
+      readonly
+      formControlName="finish"
+      id="city_from"
+      class="input select"
+      placeholder="Минск"
+      type="text"
+    />
+    <img
+      [class.active]="isCitiesListOpen2"
+      src="assets/img/menu-arrow.svg"
+      alt="user"
+      class="btn-arrow select"
+    />
+    <ul [class.active]="isCitiesListOpen2" class="cities-list">
+      <li *ngFor="let city of citiesList" (click)="selectCity(city, 'finish')">
+        <span>{{ city.city }}, </span>
+        <span>{{ city.country }}</span>
+
+        <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+      </li>
+    </ul>
+  </div>
+
+  <div class="input-container calendar">
+    <label for="date">Когда</label>
+    <input formControlName="date" id="date" placeholder="Выберите дату" type="date" />
+  </div>
+
+  <div class="input-container passenger">
+    <label for="passenger">Пассажир</label>
+    <div class="container">
+      <button
+        (click)="passengerCount = passengerCount === 1 ? 1 : passengerCount - 1"
+        type="button"
+      >
+        <img src="assets/img/minus-icon.svg" alt="" />
+      </button>
+
+      <span class="passenger-counter">
+        {{ passengerCount }}
+      </span>
+
+      <button type="button" (click)="passengerCount = passengerCount + 1">
+        <img src="assets/img/plus-icon.svg" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <button type="button" (click)="sendForm()" class="btn accent submit">Поиск</button>
+</form>

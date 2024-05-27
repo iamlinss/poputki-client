@@ -25,6 +25,7 @@ export class HeaderComponent {
     this.isMenuOpen = false;
     localStorage.removeItem('token');
     this.userService.updateAuth();
+    this.router.navigate(['/']);
   }
 
   @HostListener('document:click', ['$event'])

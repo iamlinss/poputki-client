@@ -1,0 +1,222 @@
+@import '../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    text-align: center;
+
+    .empty-head {
+      font-size: 20px;
+    }
+
+    .empty-desc {
+      font-size: 16px;
+    }
+  }
+
+  .loader-container {
+    height: 175px;
+    display: flex;
+    position: relative;
+
+    .loader {
+      top: -60%;
+      left: 42%;
+    }
+  }
+
+  .driver-info {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .star-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .star {
+      width: 20px;
+      height: 20px;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .image {
+    position: absolute;
+    left: 0px;
+    bottom: -140px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .wide {
+    width: 200px;
+  }
+
+  .main-wrap {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .trips-list {
+    max-height: 550px;
+    padding-right: 20px;
+    overflow-x: auto;
+  }
+
+  .trips-container {
+    width: 100%;
+    border-radius: 30px;
+    background-color: $default-bg;
+    padding: 20px;
+
+    .trips-header {
+      padding-bottom: 20px;
+      .date1 {
+        display: block;
+        font-size: 21px;
+        margin-bottom: 15px;
+      }
+
+      .route1 {
+        color: $semi-text-color;
+        display: flex;
+        gap: 12px;
+        margin-bottom: 7px;
+      }
+
+      .counter1 {
+        color: $semi-text-color;
+      }
+    }
+
+    .details {
+      border-top: 1px solid $default-border-color;
+      border-bottom: 1px solid $default-border-color;
+      padding: 20px;
+      transition: 0.3s;
+      .date {
+        font-size: 20px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: #00000017;
+      }
+    }
+
+    .route {
+      margin-top: 30px;
+      display: flex;
+      height: 88px;
+
+      .time {
+        margin-right: 12px;
+        font-size: 20px;
+      }
+
+      .route-icon {
+        margin-right: 20px;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .values {
+        margin-left: auto;
+        font-size: 20px;
+        .passeger-count {
+          display: flex;
+          align-items: center;
+          line-height: 100%;
+          gap: 4px;
+          font-size: 20px;
+          margin-top: 10px;
+
+          img {
+            width: 19px;
+          }
+        }
+      }
+    }
+  }
+
+  .time-filter {
+    background-color: $default-bg;
+    border-radius: 30px;
+    align-self: flex-start;
+
+    .time-title {
+      display: block;
+      font-size: 21px;
+      padding: 20px;
+      text-align: start;
+    }
+
+    ul {
+      list-style: none;
+      font-size: 21px;
+
+      li {
+        padding: 20px;
+        cursor: pointer;
+
+        label {
+          cursor: pointer;
+        }
+
+        border-top: 1px solid $default-border-color;
+        font-size: 1.2rem;
+        color: unset;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        width: 271px;
+        transition: 0.3s;
+
+        &:first-of-type {
+          border-top: none;
+        }
+
+        &:last-of-type {
+          -webkit-border-bottom-right-radius: 30px;
+          -webkit-border-bottom-left-radius: 30px;
+          -moz-border-radius-bottomright: 30px;
+          -moz-border-radius-bottomleft: 30px;
+          border-bottom-right-radius: 30px;
+          border-bottom-left-radius: 30px;
+        }
+
+        &:hover {
+          background-color: #00000017;
+        }
+      }
+    }
+  }
+}

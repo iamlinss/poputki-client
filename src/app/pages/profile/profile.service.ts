@@ -28,13 +28,23 @@ export class ProfileDataService {
     return this.apiService.httpPut<ProfileData>(url, data);
   }
 
-  getUserDriverTrips(userId: string) {
+  public getUserDriverTrips(userId: string) {
     const url = `/trips/${userId}`;
     return this.apiService.httpGet<DriverTripData[]>(url);
   }
 
-  getUserPassegerTrips(userId: string) {
+  public getUserPassegerTrips(userId: string) {
     const url = `/trips/brone/${userId}`;
     return this.apiService.httpGet<any>(url);
+  }
+
+  public getTripsList(filterData: any) {
+    const url = `/trips/filter`;
+    return this.apiService.httpPost<DriverTripData[]>(url, filterData);
+  }
+
+  public broneTrip(data: any) {
+    const url = `/trips/brone`;
+    return this.apiService.httpPost<any>(url, data);
   }
 }

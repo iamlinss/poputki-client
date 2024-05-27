@@ -31,7 +31,10 @@
       </div>
 
       <div class="trip-info">
-        <span class="date">{{ selectedTrip.departureDateTime | date }} </span>
+        <span class="date"
+          >{{ selectedTrip.departureDateTime | date }} в
+          {{ selectedTrip.departureDateTime | timeFormat }}
+        </span>
 
         <div class="route">
           <img src="assets/img/route.svg" alt="" />

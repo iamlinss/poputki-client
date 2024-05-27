@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-ways-block',
@@ -8,4 +8,6 @@ import {RouterOutlet} from '@angular/router';
   styleUrl: './ways-block.component.scss',
   imports: [RouterOutlet],
 })
-export class WaysBlockComponent {}
+export class WaysBlockComponent {
+  constructor(public router: Router) {}
+}

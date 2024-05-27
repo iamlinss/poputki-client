@@ -79,6 +79,11 @@
           <span> Ваши поездки </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
         </li>
+        <li (click)="router.navigate(['/trips-passenger']); isMenuOpen = false">
+          <img class="btn-icon" src="assets/img/passeger.svg" alt="user" />
+          <span> Найти машину </span>
+          <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
+        </li>
         <li (click)="router.navigate(['/profile']); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/menu-user.svg" alt="user" />
           <span> Профиль </span>
