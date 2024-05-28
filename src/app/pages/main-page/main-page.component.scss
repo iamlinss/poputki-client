@@ -33,4 +33,39 @@
       margin-bottom: 40px;
     }
   }
+
+  app-main-benefits {
+    &::after {
+      content: url('../../../assets/img/yellow-dotted-line.svg');
+      position: absolute;
+      left: -5px;
+      top: 1475px;
+      z-index: -1;
+    }
+  }
+
+  app-ways-block {
+    &::after {
+      content: url('../../../assets/img/blue-dotted-line.svg');
+      position: absolute;
+      right: 10px;
+      top: 2330px;
+      z-index: -1;
+    }
+  }
+
+  app-driver-benefits {
+    &::after {
+      content: '';
+      width: 500px;
+      height: 345px;
+      position: absolute;
+      left: -500px;
+      top: 2000px;
+      box-shadow: 40px 0px 300px 0px $blue-shadow;
+      border-radius: 100%;
+      background-color: transparent;
+      z-index: -1;
+    }
+  }
 }

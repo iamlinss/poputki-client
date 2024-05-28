@@ -1,6 +1,6 @@
 <main>
   <div class="logo-container">
-    <button class="round-button location">
+    <button (click)="router.navigate(['/trips-passenger'])" class="round-button location">
       <img src="assets/img/location.svg" alt="" />
     </button>
 
@@ -9,7 +9,7 @@
       <img class="main-logo" src="assets/img/main-logo.svg" alt="" />
     </div>
 
-    <button class="round-button car">
+    <button (click)="router.navigate(['/trips'])" class="round-button car">
       <img src="assets/img/car.svg" alt="" />
     </button>
   </div>
