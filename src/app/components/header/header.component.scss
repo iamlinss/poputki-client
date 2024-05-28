@@ -113,7 +113,7 @@
       width: 500px;
       height: 345px;
       position: absolute;
-      right: -500px;
+      right: -550px;
       top: 645px;
       box-shadow: 0px 0px 418px 30px $purple-shadow;
       border-radius: 100%;
@@ -144,5 +144,9 @@
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -2px;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }

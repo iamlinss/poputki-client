@@ -1,13 +1,14 @@
 import {CommonModule} from '@angular/common';
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {ScrollAppearanceDirective} from '../../../../common/directives/scroll-appearance.directive';
 
 @Component({
   selector: 'app-feedback-block',
   standalone: true,
   templateUrl: './feedback-block.component.html',
   styleUrl: './feedback-block.component.scss',
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, ScrollAppearanceDirective],
 })
 export class FeedbackBlockComponent {
   @ViewChild('sliderContainer') sliderContainer?: ElementRef;

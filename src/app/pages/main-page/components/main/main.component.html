@@ -1,4 +1,4 @@
-<main>
+<main [ngClass]="{'fade-in': true, 'visible': isVisible}">
   <div class="logo-container">
     <button (click)="router.navigate(['/trips-passenger'])" class="round-button location">
       <img src="assets/img/location.svg" alt="" />

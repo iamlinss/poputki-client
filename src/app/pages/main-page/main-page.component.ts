@@ -7,6 +7,7 @@ import {FinderBlockComponent} from '../../components/finder-block/finder-block.c
 import {MainBenefitsComponent} from './components/main-benefits/main-benefits.component';
 import {WaysBlockComponent} from './components/ways-block/ways-block.component';
 import {MainComponent} from './components/main/main.component';
+import {ScrollAppearanceDirective} from '../../common/directives/scroll-appearance.directive';
 
 @Component({
   selector: 'app-main-page',
@@ -22,6 +23,7 @@ import {MainComponent} from './components/main/main.component';
     AnalyticsBlockComponent,
     FeedbackBlockComponent,
     MainComponent,
+    ScrollAppearanceDirective,
   ],
 })
 export class MainPageComponent {}
