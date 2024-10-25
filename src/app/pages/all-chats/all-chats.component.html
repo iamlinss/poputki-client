@@ -1,0 +1,98 @@
+<!--<div class="container">-->
+<!--  <img src="assets/img/no-chats.svg" alt="" />-->
+
+<!--  <button (click)="router.navigate(['/'])" class="btn accent wide">Вернутся на главную</button>-->
+<!--</div>-->
+<section class="chats-container" [class.short-form]="selectedChatId">
+  <h2 class="chats-h">
+    Чаты
+  </h2>
+  <ul class="chat-list">
+    <li *ngFor="let chat of chats" class="chat" [class.selected-chat]="chat.id === selectedChatId" (click)="selectChat(chat.id)">
+      <div class="chat-header">
+        <div class="companion-info">
+          <img class="companion-avatar" src="assets/img/{{chat.companionAvatar}}.svg" alt="">
+          <div class="companion">
+            <p class="companion-name">
+              {{chat.companionName}}
+            </p>
+            <div class="companion-trip">
+              <span class="trip-from">
+                {{chat.destinationPoints.from}}
+              </span>
+              <img class="arrow-icon" src="assets/img/arrow-right.svg" alt="">
+              <span class="trip-to">
+                {{chat.destinationPoints.to}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-additional-info">
+          <span class="chat-time">{{chat.lastMessageDate | date :"HH:MM"}}</span>
+          <span class="chat-unread-message-counter counter-short" *ngIf="selectedChatId && chat.unreadMessagesCount">{{chat.unreadMessagesCount}}</span>
+        </div>
+      </div>
+      <div class="chat-message-info">
+        <ng-container *ngIf="!selectedChatId">
+          <ng-container *ngIf="chat.unreadMessagesCount; else yourLastMessage">
+         <span class="chat-last-message">
+            {{chat.companionLastMessage}}
+         </span>
+            <span class="chat-unread-message-counter">
+            {{chat.unreadMessagesCount}}
+         </span>
+          </ng-container>
+          <ng-template #yourLastMessage>
+          <span class="chat-last-message">
+            {{chat.yourLastMessage}}
+         </span>
+          </ng-template>
+        </ng-container>
+      </div>
+    </li>
+  </ul>
+</section>
+<section *ngIf="selectedChatId" class="expanded-chat">
+  <header class="expanded-chat-header">
+    <div class="companion-info">
+      <img class="companion-avatar" src="assets/img/{{selectedChat?.companionAvatar}}.svg" alt="">
+      <p class="companion-name">
+        {{selectedChat?.companionName}}
+      </p>
+
+    </div>
+    <div class="trip-info">
+      {{selectedChat?.tripDate | date : 'EEE, d MMMM в HH:mm'}}
+      <div class="destination-points">
+        <span class="trip-from">
+          {{selectedChat?.destinationPoints?.from}}
+        </span>
+        <img class="arrow-icon" src="assets/img/arrow-right.svg" alt="">
+        <span class="trip-to">
+          {{selectedChat?.destinationPoints?.to}}
+        </span>
+      </div>
+    </div>
+  </header>
+  <main class="messages-list">
+    <div class="message-wrap" *ngFor="let message of selectedChat?.messages; let i = index">
+      <div *ngIf="showDivider(i) && !hideMessageDivider" class="messages-divider">
+        <span></span>
+        Новое
+        <span></span>
+      </div>
+      <div class="message" [class.companion-message]="!message.isMine">
+        {{message.text}}
+      </div>
+    <span class="message-date" [class.companion-message-date]="!message.isMine" *ngIf="showMessageDate(i)">
+        {{message.date | date : "HH:mm"}}
+    </span>
+    </div>
+  </main>
+  <div class="send-message-panel">
+    <input (focus)="hideMessageDivider=true" placeholder="Ваше сообщение" class="message-input"/>
+    <button class="btn accent icon icon-center">
+      <img src="assets/img/paper-plane-outline.svg" alt="">
+    </button>
+  </div>
+</section>

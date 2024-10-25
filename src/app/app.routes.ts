@@ -5,11 +5,12 @@ import {LoginComponent} from './pages/auth/components/login/login.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {EditProfileComponent} from './pages/profile/components/edit-profile/edit-profile.component';
 import {AddCarComponent} from './pages/profile/components/add-car/add-car.component';
-import {ChatComponent} from './pages/chat/chat.component';
+import {AllChatsComponent} from './pages/all-chats/all-chats.component';
 import {AddTripComponent} from './pages/profile/components/add-trip/add-trip.component';
 import {TripsComponent} from './pages/trips/trips.component';
 import {authGuard} from './common/guards/auth.guard';
 import {TripsPassengerComponent} from './pages/trips-passenger/trips-passenger.component';
+import {FeedbackComponent} from "./pages/feedback/feedback.component";
 
 export const routes: Routes = [
   {
@@ -52,9 +53,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'chat',
+    path: 'all-chats',
     pathMatch: 'full',
-    component: ChatComponent,
+    component: AllChatsComponent,
     canActivate: [authGuard],
   },
   {
@@ -64,9 +65,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'trips',
+    path: 'trips/feedback',
     pathMatch: 'full',
-    component: TripsComponent,
+    component: FeedbackComponent,
     canActivate: [authGuard],
   },
   {

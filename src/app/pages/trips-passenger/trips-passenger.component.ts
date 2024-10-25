@@ -75,6 +75,7 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.profileDataService.getTripsList(filterData).subscribe({
         next: (res: any) => {
+          console.log(res)
           this.tripsList = this.applyTimeFilter(res);
           this.isLoading = false;
           this.cdr.detectChanges();

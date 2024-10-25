@@ -20,6 +20,7 @@
   }
 
   .ways-container {
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
   }
@@ -34,12 +35,12 @@
     background-color: $default-bg;
     border: 1px solid $default-border-color;
     border-radius: 30px;
-    transition: 0.3s;
+    transition: 0.15s;
     cursor: pointer;
 
     &:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0px 0px 10px $box-shadow-color);
+      transform: scale(1.01);
+      filter: drop-shadow(2px 2px 4px $box-shadow-color);
     }
 
     .city {

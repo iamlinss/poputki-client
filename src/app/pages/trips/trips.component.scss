@@ -67,7 +67,7 @@
     border-radius: 6px;
     transition: 0.3s;
 
-    &:hover {
+    &:not(.trip-done):hover {
       background-color: $main-bg;
     }
 
@@ -95,6 +95,10 @@
         &.gray {
           color: $gray-status;
         }
+
+        &.white {
+          color: $white-status;
+        }
       }
     }
 
@@ -114,12 +118,28 @@
     .driver-info {
       display: flex;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between;
+
       img {
         width: 40px;
         height: 40px;
       }
     }
+
+    .driver {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .feedback-btn {
+      width: unset;
+    }
+  }
+
+  .trip-done {
+    background: #7879F1;
+    color: white;
   }
 
   .loader-container {

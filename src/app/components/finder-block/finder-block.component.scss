@@ -73,14 +73,21 @@
       border-radius: 30px;
     }
 
-    .refresh-icon {
+    .revert-icon {
       cursor: pointer;
       border: none;
       background-color: transparent;
-      transition: 0.3s;
+      transition: 0.15s;
+
       &:hover {
         filter: brightness(0.5);
-        transform: scale(1.1);
+        transform: scale(1.03);
+      }
+
+      &:disabled {
+        pointer-events: none;
+        opacity: 0.4;
+        cursor: default;
       }
     }
 

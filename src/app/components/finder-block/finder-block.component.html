@@ -1,13 +1,13 @@
 <form [formGroup]="form" class="finder-block">
   <div class="input-container">
-    <label for="city_to">Куда</label>
+    <label for="city_from">Откуда</label>
     <input
       (click)="isCitiesListOpen1 = !isCitiesListOpen1; isCitiesListOpen2 = false"
       readonly
       formControlName="start"
       class="input select"
-      id="city_to"
-      placeholder="Гродно"
+      id="city_from"
+      placeholder="Минск"
       type="text"
     />
     <img
@@ -26,19 +26,19 @@
     </ul>
   </div>
 
-  <button class="refresh-icon">
+  <button (click)="revertCoordinates()" [disabled]="!form.get('start')?.value || !form.get('finish')?.value" class="revert-icon">
     <img src="assets/img/refresh-arrows.svg" alt="" />
   </button>
 
   <div class="input-container">
-    <label for="city_from">Откуда</label>
+    <label for="city_to">Куда</label>
     <input
       (click)="isCitiesListOpen2 = !isCitiesListOpen2; isCitiesListOpen1 = false"
       readonly
       formControlName="finish"
-      id="city_from"
+      id="city_to"
       class="input select"
-      placeholder="Минск"
+      placeholder="Москва"
       type="text"
     />
     <img

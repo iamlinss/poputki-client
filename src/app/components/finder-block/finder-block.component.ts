@@ -120,6 +120,13 @@ export class FinderBlockComponent implements OnInit {
     this.submitForm.emit(data);
   }
 
+  revertCoordinates() {
+    const tmp = this.form.get("start")?.value;
+    this.form.get("start")?.setValue(this.form.get("finish")?.value);
+    this.form.get("finish")?.setValue(tmp);
+  }
+
+
   @HostListener('document:click', ['$event'])
   onClick(event: Event) {
     if (!this.el.nativeElement.contains(event.target)) {

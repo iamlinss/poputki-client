@@ -28,7 +28,7 @@
               <span> Наличными </span>
               <span> Забронированных мест : {{ selectedTrip.seats }} </span>
             </div>
-            <div class="currency">15 BYN</div>
+            <div class="currency">{{(selectedTrip.price * selectedTrip.seats)}} BYN</div>
           </li>
         </ul>
         <ul class="trip-driver">

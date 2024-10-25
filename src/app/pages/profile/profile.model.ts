@@ -48,6 +48,7 @@ export interface TripData {
   };
   userId: string;
   carId: number;
+  price: number;
 }
 
 export interface DriverTripData {
@@ -64,5 +65,5 @@ export interface DriverTripData {
   };
   userId: number;
   driverName: string;
-  price?: number;
+  price: number;
 }

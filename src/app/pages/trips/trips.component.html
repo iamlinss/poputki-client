@@ -12,7 +12,7 @@
 
   <div *ngIf="!isLoading; else loader" [ngSwitch]="tripStatus" class="trip-list">
     <ng-container *ngSwitchCase="false">
-      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container">
+      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container" [class.trip-done]="trip.status?.id === 4">
         <div class="trip-status" [ngSwitch]="trip.status?.id">
           <ng-container *ngSwitchCase="1">
             <img src="assets/img/yellow-clock.svg" alt="" />
@@ -30,8 +30,8 @@
           </ng-container>
 
           <ng-container *ngSwitchCase="4">
-            <img src="assets/img/gray-approve.svg" alt="" />
-            <span class="gray">{{ trip.status?.status }}</span>
+              <img src="assets/img/white-approve.svg" alt="" />
+              <span class="white">{{ trip.status?.status }}</span>
           </ng-container>
 
           <ng-container *ngSwitchCase="5">
@@ -44,7 +44,7 @@
           <span class="date">{{ trip.departureDateTime | date }} </span>
 
           <div class="route">
-            <img src="assets/img/trip-divider.svg" alt="" />
+            <img [src]="trip.status?.id===4 ? 'assets/img/white-trip-divider.svg' : 'assets/img/trip-divider.svg'" alt="" />
             <div class="route-cities">
               <span>{{ trip.departureLocation.country + ', ' + trip.departureLocation.city }}</span>
               <span>{{
@@ -62,7 +62,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="true">
-      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container">
+      <div *ngFor="let trip of tripList" (dblclick)="selectedTrip = trip" class="trip-container"  [class.trip-done]="trip.status?.id === 4">
         <div class="trip-status" [ngSwitch]="trip.status?.id">
           <ng-container *ngSwitchCase="1">
             <img src="assets/img/yellow-clock.svg" alt="" />
@@ -80,8 +80,8 @@
           </ng-container>
 
           <ng-container *ngSwitchCase="4">
-            <img src="assets/img/gray-approve.svg" alt="" />
-            <span class="gray">{{ trip.status?.status }}</span>
+            <img src="assets/img/white-approve.svg" alt="" />
+            <span class="white">{{ trip.status?.status }}</span>
           </ng-container>
 
           <ng-container *ngSwitchCase="5">
@@ -94,7 +94,7 @@
           <span class="date">{{ trip.departureDateTime | date }} </span>
 
           <div class="route">
-            <img src="assets/img/trip-divider.svg" alt="" />
+            <img [src]="trip.status?.id===4 ? 'assets/img/white-trip-divider.svg' : 'assets/img/trip-divider.svg'" alt="" />
             <div class="route-cities">
               <span>{{ trip.departureLocation.country + ', ' + trip.departureLocation.city }}</span>
               <span>{{
@@ -104,8 +104,11 @@
           </div>
 
           <div class="driver-info">
-            <img src="assets/img/profile-user.svg" alt="" />
-            <span>{{ trip.driverName }}</span>
+            <div class="driver">
+              <img src="assets/img/profile-user.svg" alt="" />
+              <span>{{ trip.driverName }}</span>
+            </div>
+            <button *ngIf="trip.status?.id===4" class="btn default feedback-btn" (click)="leaveFeedback()">Оставить отзыв</button>
           </div>
         </div>
       </div>

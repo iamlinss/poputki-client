@@ -185,6 +185,7 @@ export class AddTripComponent implements OnInit, OnDestroy {
       userId: this.userService.userId!,
       // eslint-disable-next-line no-unsafe-optional-chaining
       carId: (this.form.get('car')?.value).id,
+      price: (this.form.get('price')?.value) || 0
     };
 
     this.loaderService.setLoading(true);

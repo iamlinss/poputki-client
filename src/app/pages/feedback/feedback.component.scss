@@ -1,0 +1,125 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+ .feedback-form {
+   display: flex;
+   flex-direction: column;
+   box-sizing: border-box;
+   width:684px;
+   height:610px;
+   padding: 70px;
+   box-shadow: 0 2px 70px 0 #0000000F;
+   border-radius: 30px;
+   background-color: white;
+   gap: 30px;
+ }
+
+ .trip-info {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ .trip-date {
+   color: #1C1C1C;
+   font-size: 21px;
+ }
+
+ .destination-points {
+   display: flex;
+   align-items: center;
+   color: #1C1B1F99;
+   font-size: 16px;
+   font-weight: 500;
+   gap: 5px;
+ }
+
+ .destination-points-icon {
+   height: 9px;
+ }
+
+ .driver-rate {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
+
+ .driver {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   color: #1C1C1C;
+   font-size: 21px;
+ }
+
+ .driver-avatar {
+   width: 57px;
+   height: 57px;
+ }
+
+ .rate {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   gap: 12px;
+   align-items: center;
+ }
+
+ .rate{
+   display: flex;
+   gap: 12px;
+   flex-direction: row-reverse;
+
+   .star {
+     width: 30px;
+     height: 30px;
+     transition-duration: 0.2s;
+     cursor: pointer;
+     fill: #D1D1D3;
+
+     &:hover,
+     &:hover ~ .star {
+       fill:#FACD49;
+       scale:1.1;
+     }
+  }
+ }
+
+.comment {
+  border-radius: 5px;
+  padding: 24px 20px;
+  height: 148px;
+  border-color: #19182533;
+  outline: none;
+  font-size: 21px;
+  box-sizing: border-box;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  color: #7879F1;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  font-size: 18px;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.send-feedback {
+  height: 65px;
+  width: 221px;
+  font-size: 21px;
+}
