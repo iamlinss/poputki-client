@@ -30,9 +30,17 @@
     margin-top: 60px;
   }
 
+  .error-message {
+    color: red;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+  }
+
   .btn-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
+

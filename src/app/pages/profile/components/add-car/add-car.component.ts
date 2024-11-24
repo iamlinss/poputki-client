@@ -47,6 +47,23 @@ export class AddCarComponent implements OnInit, OnDestroy {
     });
   }
 
+  onColorChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.form.patchValue({
+        color: input.value
+    });
+}
+
+getDarkColor(color: string, percent: number) {
+  const r = parseInt(color.slice(1, 3), 16);
+  const g = parseInt(color.slice(3, 5), 16);
+  const b = parseInt(color.slice(5, 7), 16);
+
+  const darken = (value: number) => Math.max(0, Math.min(255, value - (value * percent) / 100));
+
+  return `#${((1 << 24) + (darken(r) << 16) + (darken(g) << 8) + darken(b)).toString(16).slice(1)}`;
+}
+
   back() {
     switch (this.ProgressService.addCarProgress) {
       case 'registration':

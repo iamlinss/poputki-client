@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  backendApiUrl: 'https://poputka.onrender.com/api',
+  backendApiUrl: 'http://localhost:8080/api',
 };

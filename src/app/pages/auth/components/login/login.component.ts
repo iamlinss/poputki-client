@@ -20,6 +20,7 @@ import {LoaderService} from '../../../../common/services/loader.service';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  errorMessage: string | null = null;
 
   constructor(
     private authDataService: AuthDataService,
@@ -32,16 +33,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.onFormChanges();
   }
 
   initForm() {
     this.form = new FormGroup({
-      login: new FormControl('leonov@mail.com', [Validators.required, Validators.email]),
-      password: new FormControl('leonov', [Validators.required]),
+      login: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
+  onFormChanges() {
+    this.form.valueChanges.subscribe(() => {
+      this.errorMessage = null;
     });
   }
 
   login() {
+    this.errorMessage = null;
     if (this.form.valid) {
       const data: AuthData = {
         email: this.form.get('login')?.value,
@@ -58,6 +66,11 @@ export class LoginComponent implements OnInit {
             this.userService.updateAuth();
             this.router.navigate(['/']);
           },
+          error: (err) => {
+            this.loaderService.setLoading(false);
+            console.error('Login error:', err);
+            this.errorMessage = 'Неверная почта или пароль. Попробуйте еще раз.';
+        }
         });
     } else {
       this.form.markAllAsTouched();

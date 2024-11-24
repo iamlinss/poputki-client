@@ -58,7 +58,8 @@
 
   .image {
     position: absolute;
-    left: 0px;
+    left: -50px;
+    z-index: 0;
     bottom: -140px;
   }
 
@@ -171,6 +172,7 @@
     background-color: $default-bg;
     border-radius: 30px;
     align-self: flex-start;
+    z-index: 10;
 
     .time-title {
       display: block;
