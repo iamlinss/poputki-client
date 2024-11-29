@@ -26,9 +26,9 @@
           <li class="trip-price">
             <div class="column">
               <span> Наличными </span>
-              <span> Забронированных мест : {{ selectedTrip.seats }} </span>
+              <span> Забронированных мест : {{ selectedTrip.car.maxSeats - selectedTrip.seats }} </span>
             </div>
-            <div class="currency">{{(selectedTrip.price * selectedTrip.seats)}} BYN</div>
+            <div class="currency">{{(selectedTrip.price)}} BYN</div>
           </li>
         </ul>
         <ul class="trip-driver">

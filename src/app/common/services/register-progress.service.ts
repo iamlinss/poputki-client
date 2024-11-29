@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
   providedIn: 'root',
 })
 export class ProgressService {
-  registrationProgress: 'email' | 'info' | 'gender' | 'password' | 'success' | null = null;
-  addCarProgress: 'registration' | 'brand' | 'model' | 'color' | 'success' | null = null;
+  registrationProgress: 'email' | 'info' | 'gender' | 'password' | 'success'| 'role' | null = null;
+  addCarProgress: 'registration' | 'brand' | 'model' | 'color' |'maxSeats' | 'success' | null = null;
   addTripProgress:
     | 'car'
     | 'start'

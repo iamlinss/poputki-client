@@ -44,6 +44,7 @@ export class AddCarComponent implements OnInit, OnDestroy {
       brand: new FormControl('', [Validators.required]),
       model: new FormControl('', [Validators.required]),
       color: new FormControl('', [Validators.required]),
+      maxSeats: new FormControl('', [Validators.required, Validators.min(1)])
     });
   }
 
@@ -54,33 +55,27 @@ export class AddCarComponent implements OnInit, OnDestroy {
     });
 }
 
-getDarkColor(color: string, percent: number) {
-  const r = parseInt(color.slice(1, 3), 16);
-  const g = parseInt(color.slice(3, 5), 16);
-  const b = parseInt(color.slice(5, 7), 16);
 
-  const darken = (value: number) => Math.max(0, Math.min(255, value - (value * percent) / 100));
 
-  return `#${((1 << 24) + (darken(r) << 16) + (darken(g) << 8) + darken(b)).toString(16).slice(1)}`;
-}
-
-  back() {
-    switch (this.ProgressService.addCarProgress) {
-      case 'registration':
-        this.router.navigate(['/profile']);
-        break;
-      case 'brand':
-        this.ProgressService.addCarProgress = 'registration';
-        break;
-      case 'model':
-        this.ProgressService.addCarProgress = 'brand';
-        break;
-      case 'color':
-        this.ProgressService.addCarProgress = 'model';
-        break;
-    }
+back() {
+  switch (this.ProgressService.addCarProgress) {
+    case 'registration':
+      this.router.navigate(['/profile']);
+      break;
+    case 'brand':
+      this.ProgressService.addCarProgress = 'registration';
+      break;
+    case 'model':
+      this.ProgressService.addCarProgress = 'brand';
+      break;
+    case 'color':
+      this.ProgressService.addCarProgress = 'model';
+      break;
+    case 'maxSeats':
+      this.ProgressService.addCarProgress = 'color';
+      break;
   }
-
+}
   next() {
     switch (this.ProgressService.addCarProgress) {
       case 'registration':
@@ -104,13 +99,20 @@ getDarkColor(color: string, percent: number) {
           this.form.get('model')?.markAsTouched();
         }
         break;
-      case 'color':
-        if (this.form.get('color')?.valid) {
-          this.addCar();
-        } else {
-          this.form.get('color')?.markAsTouched();
-        }
-        break;
+        case 'color':
+          if (this.form.get('color')?.valid) {
+            this.ProgressService.addCarProgress = 'maxSeats';
+          } else {
+            this.form.get('color')?.markAsTouched();
+          }
+          break;
+        case 'maxSeats':
+          if (this.form.get('maxSeats')?.valid) {
+            this.addCar();
+          } else {
+            this.form.get('maxSeats')?.markAsTouched();
+          }
+          break;
     }
   }
 
@@ -126,6 +128,7 @@ getDarkColor(color: string, percent: number) {
       model: this.form.get('model')?.value,
       color: this.form.get('color')?.value,
       plateNumber: this.form.get('regNumber')?.value,
+      maxSeats: this.form.get('maxSeats')?.value,
     };
 
     this.loaderService.setLoading(true);

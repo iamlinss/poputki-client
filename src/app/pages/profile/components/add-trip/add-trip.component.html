@@ -35,7 +35,7 @@
                 <div class="round" [style]="'background-color :' + car.color"></div>
               </div>
 
-              <span class="plate">{{ car.plateNumber }}</span>
+              <span class="plate">{{ car.plateNumber }}, вместимость - {{car.maxSeats}}</span>
             </div>
 
             <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
@@ -152,7 +152,7 @@
 
         <div class="passenger">
           <button
-            (click)="passengerCount = passengerCount === 1 ? 1 : passengerCount - 1"
+          (click)="decrementPassengerCount()"
             type="button"
           >
             <img src="assets/img/minus-icon.svg" alt="" />
@@ -162,7 +162,7 @@
             {{ passengerCount }}
           </span>
 
-          <button type="button" (click)="passengerCount = passengerCount + 1">
+          <button type="button" (click)="incrementPassengerCount()">
             <img src="assets/img/plus-icon.svg" alt="" />
           </button>
         </div>
@@ -180,7 +180,7 @@
             autocomplete="new-password"
           />
           <div *ngIf="form.get('price')?.value" class="currency">BYN</div>
-          <span class="input-description"> Рекомендованная цена за эту поездку - 10-20 BYN </span>
+          <span class="input-description"> Рекомендованная цена за эту поездку - <span class="input-description-bold">{{ recommendedPrice !== null ? recommendedPrice + ' BYN' : 'Расчитываем...' }}</span> </span>
           <span *ngIf="formService.getFormError(form, 'price', 'required')" class="input-error">
             Поле является обязательным.
           </span>

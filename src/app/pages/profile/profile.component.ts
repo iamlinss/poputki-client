@@ -19,6 +19,7 @@ import {LoaderService} from '../../common/services/loader.service';
 })
 export class ProfileComponent implements OnInit {
   profileData?: ProfileData;
+  userRole: string | null = null;
   constructor(
     public router: Router,
     public profileDataService: ProfileDataService,
@@ -26,7 +27,11 @@ export class ProfileComponent implements OnInit {
     public loaderService: LoaderService,
     private unsubscribe$: UnsubscribeService,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+    this.userService.role$.subscribe(role => {
+      this.userRole = role;
+    });
+  }
 
   ngOnInit() {
     this.loaderService.setLoading(true);

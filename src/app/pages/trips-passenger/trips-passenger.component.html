@@ -39,7 +39,7 @@
         </div>
 
         <div *ngIf="tripsList.length; else empty" class="trips-list">
-          <div *ngFor="let trip of tripsList" (dblclick)="selectedTrip = trip" class="details">
+          <div *ngFor="let trip of tripsList" (click)="selectedTrip = trip" class="details">
             <div class="date">{{ trip.departureDateTime | date }}</div>
             <div class="route">
               <div class="time">{{ trip.departureDateTime | timeFormat }}</div>

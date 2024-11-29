@@ -16,6 +16,8 @@
     <img src="assets/img/line-divider.svg" alt="" />
     <div [class.active]="ProgressService.registrationProgress === 'gender'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.registrationProgress === 'role'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
     <div [class.active]="ProgressService.registrationProgress === 'password'" class="round"></div>
   </div>
 
@@ -30,6 +32,8 @@
     <div [class.active]="ProgressService.addCarProgress === 'model'" class="round"></div>
     <img src="assets/img/line-divider.svg" alt="" />
     <div [class.active]="ProgressService.addCarProgress === 'color'" class="round"></div>
+    <img src="assets/img/line-divider.svg" alt="" />
+    <div [class.active]="ProgressService.addCarProgress === 'maxSeats'" class="round"></div>
   </div>
 
   <div
@@ -62,7 +66,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="true">
-      <button (click)="router.navigate(['/profile/add/trip'])" class="btn default icon">
+      <button *ngIf="userRole === 'DRIVER'" (click)="router.navigate(['/profile/add/trip'])" class="btn default icon">
         <span> Опубликовать поездку </span>
         <img class="btn-icon" src="assets/img/add-icon.svg" alt="add" />
       </button>
@@ -76,10 +80,11 @@
       <ul [class.active]="isMenuOpen" class="menu">
         <li (click)="router.navigate(['/trips']); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/menu-car.svg" alt="user" />
-          <span> Ваши поездки </span>
+          <span *ngIf="userRole === 'USER'">Ваши брони</span>
+          <span *ngIf="userRole !== 'USER'">Ваши поездки</span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
         </li>
-        <li (click)="router.navigate(['/trips-passenger']); isMenuOpen = false">
+        <li *ngIf="userRole === 'USER'" (click)="router.navigate(['/trips-passenger']); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/passeger.svg" alt="user" />
           <span> Найти машину </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />

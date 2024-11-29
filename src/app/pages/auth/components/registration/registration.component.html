@@ -7,6 +7,7 @@
     <ng-container *ngSwitchCase="'email'"> Введите эл. почту </ng-container>
     <ng-container *ngSwitchCase="'info'"> Регестрация </ng-container>
     <ng-container *ngSwitchCase="'gender'"> Укажите свой пол </ng-container>
+    <ng-container *ngSwitchCase="'role'"> Укажите свою роль </ng-container>
     <ng-container *ngSwitchCase="'password'"> Придумайте пароль </ng-container>
   </h4>
 
@@ -141,6 +142,28 @@
 
       <span *ngIf="formService.getFormError(form, 'gender', 'required')" class="error">
         Пожалуйста, укажите свой пол
+      </span>
+    </ng-container>
+    <ng-container *ngSwitchCase="'role'">
+      <div class="gender-container">
+        <button
+      (click)="selectRole('DRIVER')"
+      [class.active]="form.get('role')?.value === 'DRIVER'"
+      class="btn-select"
+    >
+      Водитель
+    </button>
+    <button
+      (click)="selectRole('USER')"
+      [class.active]="form.get('role')?.value === 'USER'"
+      class="btn-select"
+    >
+      Пользователь
+    </button>
+      </div>
+
+      <span *ngIf="formService.getFormError(form, 'gender', 'required')" class="error">
+        Пожалуйста, укажите роль пользователя
       </span>
     </ng-container>
 

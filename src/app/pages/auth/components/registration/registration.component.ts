@@ -43,6 +43,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       birthDate: new FormControl('', [Validators.required]),
       phone: new FormControl('+', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
@@ -55,8 +56,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       case 'gender':
         this.ProgressService.registrationProgress = 'info';
         break;
+        case 'role':
+      this.ProgressService.registrationProgress = 'gender';
+      break;
       case 'password':
-        this.ProgressService.registrationProgress = 'gender';
+        this.ProgressService.registrationProgress = 'role';
         break;
     }
   }
@@ -100,11 +104,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         break;
       case 'gender':
         if (this.form.get('gender')?.valid) {
-          this.ProgressService.registrationProgress = 'password';
+          this.ProgressService.registrationProgress = 'role';
         } else {
           this.form.get('gender')?.markAsTouched();
         }
         break;
+        case 'role':
+      if (this.form.get('role')?.valid) {
+        this.ProgressService.registrationProgress = 'password';
+      } else {
+        this.form.get('role')?.markAsTouched();
+      }
+      break;
       case 'password':
         if (this.form.get('password')?.valid) {
           this.register();
@@ -121,6 +132,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
   }
 
+  selectRole(role: string) {
+    this.form.patchValue({
+      role: role,
+    });
+  }
+
   register() {
     const data: RegisterData = {
       firstName: this.form.get('firstName')?.value,
@@ -128,6 +145,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       email: this.form.get('email')?.value,
       birthDate: this.form.get('birthDate')?.value,
       gender: this.form.get('gender')?.value,
+      role: this.form.get('role')?.value,
       password: this.form.get('password')?.value,
       phone: this.form.get('phone')?.value,
     };

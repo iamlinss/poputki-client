@@ -11,4 +11,5 @@ export interface RegisterData {
   gender: string;
   password: string;
   phone: string;
+  role: string;
 }

@@ -108,24 +108,37 @@
   .car-list {
     list-style-type: none;
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 
     li {
       line-height: 120%;
       font-size: 20px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .round-circle {
+        margin-left: 8px;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid $car-border-color;
+        border-radius: 50%;
+      }
+
+      .capacity {
+        margin-top: 4px;
+        font-size: 16px;
+        color: $semi-text-color;
+      }
+
+      .car-info{
+        display: flex;
+        align-items: center;
+      }
     }
 
-    div {
-      margin-left: 8px;
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 1px solid $car-border-color;
-      border-radius: 50%;
-    }
   }
 }

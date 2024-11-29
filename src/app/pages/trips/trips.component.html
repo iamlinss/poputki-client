@@ -2,10 +2,10 @@
   <h4>Ваши поездки</h4>
 
   <div class="swiper">
-    <button (click)="tripStatus = false; toggleStatus()" [class.active]="!tripStatus">
+    <button *ngIf="userRole === 'DRIVER'" (click)="tripStatus = false" [class.active]="!tripStatus">
       Созданные
     </button>
-    <button (click)="tripStatus = true; toggleStatus()" [class.active]="tripStatus">
+    <button *ngIf="userRole === 'USER'" (click)="tripStatus = true" [class.active]="tripStatus">
       Забронированные
     </button>
   </div>

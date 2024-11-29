@@ -9,9 +9,9 @@ import {Observable} from 'rxjs';
 export class AuthDataService {
   constructor(private apiService: ApiService) {}
 
-  public login(data: AuthData): Observable<{token: string}> {
+  public login(data: AuthData): Observable<{token: string,user:{role: string}}> {
     const url = '/util/login';
-    return this.apiService.httpPost<{token: string}>(url, data);
+    return this.apiService.httpPost<{token: string, user:{role: string}}>(url, data);
   }
 
   public register(data: RegisterData) {

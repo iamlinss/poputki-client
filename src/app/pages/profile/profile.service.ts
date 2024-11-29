@@ -9,9 +9,14 @@ export class ProfileDataService {
   constructor(private apiService: ApiService) {}
 
   public addCar(userId: string, data: CarData) {
-    const url = `/users/cars/${userId}`;
+    const url = `/cars/${userId}`;
     return this.apiService.httpPost(url, data);
   }
+
+  public getPrice(cityFrom: string, cityTo: string) {
+    const url = `/cars/price?cityFrom=${encodeURIComponent(cityFrom)}&cityTo=${encodeURIComponent(cityTo)}`;
+    return this.apiService.httpGet<number>(url);
+}
 
   public addTrip(data: TripData) {
     const url = `/trips/create`;

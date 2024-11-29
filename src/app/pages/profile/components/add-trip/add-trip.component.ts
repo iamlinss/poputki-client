@@ -29,6 +29,9 @@ export class AddTripComponent implements OnInit, OnDestroy {
   passengerCount: number = 1;
   selectedStartCityId?: number;
   selectedFinishCityId?: number;
+  startNameCity: string = '';
+  finishNameCity: string = '';
+  recommendedPrice: number | null = null;
 
   constructor(
     public ProgressService: ProgressService,
@@ -66,6 +69,35 @@ export class AddTripComponent implements OnInit, OnDestroy {
     this.ProgressService.addTripProgress = 'car';
   }
 
+  incrementPassengerCount() {
+    if (this.passengerCount < this.form.get('car')?.value.maxSeats) {
+      this.passengerCount++;
+      this.form.get('passengerCount')?.setValue(this.passengerCount);
+    }
+  }
+
+  decrementPassengerCount() {
+    if (this.passengerCount > 1) {
+      this.passengerCount--;
+      this.form.get('passengerCount')?.setValue(this.passengerCount);
+    }
+  }
+
+  getPriceForTrip() {
+    if (this.startNameCity && this.finishNameCity) {
+        this.profileDataService.getPrice(this.startNameCity, this.finishNameCity).subscribe({
+            next: (price) => {
+                this.recommendedPrice = price;
+            },
+            error: (err) => {
+                console.error('Ошибка при получении цены:', err);
+            }
+        });
+    } else {
+        console.warn('Не выбраны начальный или конечный город.');
+    }
+}
+
   initForm() {
     this.form = new FormGroup({
       car: new FormControl('', [Validators.required]),
@@ -78,16 +110,19 @@ export class AddTripComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectCity(city: CityData, state: 'start' | 'finish') {
-    if (state === 'start') {
-      this.form.get('start')?.setValue(city.city + ', ' + city.country);
-      this.selectedStartCityId = city.id;
-    } else {
-      this.form.get('finish')?.setValue(city.city + ', ' + city.country);
-      this.selectedFinishCityId = city.id;
+    selectCity(city: CityData, state: 'start' | 'finish') {
+      if (state === 'start') {
+        this.form.get('start')?.setValue(city.city + ', ' + city.country);
+        this.selectedStartCityId = city.id;
+        this.startNameCity = city.city;
+      } else {
+        this.form.get('finish')?.setValue(city.city + ', ' + city.country);
+        this.selectedFinishCityId = city.id;
+        this.finishNameCity = city.city;
+        this.getPriceForTrip();
+      }
+      this.isCitiesListOpen = false;
     }
-    this.isCitiesListOpen = false;
-  }
 
   back() {
     switch (this.ProgressService.addTripProgress) {

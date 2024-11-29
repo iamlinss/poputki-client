@@ -4,6 +4,7 @@ export interface CarData {
   model: string;
   color: string;
   plateNumber: string;
+  maxSeats: number;
 }
 
 export interface CityData {

@@ -12,6 +12,7 @@
     <ng-container *ngSwitchCase="'brand'"> Введите производителя машины </ng-container>
     <ng-container *ngSwitchCase="'model'"> Введите модель машины </ng-container>
     <ng-container *ngSwitchCase="'color'"> Выберите цвет машины </ng-container>
+    <ng-container *ngSwitchCase="'maxSeats'"> Введите количество пассажирских мест</ng-container>
   </h4>
 
   <form
@@ -121,6 +122,25 @@
     />
         <span *ngIf="formService.getFormError(form, 'color', 'required')" class="input-error">
           Поле является обязательным.
+        </span>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'maxSeats'">
+      <div class="input-container">
+        <input
+          formControlName="maxSeats"
+          placeholder="Введите количество пассажирских мест"
+          class="input"
+          id="maxSeats"
+          type="number"
+          min="1"
+          autocomplete="new-password"
+        />
+        <span *ngIf="formService.getFormError(form, 'maxSeats', 'required')" class="input-error">
+          Поле является обязательным.
+        </span>
+        <span *ngIf="formService.getFormError(form, 'maxSeats', 'min')" class="input-error">
+          Kоличество пассажирских мест должно быть больше 0.
         </span>
       </div>
     </ng-container>

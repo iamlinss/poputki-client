@@ -13,17 +13,24 @@ import {UserService} from '../../common/services/user.service';
 })
 export class HeaderComponent {
   isMenuOpen = false;
+  userRole: string | null = null;
+
 
   constructor(
     public router: Router,
     public ProgressService: ProgressService,
     public userService: UserService,
     private el: ElementRef,
-  ) {}
+  ) {
+    this.userService.role$.subscribe(role => {
+      this.userRole = role;
+    });
+  }
 
   logout() {
     this.isMenuOpen = false;
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.userService.updateAuth();
     this.router.navigate(['/']);
   }

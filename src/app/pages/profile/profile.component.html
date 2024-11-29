@@ -4,7 +4,7 @@
       <h4 class="container-title">Ваш профиль</h4>
       <h3 class="container-name">
         <span> {{ profileData?.firstName }} {{ profileData?.lastName }} </span>
-        <div>
+        <div *ngIf="userRole === 'DRIVER'">
           <img src="assets/img/star.svg" alt="star" />
           {{ profileData?.rate }}
         </div>
@@ -28,13 +28,17 @@
       <span class="info-desc"> {{ profileData?.description }} </span>
     </li>
 
-    <li class="cars">
+    <li *ngIf="userRole === 'DRIVER'" class="cars">
       <h3>Машины</h3>
 
       <ul *ngIf="profileData?.cars" class="car-list">
         <li *ngFor="let car of profileData?.cars">
-          <span>{{ car.brand }} {{ car.model }}</span>
-          <div [style]="'background-color :' + car.color"></div>
+          <div class="car-info">
+            <p>{{ car.brand }} {{ car.model }}</p>
+            <div class="round-circle" [style]="'background-color: ' + car.color"></div>
+          </div>
+
+          <span class="capacity">Вместимость: {{ car.maxSeats }}</span> <!-- Новая строка для вместимости -->
         </li>
       </ul>
 
@@ -45,7 +49,8 @@
     </li>
 
     <li class="date">
-      <span>Опубликованных поездок: {{ profileData?.tripAmount }} </span>
+      <span *ngIf="userRole === 'DRIVER'">Опубликованных поездок: {{ profileData?.tripAmount }} </span>
+      <span *ngIf="userRole === 'USER'">Забронированных поездок: {{ profileData?.tripAmount }} </span>
       <span>Дата регистрации: {{ profileData?.registrationDate }}</span>
     </li>
   </ul>

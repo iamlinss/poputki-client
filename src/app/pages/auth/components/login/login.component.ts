@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
           next: (res) => {
             this.loaderService.setLoading(false);
             localStorage.setItem('token', res.token);
+            localStorage.setItem('role',res.user.role)
             this.userService.updateAuth();
             this.router.navigate(['/']);
           },
