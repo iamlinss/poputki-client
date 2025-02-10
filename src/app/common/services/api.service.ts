@@ -37,9 +37,19 @@ export class ApiService {
     return this.responseProceed(this.http.post(this.apiUrl + url, body));
   }
 
-  httpPut<T>(url: string, body: any | null = null): Observable<T> {
-    return this.responseProceed(this.http.put(this.apiUrl + url, body));
-  }
+  httpPut<T>(url: string, body: any | null = null, params?: { [key: string]: string }): Observable<T> {
+    let httpParams = new HttpParams();
+
+    if (params) {
+        for (const key in params) {
+            if (Object.prototype.hasOwnProperty.call(params, key)) {
+                httpParams = httpParams.append(key, params[key]);
+            }
+        }
+    }
+
+    return this.responseProceed(this.http.put<T>(this.apiUrl + url, body, { params: httpParams }));
+}
 
   httpDelete<T>(url: string): Observable<T> {
     return this.responseProceed(this.http.delete(this.apiUrl + url));

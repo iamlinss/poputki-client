@@ -3,30 +3,58 @@
     <h4>План поездки</h4>
 
     <div *ngIf="selectedTrip" class="trip-container">
-      <div class="trip-status" [ngSwitch]="selectedTrip.status?.id">
-        <ng-container *ngSwitchCase="1">
+
+      <div *ngIf="userRole === 'USER'" class="trip-status" [ngSwitch]="selectedTrip.status">
+        <ng-container *ngSwitchCase="'PENDING_CONFIRMATION'">
           <img src="assets/img/yellow-clock.svg" alt="" />
-          <span class="yellow">{{ selectedTrip.status?.status }}</span>
+          <span class="yellow">Ожидание подтверждения</span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="2">
+        <ng-container *ngSwitchCase="'REJECTED_BY_DRIVER'">
           <img src="assets/img/red-cross.svg" alt="" />
-          <span class="red">{{ selectedTrip.status?.status }}</span>
+          <span class="red">Отменено водителем</span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="3">
+        <ng-container *ngSwitchCase="'CONFIRMED'">
           <img src="assets/img/green-car.svg" alt="" />
-          <span class="green">{{ selectedTrip.status?.status }}</span>
+          <span class="green">Подтверждено</span>
         </ng-container>
 
         <ng-container *ngSwitchCase="4">
           <img src="assets/img/gray-approve.svg" alt="" />
-          <span class="gray">{{ selectedTrip.status?.status }}</span>
+          <span class="gray">Одобрено</span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="5">
+        <ng-container *ngSwitchCase="'CANCELLED_BY_PASSENGER'">
           <img src="assets/img/red-cross.svg" alt="" />
-          <span class="red">{{ selectedTrip.status?.status }}</span>
+          <span class="red">Отменено пассажиром</span>
+        </ng-container>
+      </div>
+
+      <div *ngIf="userRole === 'DRIVER'" class="trip-status" [ngSwitch]="selectedTrip.status">
+        <ng-container *ngSwitchCase="'PENDING_CONFIRMATION'">
+          <img src="assets/img/yellow-clock.svg" alt="" />
+          <span class="yellow">Ожидание подтверждения</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'CANCELLED'">
+          <img src="assets/img/red-cross.svg" alt="" />
+          <span class="red">Поездка отменена</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'CREATED'">
+          <img src="assets/img/green-car.svg" alt="" />
+          <span class="green">Действующая поездка</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'COMPLETED'">
+          <img src="assets/img/white-approve.svg" alt="" />
+          <span class="white">Поездка завершена</span>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'CANCELLED_BY_PASSENGER'">
+          <img src="assets/img/red-cross.svg" alt="" />
+          <span class="red">Отменено пассажиром</span>
         </ng-container>
       </div>
 
@@ -50,12 +78,19 @@
           </div>
         </div>
         <ul class="trip-info">
-          <li class="trip-price">
+          <li *ngIf="userRole === 'USER'"  class="trip-price">
             <div class="column">
               <span> Наличными </span>
               <span> Забронированных мест : {{ selectedTrip.seats }} </span>
             </div>
-            <div class="currency">15 BYN</div>
+            <div class="currency">{{selectedTrip.seats*selectedTrip.price}} BYN</div>
+          </li>
+          <li *ngIf="userRole === 'DRIVER'"  class="trip-price">
+            <div class="column">
+              <span> Наличными </span>
+              <span> Осталось свободных мест : {{ selectedTrip.seats }} </span>
+            </div>
+            <div class="currency">{{(selectedTrip.car.maxSeats - selectedTrip.seats)*selectedTrip.price}} BYN</div>
           </li>
         </ul>
         <ul class="trip-driver">
@@ -77,20 +112,34 @@
             </div>
           </div>
         </ul>
-
-        <ul class="trip-passager">
-          Других пассажиров пока нет
-        </ul>
       </div>
     </div>
 
-    <div class="btn-container">
+    <div *ngIf="userRole === 'USER'" class="btn-container">
       <a (click)="close()" class="link"> Закрыть </a>
-      <button (click)="toggleStatus('decline'); $event.stopPropagation()" class="btn danger left">
+      <button *ngIf="selectedTrip && (selectedTrip.status !== 'CANCELLED_BY_PASSENGER' && selectedTrip.status !== 'REJECTED_BY_DRIVER')"
+        (click)="toggleStatus('decline'); $event.stopPropagation()"
+        class="btn danger left">
         Отменить бронь
       </button>
     </div>
+    <div *ngIf="userRole === 'DRIVER'" class="btn-container">
+      <a (click)="close()" class="link"> Закрыть </a>
+      <button
+        (click)="toggleStatus('decline'); $event.stopPropagation()"
+        *ngIf="selectedTrip && (selectedTrip.status !== 'CANCELLED' && selectedTrip.status !== 'COMPLETED')"
+        class="btn danger left">
+        Отменить
+      </button>
+      <button
+        (click)="toggleStatus('complete-success'); $event.stopPropagation()"
+        *ngIf="selectedTrip && (selectedTrip.status !== 'CANCELLED' && selectedTrip.status !== 'COMPLETED')"
+        class="btn feedback-btn accent">
+        Завершить
+      </button>
+    </div>
   </div>
+
 
   <div *ngSwitchCase="'decline'" (click)="$event.stopPropagation()" class="container">
     <h4>В чем причина отмены?</h4>
@@ -148,7 +197,7 @@
     <div class="btn-container">
       <a (click)="toggleStatus('data'); $event.stopPropagation()" class="link"> Назад </a>
       <button
-        (click)="toggleStatus('decline-success'); $event.stopPropagation()"
+        (click)="toggleStatus(tripStatus?'decline-success': 'decline-success-driver'); $event.stopPropagation()"
         class="btn danger left"
       >
         Отменить

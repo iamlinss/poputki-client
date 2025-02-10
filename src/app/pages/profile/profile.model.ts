@@ -60,11 +60,48 @@ export interface DriverTripData {
   destinationLocation: CityData;
   id: number;
   seats: number;
-  status?: {
-    id: number;
-    status: string;
-  };
+  status: string;
   userId: number;
   driverName: string;
   price: number;
+  hasPendingPassengers: boolean;
+}
+
+
+export interface PassengerTripData {
+  id: number;
+  passengerSeats: number;
+  passengerStatus: string | null;
+  tripDetails:{
+    departureDateTime: string;
+    departureLocation: CityData;
+    destinationLocation: CityData;
+    car: CarData;
+    driverName: string;
+    price: number;
+    seats:  number;
+    status: string;
+  }
+}
+
+
+
+
+export interface PassengerData {
+  id: number;
+  tripId: number;
+  user: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    rate: number;
+  };
+  seats: number;
+  status: string;
+  driverRating: number;
+  passengerRating: number;
+  driverComment: string;
+  passengerComment: string;
 }

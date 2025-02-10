@@ -1,0 +1,39 @@
+<div *ngIf="actionResult !== 'approve' && actionResult !== 'cancel'" class="container">
+  <h4>Запросы</h4>
+
+  <div *ngIf="!isLoading; else loader" class="trip-list">
+    <ng-container>
+      <div *ngFor="let trip of tripListPassenger" class="trip-container">
+        <div class="trip-info">
+          <div class="driver-info">
+            <div class="personal-info">
+              <span class="user-name">{{ trip.user.firstName }} {{ trip.user.lastName }}</span>
+              <span>{{ trip.user.email }}</span>
+            </div>
+            <img src="assets/img/profile-user.svg" alt="" />
+          </div>
+          <div class="btn-wrappers">
+            <button (click)="cancelTrip(trip.id)" class="btn danger left">Отклонить</button>
+            <button (click)="approveTrip(trip.id)" class="btn accent">Подтвердить</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngIf="actionResult === 'approve'">
+  <img class="no-trips" src="assets/img/approve-brone.svg" alt="Approved" />
+  <button (click)="router.navigate(['/trips'])" class="btn accent wide">Вернуться к поездкам</button>
+</ng-container>
+
+<ng-container *ngIf="actionResult === 'cancel'">
+  <img class="no-trips" src="assets/img/cancel-brone.svg" alt="Canceled" />
+  <button (click)="router.navigate(['/trips'])" class="btn accent wide">Вернуться к поездкам</button>
+</ng-container>
+
+<ng-template #loader>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>

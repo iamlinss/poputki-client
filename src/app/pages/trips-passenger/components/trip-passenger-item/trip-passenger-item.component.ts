@@ -27,19 +27,38 @@ import {Subscription} from 'rxjs';
 export class TripPassengerItemComponent implements OnChanges, OnDestroy {
   status: 'data' | 'reserved' = 'data';
   subs: Subscription[] = [];
+  userRole: string | null = null;
   @Input() selectedTrip: DriverTripData | null = null;
-  @Input() count: string = '1';
+  @Input() count: number = 1;
   @Output() closedEvent: EventEmitter<void> = new EventEmitter();
+  @Output() tripBooked: EventEmitter<void> = new EventEmitter();
 
+  passengerCount: number = 1;
   constructor(
     public profileDataService: ProfileDataService,
     public userService: UserService,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+    this.userService.role$.subscribe(role => {
+      this.userRole = role;
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['count']) {
       this.count = changes['count'].currentValue;
+    }
+  }
+
+  increasePassengerCount() {
+    if (this.count < (this.selectedTrip?.seats || 0)) {
+      this.count++;
+    }
+  }
+
+  decreasePassengerCount() {
+    if (this.count > 1) {
+      this.count--;
     }
   }
 
@@ -49,21 +68,30 @@ export class TripPassengerItemComponent implements OnChanges, OnDestroy {
         tripId: this.selectedTrip?.id,
         userId: this.userService.userId,
         seats: this.count,
+        status: 'PENDING_CONFIRMATION'
       };
 
       this.subs.push(
         this.profileDataService.broneTrip(data).subscribe({
           next: () => {
             this.status = status;
+            this.count = 1;
+            this.tripBooked.emit();
             this.cdr.detectChanges();
           },
+          error: ()=>{
+            this.close()
+          }
         }),
       );
     }
   }
 
+
+
   close() {
     this.closedEvent.emit();
+    this.count = 1;
     setTimeout(() => {
       this.status = 'data';
     }, 500);

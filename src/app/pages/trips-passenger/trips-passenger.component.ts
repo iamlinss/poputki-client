@@ -36,7 +36,7 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
   public start = '';
   public finish = '';
   public date = '';
-  public count = '';
+  public count = 1;
   subs: Subscription[] = [];
   isLoading = false;
 
@@ -62,12 +62,16 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
         seats: filter.seats,
         departureLocationId: filter.selectedStartCityId,
         destinationLocationId: filter.selectedFinishCityId,
+        status: 'CREATED'
       };
       this.getTripsList(filterData);
-    } else {
-      this.getTripsList();
     }
   }
+
+  tripBooked() {
+    this.getTripsList();
+  }
+
 
   getTripsList(filterData: any = {}) {
     this.isLoading = true;
@@ -75,11 +79,15 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.profileDataService.getTripsList(filterData).subscribe({
         next: (res: any) => {
-          console.log(res)
           this.tripsList = this.applyTimeFilter(res);
           this.isLoading = false;
           this.cdr.detectChanges();
         },
+        error: () => {
+          this.isLoading = false;
+          this.tripsList = [];
+          this.cdr.detectChanges();
+        }
       }),
     );
   }
@@ -118,6 +126,7 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
       seats: this.count,
       departureLocationId: this.selectedStartCityId,
       destinationLocationId: this.selectedFinishCityId,
+      status: 'CREATED'
     };
 
     this.getTripsList(filterData);

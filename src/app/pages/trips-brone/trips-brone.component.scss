@@ -1,0 +1,109 @@
+@import '../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px 70px 20px 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+    width: 100%;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .trip-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    max-height: 420px;
+    padding-right: 16px;
+    margin-bottom: 50px;
+  }
+
+  .trip-container {
+    border: 1px solid $input-border-default;
+    padding: 20px;
+    border-radius: 6px;
+    transition: 0.3s;
+
+
+    .trip-info {
+
+      .driver-info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .personal-info{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 15px;
+        }
+
+        .user-name{
+          color: black;
+          font-weight: bold;
+          font-size: 25px;
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .btn-wrappers{
+        margin-top: 25px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+
+  .loader-container {
+    height: 230px;
+    display: flex;
+    position: relative;
+
+    .loader {
+      top: -60%;
+      left: 42%;
+    }
+  }
+
+  .wide {
+    margin-top: 40px;
+    width: 200px;
+  }
+}
+
+.btn-wrapper {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  bottom: 5px;
+  right: 5px;
+}
+
+.passenger-btn {
+  background-color: white;
+  color: #F411CF;
+  border: 1px solid #F411CF;
+}

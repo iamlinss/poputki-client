@@ -11,6 +11,8 @@ import {TripsComponent} from './pages/trips/trips.component';
 import {authGuard} from './common/guards/auth.guard';
 import {TripsPassengerComponent} from './pages/trips-passenger/trips-passenger.component';
 import {FeedbackComponent} from "./pages/feedback/feedback.component";
+import { TripsBroneComponent } from './pages/trips-brone/trips.-brone.component';
+
 
 export const routes: Routes = [
   {
@@ -74,6 +76,10 @@ export const routes: Routes = [
     path: 'trips-passenger',
     pathMatch: 'full',
     component: TripsPassengerComponent,
+  },
+  {
+    path: 'trips/:tripId',
+    component: TripsBroneComponent,
   },
   {
     path: '**',

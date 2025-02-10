@@ -8,7 +8,7 @@ import {LoaderService} from '../../common/services/loader.service';
 import {UserService} from '../../common/services/user.service';
 import {ProfileDataService} from '../profile/profile.service';
 import {takeUntil} from 'rxjs';
-import {DriverTripData} from '../profile/profile.model';
+import {DriverTripData, PassengerTripData} from '../profile/profile.model';
 import {TripItemComponent} from './components/trip-item/trip-item.component';
 
 @Component({
@@ -20,10 +20,11 @@ import {TripItemComponent} from './components/trip-item/trip-item.component';
   imports: [RouterOutlet, ReactiveFormsModule, CommonModule, TripItemComponent],
 })
 export class TripsComponent implements OnInit {
-  tripStatus: boolean = false;
+  tripStatus: boolean = true;
   isLoading = false;
   userRole: string | null = null;
-  tripList: DriverTripData[] = [];
+  tripListPassenger: PassengerTripData[] = [];
+  tripListDriver: DriverTripData[] = [];
   selectedTrip: DriverTripData | null = null;
 
   constructor(
@@ -36,11 +37,39 @@ export class TripsComponent implements OnInit {
   ) {
     this.userService.role$.subscribe(role => {
       this.userRole = role;
+      this.tripStatus = (this.userRole === 'USER');
     });
   }
 
+
+
   ngOnInit() {
     this.toggleStatus(true);
+  }
+
+  transformPassengerToDriverTrip(passengerTrip: PassengerTripData): DriverTripData {
+    return {
+      car: passengerTrip.tripDetails.car,
+      departureDateTime: passengerTrip.tripDetails.departureDateTime,
+      departureLocation: passengerTrip.tripDetails.departureLocation,
+      description: '',
+      destinationLocation: passengerTrip.tripDetails.destinationLocation,
+      id: passengerTrip.id,
+      seats: passengerTrip.passengerSeats,
+      status: passengerTrip.passengerStatus!,
+      userId: Number(this.userService.userId!),
+      driverName: passengerTrip.tripDetails.driverName,
+      price: passengerTrip.tripDetails.price,
+      hasPendingPassengers: false,
+    };
+  }
+
+  onSelectTrip(trip: PassengerTripData | DriverTripData) {
+    if ('car' in trip) {
+      this.selectedTrip = trip;
+    } else {
+      this.selectedTrip = this.transformPassengerToDriverTrip(trip as PassengerTripData);
+    }
   }
 
   toggleStatus(isFirstCall = false) {
@@ -51,7 +80,7 @@ export class TripsComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            this.tripList = res;
+            this.tripListDriver = res;
             isFirstCall ? this.loaderService.setLoading(false) : (this.isLoading = false);
             this.cdr.detectChanges();
           },
@@ -62,7 +91,7 @@ export class TripsComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            this.tripList = res;
+            this.tripListPassenger = res;
             isFirstCall ? this.loaderService.setLoading(false) : (this.isLoading = false);
             this.cdr.detectChanges();
           },

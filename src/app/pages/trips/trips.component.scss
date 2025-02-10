@@ -55,7 +55,7 @@
     flex-direction: column;
     gap: 20px;
     overflow: auto;
-    max-height: 924px;
+    max-height: 420px;
     padding-right: 16px;
     margin-bottom: 50px;
   }
@@ -70,6 +70,79 @@
     &:not(.trip-done):hover {
       background-color: $main-bg;
     }
+
+    .trip-status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      img {
+        margin-right: 12px;
+      }
+      span {
+        &.yellow {
+          color: $yellow-status;
+        }
+
+        &.red {
+          color: $red-status;
+        }
+
+        &.green {
+          color: $green-status;
+        }
+
+        &.gray {
+          color: $gray-status;
+        }
+
+        &.white {
+          color: $white-status;
+        }
+      }
+    }
+
+    .route {
+      margin: 12px 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .route-cities {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 50px;
+    }
+
+    .driver-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .driver {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .feedback-btn {
+      width: unset;
+    }
+  }
+  .trip-container-driver {
+    border: 1px solid $input-border-default;
+    padding: 20px;
+    border-radius: 6px;
+    transition: 0.3s;
+    position: relative;
+
 
     .trip-status {
       display: flex;
@@ -157,4 +230,18 @@
     margin-top: 40px;
     width: 200px;
   }
+}
+
+.btn-wrapper{
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  bottom: 5px;
+  right: 5px;
+}
+
+.passenger-btn{
+  background-color: white;
+  color: #F411CF;
+  border: 1px solid #F411CF;
 }

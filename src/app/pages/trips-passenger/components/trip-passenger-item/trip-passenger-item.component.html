@@ -23,14 +23,34 @@
           </div>
         </div>
         <ul class="trip-info">
-          <li class="trip-price">
-            <div class="column">
-              <span> Наличными </span>
-              <span> Забронированных мест : {{ selectedTrip.car.maxSeats - selectedTrip.seats }} </span>
+          <li class="trip-price-wrapper">
+            <div class="trip-price">
+              <div class="column">
+                <span> Наличными </span>
+              </div>
+              <div class="currency">{{(selectedTrip.price * count)}} BYN</div>
             </div>
-            <div class="currency">{{(selectedTrip.price)}} BYN</div>
+            <div class="passenger">
+              <button
+                type="button"
+                (click)="decreasePassengerCount()"
+              >
+                <img src="assets/img/minus-icon.svg" alt="" />
+              </button>
+
+              <span class="passenger-counter">
+                {{ count }}
+              </span>
+
+              <button type="button" (click)="increasePassengerCount()">
+                <img src="assets/img/plus-icon.svg" alt="" />
+              </button>
+            </div>
           </li>
+
         </ul>
+
+
         <ul class="trip-driver">
           <div class="driver-info">
             <img class="icon" src="assets/img/profile-user.svg" alt="" />
@@ -52,7 +72,7 @@
         </ul>
 
         <ul class="trip-passager">
-          Других пассажиров пока нет
+          Забронированных мест : {{ selectedTrip.car.maxSeats - selectedTrip.seats }}
         </ul>
       </div>
     </div>
@@ -60,7 +80,7 @@
     <div class="btn-container">
       <a (click)="close()" class="link"> Закрыть </a>
       <button
-        *ngIf="userService.isAuthorized$ | async"
+      *ngIf="(userService.isAuthorized$ | async) && userRole === 'USER'"
         (click)="toggleStatus('reserved'); $event.stopPropagation()"
         class="btn accent wide left"
       >

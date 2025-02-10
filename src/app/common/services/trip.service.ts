@@ -9,7 +9,7 @@ export class TripDataService {
   constructor(private apiService: ApiService) {}
 
   public getCitiesList() {
-    const url = `/data/cities`;
+    const url = `/cities`;
     return this.apiService.httpGet<CityData[]>(url);
   }
 }

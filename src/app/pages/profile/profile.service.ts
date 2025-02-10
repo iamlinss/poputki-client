@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../common/services/api.service';
-import {CarData, DriverTripData, EditProfileData, ProfileData, TripData} from './profile.model';
+import {CarData, DriverTripData, EditProfileData, PassengerData, PassengerTripData, ProfileData, TripData} from './profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,25 @@ export class ProfileDataService {
     return this.apiService.httpPost(url, data);
   }
 
+  public getTripPassengers(tripId: string) {
+    const url = `/trips/${tripId}/passengers`;
+    return this.apiService.httpGet<PassengerData[]>(url);
+  }
+
+  public changePassengerStatus(id: number| undefined, status: string) {
+    const url = `/trips/${id}/passenger-status`;
+    const params = { status };
+
+    return this.apiService.httpPut(url, null, params );
+}
+
+public changeTripStatus(id: number| undefined, status: string) {
+  const url = `/trips/${id}/status`;
+  const params = { status };
+
+  return this.apiService.httpPut(url, null, params );
+}
+
   public getUser(userId: string) {
     const url = `/users/${userId}`;
     return this.apiService.httpGet<ProfileData>(url);
@@ -40,7 +59,7 @@ export class ProfileDataService {
 
   public getUserPassegerTrips(userId: string) {
     const url = `/trips/brone/${userId}`;
-    return this.apiService.httpGet<any>(url);
+    return this.apiService.httpGet<PassengerTripData[]>(url);
   }
 
   public getTripsList(filterData: any) {
