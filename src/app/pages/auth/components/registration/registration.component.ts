@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl,} from '@angular/forms';
 import {Router, RouterOutlet} from '@angular/router';
 import {FormService} from '../../../../common/services/form-validation.service';
 import {AuthDataService} from '../../auth.service';
@@ -8,6 +8,30 @@ import {ProgressService} from '../../../../common/services/register-progress.ser
 import {RegisterData} from '../../auth.model';
 import {Subscription} from 'rxjs';
 import {LoaderService} from '../../../../common/services/loader.service';
+
+
+export function passwordValidator(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const value = control.value || '';
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    const isLengthValid = value.length >= 8;
+
+    const valid = hasUpperCase && hasSpecialChar && isLengthValid;
+    return !valid ? { 'passwordStrength': true } : null;
+  };
+}
+
+export function phoneValidator(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const value = control.value || '';
+    const isRussianPhone = /^(\+7|7|8)\d{10}$/.test(value);
+    const isBelarusianPhone = /^\+375(17|29|33|44|25)\d{7}$/.test(value);
+
+    return !(isRussianPhone || isBelarusianPhone) ? { 'invalidPhoneNumber': true } : null;
+  };
+}
+
 
 @Component({
   selector: 'app-registration',
@@ -19,6 +43,8 @@ import {LoaderService} from '../../../../common/services/loader.service';
 export class RegistrationComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   subs: Subscription[] = [];
+  isPasswordTouched: boolean = false;
+  isPhoneTouched: boolean = false;
 
   isEmailUniqe: boolean = true;
 
@@ -35,16 +61,24 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.ProgressService.registrationProgress = 'email';
   }
 
+  onPasswordChange() {
+    this.isPasswordTouched = true;
+  }
+
+  onPhoneChange() {
+    this.isPhoneTouched = true;
+  }
+
   initForm() {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       birthDate: new FormControl('', [Validators.required]),
-      phone: new FormControl('+', [Validators.required]),
+      phone: new FormControl('', [Validators.required,phoneValidator()]),
       gender: new FormControl('', [Validators.required]),
       role: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required,  passwordValidator() ]),
     });
   }
 

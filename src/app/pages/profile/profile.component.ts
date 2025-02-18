@@ -33,6 +33,24 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  deleteCar(carId: number | undefined) {
+    if (confirm("Вы уверены, что хотите удалить этот автомобиль?")) {
+      this.profileDataService.deleteCar(carId)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe({
+          next: () => {
+            if (this.profileData?.cars) {
+              this.profileData.cars = this.profileData.cars.filter(car => car.id !== carId);
+              this.cdr.detectChanges();
+            }
+          },
+          error: (err) => {
+            console.error("Ошибка при удалении автомобиля:", err);
+          }
+        });
+    }
+  }
+
   ngOnInit() {
     this.loaderService.setLoading(true);
 

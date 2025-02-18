@@ -13,6 +13,11 @@ export class ProfileDataService {
     return this.apiService.httpPost(url, data);
   }
 
+  public deleteCar(id: number | undefined) {
+    const url = `/cars/${id}`;
+    return this.apiService.httpDelete(url);
+  }
+
   public getPrice(cityFrom: string, cityTo: string) {
     const url = `/cars/price?cityFrom=${encodeURIComponent(cityFrom)}&cityTo=${encodeURIComponent(cityTo)}`;
     return this.apiService.httpGet<number>(url);

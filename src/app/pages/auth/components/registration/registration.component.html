@@ -5,7 +5,7 @@
     class="container-title"
   >
     <ng-container *ngSwitchCase="'email'"> Введите эл. почту </ng-container>
-    <ng-container *ngSwitchCase="'info'"> Регестрация </ng-container>
+    <ng-container *ngSwitchCase="'info'"> Регистрация </ng-container>
     <ng-container *ngSwitchCase="'gender'"> Укажите свой пол </ng-container>
     <ng-container *ngSwitchCase="'role'"> Укажите свою роль </ng-container>
     <ng-container *ngSwitchCase="'password'"> Придумайте пароль </ng-container>
@@ -80,19 +80,22 @@
 
       <div class="input-container mb-32">
         <input
-          formControlName="phone"
-          placeholder=" "
-          class="input"
-          id="phone"
-          type="text"
-          autocomplete="new-password"
-        />
+    formControlName="phone"
+    placeholder=" "
+    class="input"
+    id="phone"
+    type="text"
+    autocomplete="new-password"
+    (input)="onPhoneChange()"
+  />
         <label class="placeholder" for="phone">Номер телефона</label>
-        <span
-          *ngIf="formService.getFormError(form, 'phone', 'required')"
-          class="input-error top-80"
-        >
+
+        <span *ngIf="form.get('phone')?.hasError('required') && form.get('phone')?.touched" class="input-error top-80">
           Поле Номер телефона является обязательным.
+        </span>
+
+        <span *ngIf="isPhoneTouched && form.get('phone')?.value && form.get('phone')?.hasError('invalidPhoneNumber')" class="input-error top-80">
+          Номер телефона должен быть в правильном формате для России или Беларуси.
         </span>
       </div>
 
@@ -176,16 +179,15 @@
           id="password"
           type="password"
           autocomplete="new-password"
+          (input)="onPasswordChange()"
         />
         <label class="placeholder" for="password">Пароль</label>
-        <span class="input-description">
-          Пароль должен содержать не менее восьми знаков, включать заглавные и строчные буквы.
-        </span>
-        <span
-          *ngIf="formService.getFormError(form, 'password', 'required')"
-          class="input-error top-120"
-        >
+        <span *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched" class="input-error top-80">
           Поле Пароль является обязательным.
+        </span>
+
+        <span *ngIf="isPasswordTouched && !form.get('password')?.hasError('required') && form.get('password')?.hasError('passwordStrength')" class="input-error top-80">
+          Пароль должен содержать минимум 8 символов, одну заглавную букву и один специальный символ.
         </span>
       </div>
     </ng-container>

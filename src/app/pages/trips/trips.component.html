@@ -108,7 +108,8 @@
           </div>
         </div>
         <div class="btn-wrapper">
-          <button class="btn feedback-btn accent" (click)="onSelectTrip(trip)">План поездки</button>
+          <button   [ngClass]="{'accent': trip.status !== 'COMPLETED'}"  class="btn feedback-btn accent" (click)="onSelectTrip(trip)">План поездки</button>
+
           <button *ngIf="trip.hasPendingPassengers" (click)="router.navigate(['/trips', trip.id])" class="btn accent passenger-btn">Брони</button>
         </div>
 
