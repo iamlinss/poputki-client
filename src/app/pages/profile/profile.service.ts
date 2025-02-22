@@ -68,9 +68,31 @@ public changeTripStatus(id: number| undefined, status: string) {
   }
 
   public getTripsList(filterData: any) {
-    const url = `/trips/filter`;
-    return this.apiService.httpPost<DriverTripData[]>(url, filterData);
-  }
+    const url = `/trips`;
+
+    const params = new URLSearchParams();
+
+    if (filterData.userId) {
+        params.append('userId', filterData.userId.toString());
+    }
+    if (filterData.date) {
+        params.append('date', filterData.date);
+    }
+    if (filterData.departureLocationId) {
+        params.append('departureLocation', filterData.departureLocationId.toString());
+    }
+    if (filterData.destinationLocationId) {
+        params.append('destinationLocation', filterData.destinationLocationId.toString());
+    }
+    if (filterData.status) {
+        params.append('status', filterData.status);
+    }
+    if (filterData.seats) {
+        params.append('seats', filterData.seats.toString());
+    }
+
+    return this.apiService.httpGet<DriverTripData[]>(`${url}?${params.toString()}`);
+}
 
   public broneTrip(data: any) {
     const url = `/trips/brone`;

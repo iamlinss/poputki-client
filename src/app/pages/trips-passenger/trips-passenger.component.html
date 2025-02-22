@@ -80,7 +80,7 @@
   [class.active]="selectedTrip"
   [selectedTrip]="selectedTrip"
   [count]="count"
-  (tripBooked)="getTripsList()"
+  (tripBooked)="tripBooked()"
   (closedEvent)="selectedTrip = null"
 >
 </app-trip-passenger-item>

@@ -62,6 +62,13 @@ export class FinderBlockComponent implements OnInit {
       });
   }
 
+  resetForm() {
+    this.form.reset();
+    this.passengerCount = 1;
+    this.selectedStartCityId = undefined;
+    this.selectedFinishCityId = undefined;
+}
+
   initForm() {
     this.form = new FormGroup({
       start: new FormControl(''),

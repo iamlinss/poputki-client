@@ -56,7 +56,7 @@ export class TripsBroneComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (res) => {
-            this.tripListPassenger = res;
+            this.tripListPassenger = res.filter(passenger => passenger.status === 'PENDING_CONFIRMATION');
             isFirstCall ? this.loaderService.setLoading(false) : (this.isLoading = false);
             this.cdr.detectChanges();
           },

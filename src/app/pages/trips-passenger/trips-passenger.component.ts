@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterOutlet} from '@angular/router';
 import {LoaderService} from '../../common/services/loader.service';
@@ -33,6 +33,7 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
   public selectedTrip: DriverTripData | null = null;
   public selectedStartCityId?: number;
   public selectedFinishCityId?: number;
+  @ViewChild(FinderBlockComponent) finderBlockComponent!: FinderBlockComponent;
   public start = '';
   public finish = '';
   public date = '';
@@ -56,21 +57,45 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const filter = JSON.parse(localStorage.getItem('filter')!);
+    const filterData = filter ? {
+      date: filter.date || new Date().toISOString().split('T')[0],
+      seats: filter.seats || 1,
+      departureLocationId: filter.selectedStartCityId,
+      destinationLocationId: filter.selectedFinishCityId,
+      status: 'CREATED'
+  } : {
+      date: new Date().toISOString().split('T')[0],
+      seats: filter?.seats || 1,
+      departureLocationId: undefined,
+      destinationLocationId: undefined,
+      status: 'CREATED'
+  };
 
-    if (filter) {
-      const filterData = {
-        seats: filter.seats,
-        departureLocationId: filter.selectedStartCityId,
-        destinationLocationId: filter.selectedFinishCityId,
-        status: 'CREATED'
-      };
-      this.getTripsList(filterData);
-    }
+  this.getTripsList(filterData);
   }
 
   tripBooked() {
-    this.getTripsList();
-  }
+    this.start = '';
+    this.finish = '';
+    this.date = '';
+    this.count = 1;
+    this.selectedStartCityId = undefined;
+    this.selectedFinishCityId = undefined;
+
+    this.finderBlockComponent.resetForm();
+
+    localStorage.removeItem('filter');
+
+    const filterData = {
+        date: new Date().toISOString().split('T')[0],
+        seats: 1,
+        departureLocationId: undefined,
+        destinationLocationId: undefined,
+        status: 'CREATED'
+    };
+
+    this.getTripsList(filterData);
+}
 
 
   getTripsList(filterData: any = {}) {
@@ -123,6 +148,7 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
     this.selectedFinishCityId = data.selectedFinishCityId;
 
     const filterData = {
+      date: this.date,
       seats: this.count,
       departureLocationId: this.selectedStartCityId,
       destinationLocationId: this.selectedFinishCityId,
