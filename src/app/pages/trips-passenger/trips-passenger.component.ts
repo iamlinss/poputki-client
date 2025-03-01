@@ -122,22 +122,41 @@ export class TripsPassengerComponent implements OnInit, OnDestroy {
     if (option) {
       option.state = !option.state;
     }
-    this.getTripsList();
+
+
+    const filterData = {
+      date: this.date || new Date().toISOString().split('T')[0],
+      seats: this.count,
+      departureLocationId: this.selectedStartCityId,
+      destinationLocationId: this.selectedFinishCityId,
+      status: 'CREATED'
+    };
+
+    this.getTripsList(filterData);
   }
 
-  applyTimeFilter(trips: DriverTripData[]): DriverTripData[] {
-    const activeTimeOptions = this.timeOptions.filter((option) => option.state);
-    if (activeTimeOptions.length === 0) {
-      return trips;
-    }
 
-    return trips.filter((trip) => {
-      const tripTime = trip.departureDateTime.slice(11, 16);
-      return activeTimeOptions.some((option) => {
-        return tripTime >= option.startTime && tripTime <= option.endTime;
-      });
+applyTimeFilter(trips: DriverTripData[]): DriverTripData[] {
+  const activeTimeOptions = this.timeOptions.filter((option) => option.state);
+
+  if (activeTimeOptions.length === 0) {
+    return trips;
+  }
+
+  return trips.filter((trip) => {
+    const tripDate = new Date(trip.departureDateTime);
+    const tripTimeInMinutes = tripDate.getHours() * 60 + tripDate.getMinutes();
+
+    return activeTimeOptions.some((option) => {
+      const [startHour, startMinute] = option.startTime.split(':').map(Number);
+      const [endHour, endMinute] = option.endTime.split(':').map(Number);
+      const startTimeInMinutes = startHour * 60 + startMinute;
+      const endTimeInMinutes = endHour * 60 + endMinute;
+
+      return tripTimeInMinutes >= startTimeInMinutes && tripTimeInMinutes <= endTimeInMinutes;
     });
-  }
+  });
+}
 
   setFilter(data: any) {
     this.start = data.start;
