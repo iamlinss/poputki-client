@@ -188,3 +188,17 @@
 }
 
 
+.comment-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #000000;
+}
+
+.comment-btn:hover {
+  transform: scale(1.1);
+  color: #fab349;;
+}

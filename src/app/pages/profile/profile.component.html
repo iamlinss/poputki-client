@@ -1,10 +1,10 @@
 <div class="container">
   <div class="container-header">
     <div class="column">
-      <h4 class="container-title">Ваш профиль</h4>
+      <h4 class="container-title">{{ isCurrentUserProfile ? 'Ваш профиль' : 'Профиль пользователя' }}</h4>
       <h3 class="container-name">
         <span> {{ profileData?.firstName }} {{ profileData?.lastName }} </span>
-        <div *ngIf="userRole === 'DRIVER'">
+        <div *ngIf="userRole === 'DRIVER' || !isCurrentUserProfile">
           <img src="assets/img/star.svg" alt="star" />
           {{ profileData?.rate }}
         </div>
@@ -19,7 +19,8 @@
       <div class="info-header">
         <h3>О себе</h3>
         <img
-          (click)="router.navigate(['/profile/edit'])"
+        *ngIf="isCurrentUserProfile"
+          (click)="router.navigate(['/profile', userService.userId, 'edit'])"
           src="assets/img/edit-profile.svg"
           class="btn-icon"
           alt="edit-profile"
@@ -37,7 +38,7 @@
             <p>{{ car.brand }} {{ car.model }}</p>
             <div class="round-circle" [style]="'background-color: ' + car.color"></div>
           </div>
-          <div class="car-info-delete">
+          <div class="car-info-delete" *ngIf="isCurrentUserProfile">
             <span class="capacity">Вместимость: {{ car.maxSeats }}</span>
             <button (click)="deleteCar(car.id)" class="delete-car-button" style="border: none; background: none; cursor: pointer;">
               <svg fill="#000000" width="20px" height="20px" viewBox="0 0 482.428 482.429">
@@ -66,10 +67,26 @@
         </li>
       </ul>
 
-      <button (click)="router.navigate(['/profile/add/car'])" class="add-car">
+      <button *ngIf="isCurrentUserProfile" (click)="router.navigate(['/profile/add/car'])" class="add-car">
         Добавить машину
         <img src="assets/img/plus-icon.svg" alt="" />
       </button>
+    </li>
+    <li *ngIf="userRole === 'DRIVER' || !isCurrentUserProfile"  class="reviews">
+      <h3>Отзывы</h3>
+      <ul *ngIf="profileData && profileData.reviews && profileData.reviews.length > 0" class="review-list">
+        <li *ngFor="let review of profileData.reviews">
+          <div class="review-rating">Рейтинг: {{ review.rating }}
+            <img
+            [src]="'assets/img/star.svg'"
+            alt="star" />
+          </div>
+          <p class="review-comment">{{ review.comment }}</p>
+        </li>
+      </ul>
+      <div class="no-reviews" *ngIf="!profileData || !profileData.reviews || profileData.reviews.length === 0">
+        Нет отзывов
+      </div>
     </li>
 
     <li class="date">

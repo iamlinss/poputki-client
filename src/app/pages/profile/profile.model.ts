@@ -26,6 +26,10 @@ export interface ProfileData {
   registrationDate: string;
   description: string;
   phone: string;
+  reviews: Array<{
+    rating: number;
+    comment: string;
+  }>
 }
 
 export interface EditProfileData {
@@ -34,6 +38,7 @@ export interface EditProfileData {
   birthDate: string;
   phone: string;
   description: string;
+  role: string | null;
 }
 
 export interface TripData {

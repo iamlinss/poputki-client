@@ -1,0 +1,83 @@
+@import '../../../assets/styles/colors.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .container {
+    background-color: $default-bg;
+    border-radius: 30px;
+    padding: 70px 70px 20px 70px;
+    box-sizing: border-box;
+    max-width: 684px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .success-message{
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: #7879f1;
+  }
+
+  .input-container {
+    margin-bottom: 20px;
+
+    .input {
+      border: none;
+      border-bottom: 1px solid $input-border-default;
+      border-radius: 0;
+      padding: 24px 0;
+      min-width: 544px;
+    }
+
+    textarea {
+      min-width: 544px;
+      max-width: 544px;
+      max-height: 150px;
+      height: 80px;
+    }
+
+    .stars {
+      display: flex;
+
+      img {
+        cursor: pointer;
+        width: 30px; // Adjust star size as needed
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+

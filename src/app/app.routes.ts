@@ -12,6 +12,7 @@ import {authGuard} from './common/guards/auth.guard';
 import {TripsPassengerComponent} from './pages/trips-passenger/trips-passenger.component';
 import {FeedbackComponent} from "./pages/feedback/feedback.component";
 import { TripsBroneComponent } from './pages/trips-brone/trips.-brone.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
 
 
 export const routes: Routes = [
@@ -31,13 +32,13 @@ export const routes: Routes = [
     component: RegistrationComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:profileId',
     pathMatch: 'full',
     component: ProfileComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'profile/edit',
+    path: 'profile/:profileId/edit',
     pathMatch: 'full',
     component: EditProfileComponent,
     canActivate: [authGuard],
@@ -80,6 +81,11 @@ export const routes: Routes = [
   {
     path: 'trips/:tripId',
     component: TripsBroneComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'reviews/:passangerId',
+    component: ReviewsComponent,
   },
   {
     path: '**',

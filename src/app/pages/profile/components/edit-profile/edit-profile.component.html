@@ -57,7 +57,7 @@
   </form>
 
   <div class="btn-container">
-    <a (click)="router.navigate(['/profile'])" class="link">Назад</a>
+    <a (click)="router.navigate(['/profile', userService.userId])" class="link">Назад</a>
     <button (click)="editProfile()" class="btn accent">Сохранить</button>
   </div>
 </div>

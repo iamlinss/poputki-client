@@ -19,14 +19,18 @@ import {UserService} from '../../../../common/services/user.service';
 })
 export class EditProfileComponent implements OnInit {
   form!: FormGroup;
-
+  userRole: string | null = null;
   constructor(
     public router: Router,
     public loaderService: LoaderService,
     public profileDataService: ProfileDataService,
     private unsubscribe$: UnsubscribeService,
     public userService: UserService,
-  ) {}
+  ) {
+    this.userService.role$.subscribe(role => {
+      this.userRole = role;
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -66,7 +70,9 @@ export class EditProfileComponent implements OnInit {
         birthDate: this.form.get('date')?.value,
         phone: this.form.get('phone')?.value,
         description: this.form.get('desc')?.value,
+        role: this.userRole,
       };
+
 
       this.loaderService.setLoading(true);
       this.profileDataService
@@ -75,7 +81,7 @@ export class EditProfileComponent implements OnInit {
         .subscribe({
           next: () => {
             this.loaderService.setLoading(false);
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/profile', this.userService.userId]);
           },
         });
     } else {

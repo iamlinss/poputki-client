@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../common/services/api.service';
 import {CarData, DriverTripData, EditProfileData, PassengerData, PassengerTripData, ProfileData, TripData} from './profile.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,7 @@ public changeTripStatus(id: number| undefined, status: string) {
   return this.apiService.httpPut(url, null, params );
 }
 
-  public getUser(userId: string) {
+  public getUser(userId: string | null) {
     const url = `/users/${userId}`;
     return this.apiService.httpGet<ProfileData>(url);
   }
@@ -65,6 +66,17 @@ public changeTripStatus(id: number| undefined, status: string) {
   public getUserPassegerTrips(userId: string) {
     const url = `/trips/brone/${userId}`;
     return this.apiService.httpGet<PassengerTripData[]>(url);
+  }
+
+  public addReview(driverId: number, data: { rating: number; comment: string }) {
+    const params = new HttpParams()
+      .set('rating', data.rating.toString())
+      .set('comment', data.comment);
+
+    const url = `/reviews/to-driver/${driverId}?${params.toString()}`;
+
+
+    return this.apiService.httpPost(url, null);
   }
 
   public getTripsList(filterData: any) {

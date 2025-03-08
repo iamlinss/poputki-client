@@ -103,3 +103,5 @@ export class TripsComponent implements OnInit {
     this.router.navigate(['trips/feedback'])
   }
 }
+
+

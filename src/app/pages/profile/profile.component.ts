@@ -2,10 +2,10 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UnsubscribeService} from '../../common/services/unsubscribe.service';
-import {Router, RouterOutlet} from '@angular/router';
+import {ActivatedRoute, Router, RouterOutlet} from '@angular/router';
 import {ProfileDataService} from './profile.service';
 import {UserService} from '../../common/services/user.service';
-import {takeUntil} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs';
 import {ProfileData} from './profile.model';
 import {LoaderService} from '../../common/services/loader.service';
 
@@ -20,8 +20,11 @@ import {LoaderService} from '../../common/services/loader.service';
 export class ProfileComponent implements OnInit {
   profileData?: ProfileData;
   userRole: string | null = null;
+  isCurrentUserProfile: boolean = false;
   constructor(
     public router: Router,
+
+    private route: ActivatedRoute,
     public profileDataService: ProfileDataService,
     public userService: UserService,
     public loaderService: LoaderService,
@@ -53,17 +56,28 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loaderService.setLoading(true);
+    const currentUserId = this.userService.userId;
 
-    this.profileDataService
-      .getUser(this.userService.userId!)
-      .pipe(takeUntil(this.unsubscribe$))
+    // Подписываемся на изменения параметров маршрута
+    this.route.paramMap
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        switchMap(paramMap => {
+          const profileId = paramMap.get('profileId');
+          this.isCurrentUserProfile = (currentUserId === profileId);
+          return this.profileDataService.getUser(profileId);
+        })
+      )
       .subscribe({
         next: (res) => {
           this.loaderService.setLoading(false);
-
           this.profileData = res;
           this.cdr.detectChanges();
         },
+        error: (err) => {
+          console.error("Ошибка при загрузке профиля:", err);
+          this.loaderService.setLoading(false);
+        }
       });
   }
 }

@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {DriverTripData,} from '../../../profile/profile.model';
 import {TimeFormatPipe} from '../../../../common/pipes/time.pipe';
 import { ProfileDataService } from '../../../profile/profile.service';
@@ -33,6 +33,7 @@ export class TripItemComponent {
     private profileService: ProfileDataService,
     private unsubscribe$: UnsubscribeService,
     public userService: UserService,
+        public router: Router,
   ) {
     this.userService.role$.subscribe(role => {
       this.userRole = role;

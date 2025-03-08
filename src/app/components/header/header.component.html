@@ -89,7 +89,7 @@
           <span> Найти машину </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />
         </li>
-        <li (click)="router.navigate(['/profile']); isMenuOpen = false">
+        <li (click)="router.navigate(['/profile', userService.userId]); isMenuOpen = false">
           <img class="btn-icon" src="assets/img/menu-user.svg" alt="user" />
           <span> Профиль </span>
           <img class="btn-arrow" src="assets/img/menu-arrow.svg" alt="user" />

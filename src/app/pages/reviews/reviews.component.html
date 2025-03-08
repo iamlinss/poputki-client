@@ -1,0 +1,29 @@
+<div class="container">
+  <h4>Оставить отзыв</h4>
+
+  <form [formGroup]="form" (ngSubmit)="submitReview()" class="form-container">
+    <div class="input-container">
+      <div class="stars">
+        <img *ngFor="let star of stars; let i = index"
+             [src]="i < rating ? 'assets/img/star.svg' : 'assets/img/empty.svg'"
+             (click)="setRating(i + 1)"
+             alt="star" />
+      </div>
+    </div>
+
+    <div class="input-container">
+      <textarea formControlName="comment" placeholder="" class="input" id="comment"></textarea>
+      <label class="placeholder" for="comment">Комментарий</label>
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      Отзыв для водителя сохранен успешно!
+    </div>
+
+
+    <div class="btn-container">
+      <a href="/trips" class="link back">Назад</a>
+      <button type="submit" class="btn accent">Сохранить</button>
+    </div>
+  </form>
+</div>
