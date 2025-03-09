@@ -57,7 +57,7 @@ export class TripsComponent implements OnInit {
       id: passengerTrip.id,
       seats: passengerTrip.passengerSeats,
       status: passengerTrip.passengerStatus!,
-      userId: Number(this.userService.userId!),
+      userId: passengerTrip.tripDetails.driverId,
       driverName: passengerTrip.tripDetails.driverName,
       price: passengerTrip.tripDetails.price,
       hasPendingPassengers: false,

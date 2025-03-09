@@ -29,7 +29,7 @@
       <span class="info-desc"> {{ profileData?.description }} </span>
     </li>
 
-    <li *ngIf="userRole === 'DRIVER'" class="cars">
+    <li *ngIf="userRole === 'DRIVER' || !isCurrentUserProfile" class="cars">
       <h3>Машины</h3>
 
       <ul *ngIf="profileData?.cars" class="car-list">

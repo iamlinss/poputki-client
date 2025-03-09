@@ -70,6 +70,7 @@ export interface DriverTripData {
   driverName: string;
   price: number;
   hasPendingPassengers: boolean;
+  rate?: number;
 }
 
 
@@ -82,6 +83,7 @@ export interface PassengerTripData {
     departureLocation: CityData;
     destinationLocation: CityData;
     car: CarData;
+    driverId: number;
     driverName: string;
     price: number;
     seats:  number;

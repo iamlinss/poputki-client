@@ -52,11 +52,16 @@
 
 
         <ul class="trip-driver">
-          <div class="driver-info">
+          <div *ngIf="userRole === 'DRIVER'" class="driver-info">
             <img class="icon" src="assets/img/profile-user.svg" alt="" />
             <span>{{ selectedTrip.driverName }}</span>
             <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
           </div>
+          <a href="/profile/{{ selectedTrip.userId }}" *ngIf="userRole === 'USER'" class="driver-info">
+            <img class="icon" src="assets/img/profile-user.svg" alt="" />
+            <span>{{ selectedTrip.driverName }}</span>
+            <img src="assets/img/menu-arrow.svg" alt="user" class="btn-arrow" />
+          </a>
           <div class="car-block">
             <div class="car-data">
               <div>
