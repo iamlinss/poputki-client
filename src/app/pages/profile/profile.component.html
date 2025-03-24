@@ -6,7 +6,7 @@
         <span> {{ profileData?.firstName }} {{ profileData?.lastName }} </span>
         <div *ngIf="userRole === 'DRIVER' || !isCurrentUserProfile">
           <img src="assets/img/star.svg" alt="star" />
-          {{ profileData?.rate }}
+          {{ profileData?.rate?.toFixed(1) }}
         </div>
       </h3>
       <span>{{ profileData?.phone }}</span>

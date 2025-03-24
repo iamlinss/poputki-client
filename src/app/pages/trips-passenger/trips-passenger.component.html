@@ -64,7 +64,7 @@
               <img src="assets/img/profile-user.svg" alt="" />
               <span>{{ trip.driverName }}</span>
               <div class="star-container">
-                <img class="star" src="assets/img/star.svg" alt="" /> {{ selectedTrip?.rate ?? 5 }}
+                <img class="star" src="assets/img/star.svg" alt="" /> {{ trip?.rate?.toFixed(1) }}
               </div>
             </div>
           </div>
