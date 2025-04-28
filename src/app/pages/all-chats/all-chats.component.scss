@@ -163,12 +163,17 @@
     color: #000;
   }
 
-  .messages-list {
+  .message-list {
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
-    justify-content: end;
     gap: 15px;
     height: 100%;
+    overflow-y: auto;
+  }
+
+  .message-wrap:last-child {
+    margin-top: auto;
   }
 
   .message-wrap {

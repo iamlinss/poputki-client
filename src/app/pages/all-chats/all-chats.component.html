@@ -74,7 +74,7 @@
       </div>
     </div>
   </header>
-  <main class="messages-list">
+  <main #messageList class="message-list">
     <div class="message-wrap" *ngFor="let message of selectedChat?.messages; let i = index">
       <div *ngIf="showDivider(i) && !hideMessageDivider" class="messages-divider">
         <span></span>
@@ -89,10 +89,11 @@
     </span>
     </div>
   </main>
-  <div class="send-message-panel">
-    <input (focus)="hideMessageDivider=true" placeholder="Ваше сообщение" class="message-input"/>
-    <button class="btn accent icon icon-center">
-      <img src="assets/img/paper-plane-outline.svg" alt="">
+
+  <form (ngSubmit)="sendMessage()" class="send-message-panel">
+    <input [(ngModel)]="newMessage" [ngModelOptions]="{standalone: true}" (focus)="hideMessageDivider=true" placeholder="Ваше сообщение" class="message-input" required />
+    <button type="submit" class="btn accent icon icon-center">
+        <img src="assets/img/paper-plane-outline.svg" alt="">
     </button>
-  </div>
+</form>
 </section>

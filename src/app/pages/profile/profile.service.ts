@@ -63,6 +63,7 @@ public changeTripStatus(id: number| undefined, status: string) {
     return this.apiService.httpGet<DriverTripData[]>(url);
   }
 
+
   public getUserPassegerTrips(userId: string) {
     const url = `/trips/brone/${userId}`;
     return this.apiService.httpGet<PassengerTripData[]>(url);
